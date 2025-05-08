@@ -1,1 +1,0 @@
-public String toJson(List<UserStory> stories) { ... }
