@@ -109,7 +109,7 @@ public class UserStory {
 
     // Getter für JSON-Serialisierung und interne Nutzung
 
-    public String gePid() {
+    public String getPid() {
         return pid;
     }
 
