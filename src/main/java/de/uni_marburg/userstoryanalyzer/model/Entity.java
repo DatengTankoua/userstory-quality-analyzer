@@ -54,4 +54,12 @@ public class Entity {
     public List<String> getBenefit() {
         return benefit;
     }
+
+    @Override
+    public String toString() {
+        return "Entity {\n" +
+                "  Goal Entity: " + goal + ",\n" +
+                "  Benefit Entity: " + benefit + "\n" +
+                "  }";
+    }
 }

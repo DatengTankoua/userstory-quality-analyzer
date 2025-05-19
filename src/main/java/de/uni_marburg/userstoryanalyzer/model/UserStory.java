@@ -36,7 +36,7 @@ public class UserStory {
     @JsonProperty("Action")
     private final Action action;
 
-    /** Enthält die betroffenen Entitäten für Ziel und Nutzen (z. B. "Information", "properties") */
+    /** Enthält die betroffenen Entitäten für Ziel und Nutzen (z.B. "Information", "properties") */
     @JsonProperty("Entity")
     private final Entity entity;
 
@@ -152,4 +152,28 @@ public class UserStory {
     public List<List<String>> getContains() {
         return contains;
     }
+
+    @Override
+    public String toString() {
+        return "UserStory {\n" +
+                "  pid='" + pid + "',\n" +
+                "  text='" + text + "',\n" +
+                "  persona=" + String.join(", ", persona) + ",\n" +
+                "  " + action.toString() + ",\n" +
+                "  " + entity.toString() + ",\n" +
+                "  benefit='" + benefit + "',\n" +
+                "  annotations=" + annotations + ",\n" +
+                "  relations=" + relations + ",\n" +
+                "  triggers=" + formatRelationList(triggers) + ",\n" +
+                "  targets=" + formatRelationList(targets) + ",\n" +
+                "  contains=" + formatRelationList(contains) + "\n" +
+                '}';
+    }
+
+    private String formatRelationList(List<List<String>> relationList) {
+        return relationList.stream()
+                .map(pair -> "[" + String.join(", ", pair) + "]")
+                .collect(Collectors.joining(", ", "[", "]"));
+    }
+
 }

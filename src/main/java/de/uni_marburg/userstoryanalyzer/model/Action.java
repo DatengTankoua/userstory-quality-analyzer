@@ -55,4 +55,13 @@ public class Action {
     public List<String> getBenefit() {
         return benefit;
     }
+
+    @Override
+    public String toString() {
+        return "Action {\n" +
+                "  Goal Actions: " + goal + ",\n" +
+                "  Benefit Actions: " + benefit + "\n" +
+                "  }";
+    }
+
 }
