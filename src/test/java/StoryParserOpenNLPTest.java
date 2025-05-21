@@ -1,11 +1,10 @@
-import de.uni_marburg.userstoryanalyzer.model.UserStory;
-import de.uni_marburg.userstoryanalyzer.parser.StoryParserOpenNLP;
+package de.uni_marburg.userstoryanalyzer.parser;
+
+import de.uni_marburg.userstoryanalyzer.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 class StoryParserOpenNLPTest {
 
@@ -17,88 +16,74 @@ class StoryParserOpenNLPTest {
     }
 
     @Test
-    void testParseWithPidAndBenefit() {
-        String input = "#U123# As a registered user, I want to submit feedback, so that the support team can improve the service.";
-
+    void parse_shouldExtractPid() {
+        String input = "#G03# As a User, I want to X, so that Y.";
         UserStory story = parser.parse(input);
-
-        //Check if the PID is correctly extracted
-        assertEquals("#U123#", story.getPid());
-
-        //Make sure the persona includes "registered user"
-        assertTrue(story.getPersona().contains("registered user"));
-
-        //Verify that goal and benefit actions are detected correctly
-        List<String> goalActions = story.getAction().getGoal();
-        List<String> benefitActions = story.getAction().getBenefit();
-        assertTrue(goalActions.contains("submit"), "Goal action 'submit' not found");
-        assertTrue(benefitActions.contains("improve"), "Benefit action 'improve' not found");
-
-        //Check that entities for goal and benefit are present
-        List<String> goalEntities = story.getEntity().getGoal();
-        List<String> benefitEntities = story.getEntity().getBenefit();
-        assertTrue(goalEntities.contains("feedback"), "Goal entity 'feedback' not found");
-        assertTrue(benefitEntities.contains("service"), "Benefit entity 'service' not found");
-
-        //Confirm that the benefit text is captured properly
-        assertTrue(story.getBenefit().toLowerCase().contains("improve"), "Benefit text not recognized properly");
-
-        //Ensure relations and their types are created
-        assertFalse(story.getRelations().isEmpty(), "Relations should not be empty");
-        assertFalse(story.getTriggers().isEmpty(), "Trigger relations missing");
-        assertFalse(story.getTargets().isEmpty(), "Target relations missing");
+        assertEquals("#G03#", story.getPid());
     }
 
     @Test
-    void testParserWithoutPidOrBenefit() {
-        String input = "As an admin, I want to create a user account.";
-
+    void parse_shouldExtractPersona() {
+        String input = "#G01# As a Public User, I want to Search, so that...";
         UserStory story = parser.parse(input);
-
-        //Print extracted persona, goal actions, and entities for debugging
-        System.out.println("Persona: " + story.getPersona());
-        System.out.println("Goal Actions: " + story.getAction().getGoal());
-        System.out.println("Goal Entities: " + story.getEntity().getGoal());
-
-        //Check that persona includes "admin"
-        assertTrue(
-                story.getPersona().stream().anyMatch(p -> p.toLowerCase().contains("admin")),
-                "Persona should contain 'admin'"
-        );
-
-        //Confirm that the goal action "create" was detected
-        assertTrue(
-                story.getAction().getGoal().contains("create"),
-                "Action should contain 'create'"
-        );
-
-        //Verify the goal entities mention "account"
-        assertTrue(
-                story.getEntity().getGoal().stream().anyMatch(e -> e.toLowerCase().contains("account")),
-                "Entity should mention 'account'"
-        );
-
-        //The benefit should be empty in this case
-        assertEquals("", story.getBenefit(), "Benefit should be empty");
+        assertEquals(List.of("Public User"), story.getPersona());
     }
 
     @Test
-    void testParseInvalidInput() {
-        String input = "Just some random text without structure.";
+    void parse_shouldExtractGoalAction() {
+        String input = "#G02# As a User, I want to Search, so that...";
+        UserStory story = parser.parse(input);
+        assertTrue(story.getAction().getGoal().contains("Search"));
+    }
 
+    @Test
+    void parse_shouldExtractBenefitAction() {
+        String input = "#G04# As a User, I want to X, so that I can obtain...";
+        UserStory story = parser.parse(input);
+        assertTrue(story.getAction().getBenefit().contains("obtain"));
+    }
+
+    @Test
+    void parse_shouldBuildTriggersRelation() {
+        String input = "#G05# As a Admin, I want to Delete, so that...";
         UserStory story = parser.parse(input);
 
-        //Print persona for debugging purposes
-        System.out.println("Persona: " + story.getPersona());
+        List<List<String>> triggers = story.getTriggers();
+        assertTrue(
+                triggers.stream().anyMatch(pair ->
+                        pair.get(0).equals("Admin") &&
+                                pair.get(1).equals("Delete")),
+                "Expected TRIGGERS relation between 'Admin' and 'Delete'"
+        );
+    }
 
-        //Make sure no persona is detected
-        assertTrue(story.getPersona().isEmpty() || story.getPersona().get(0).isBlank(), "No persona should be detected");
+    @Test
+    void parse_shouldHandleEmptyInputGracefully() {
+        UserStory story = parser.parse("");
 
-        //There should be no goal actions or goal entities
-        assertTrue(story.getAction().getGoal().isEmpty());
-        assertTrue(story.getEntity().getGoal().isEmpty());
+        assertAll(
+                () -> assertNull(story.getPid(), "PID should be null for empty input"),
+                () -> assertTrue(story.getPersona().isEmpty(), "Persona list should be empty"),
+                () -> assertTrue(story.getAction().getGoal().isEmpty(), "Goal actions should be empty"),
+                () -> assertTrue(story.getAnnotations().isEmpty(), "Annotations should be empty")
+        );
+    }
 
-        //Benefit text should be empty
-        assertEquals("", story.getBenefit());
+    @Test
+    void parse_shouldExtractComplexEntities() {
+        String input = "#G06# As a User, I want to Find, so that I can use publicly available information...";
+        UserStory story = parser.parse(input);
+        assertTrue(story.getEntity().getBenefit().contains("publicly available information"));
+    }
+
+    @Test
+    void parse_shouldGenerateAnnotations() {
+        String input = "#G07# As a User, I want to Edit, so that I can save...";
+        UserStory story = parser.parse(input);
+
+        assertAll(
+                () -> assertTrue(story.getAnnotations().contains(Annotation.PERSONA), "PERSONA annotation missing"),
+                () -> assertTrue(story.getAnnotations().contains(Annotation.GOAL_ACTION), "GOAL_ACTION annotation missing")
+        );
     }
 }

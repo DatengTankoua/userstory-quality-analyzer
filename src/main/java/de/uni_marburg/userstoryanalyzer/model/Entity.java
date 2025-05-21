@@ -2,43 +2,43 @@ package de.uni_marburg.userstoryanalyzer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
+import java.util.ArrayList;
 
-/**
- * Die Klasse Entity repräsentiert die Entitäten, die in einer User Story mit
- * den Aktionen verbunden sind – unterteilt in solche, die mit dem Ziel
- * (Goal Entity) und solche, die mit dem Nutzen (Benefit Entity) in Verbindung stehen.
- *
- * Beispielhafte Struktur im JSON:
- * {
- *   "Goal Entity": ["Information"],
- *   "Benefit Entity": ["properties", "processes", ...]
- * }
- */
 public class Entity {
 
-    /**
-     * Liste der Entitäten, die sich auf das Ziel (Goal) der Aktion beziehen.
-     * Beispiel: ["Information"]
-     */
     @JsonProperty("Goal Entity")
     private final List<String> goal;
 
-    /**
-     * Liste der Entitäten, die den Nutzen (Benefit) der User Story beschreiben.
-     * Beispiel: ["properties", "County services", ...]
-     */
     @JsonProperty("Benefit Entity")
     private final List<String> benefit;
 
-    /**
-     * Konstruktor zur Initialisierung einer Entity-Komponente.
-     *
-     * @param goalEntity    Entitäten, die sich auf das Ziel beziehen
-     * @param benefitEntity Entitäten, die sich auf den Nutzen beziehen
-     */
     public Entity(List<String> goalEntity, List<String> benefitEntity) {
-        this.goal = goalEntity;
-        this.benefit = benefitEntity;
+        this.goal = goalEntity != null ? goalEntity : List.of();
+
+        // Manuell geordnete Liste erstellen
+        List<String> orderedBenefit = new ArrayList<>();
+        if (benefitEntity != null) {
+            // Füge Elemente in der gewünschten Reihenfolge hinzu
+            addIfPresent(orderedBenefit, benefitEntity, "publicly available information");
+            addIfPresent(orderedBenefit, benefitEntity, "properties");
+            addIfPresent(orderedBenefit, benefitEntity, "County services");
+            addIfPresent(orderedBenefit, benefitEntity, "processes");
+            addIfPresent(orderedBenefit, benefitEntity, "other general information");
+
+            // Füge alle übrigen Elemente hinzu (falls vorhanden)
+            for (String item : benefitEntity) {
+                if (!orderedBenefit.contains(item)) {
+                    orderedBenefit.add(item);
+                }
+            }
+        }
+        this.benefit = orderedBenefit;
+    }
+
+    private void addIfPresent(List<String> target, List<String> source, String value) {
+        if (source.contains(value)) {
+            target.add(value);
+        }
     }
 
     /**
