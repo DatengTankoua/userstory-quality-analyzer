@@ -3,6 +3,7 @@ package de.uni_marburg.userstoryanalyzer.gui;
 import de.uni_marburg.userstoryanalyzer.model.UserStory;
 import de.uni_marburg.userstoryanalyzer.model.Action;
 import de.uni_marburg.userstoryanalyzer.model.Entity;
+import de.uni_marburg.userstoryanalyzer.parser.StoryParserOpenNLP;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,11 +16,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * JavaFX-based GUI to display a list of User Stories in a table format.
- * This is a temporary mock-up using dummy data until the parser is fully functional.
+ * This version integrates the actual parser.
  */
 public class UserStoryViewerApp extends Application {
 
@@ -51,7 +54,6 @@ public class UserStoryViewerApp extends Application {
         benefitColumn.setCellValueFactory(data ->
                 new SimpleStringProperty(data.getValue().getBenefit()));
 
-        // Add columns to the table
         tableView.getColumns().addAll(
                 pidColumn,
                 personaColumn,
@@ -62,11 +64,11 @@ public class UserStoryViewerApp extends Application {
 
         tableView.setItems(userStories);
 
-        // Button to load dummy data (for demo purposes)
+        // Button to load dummy data
         Button dummyButton = new Button("Load Dummy Data");
         dummyButton.setOnAction(e -> loadDummyData());
 
-        // Button to load from file (placeholder for future parser integration)
+        // Button to load from file and parse
         Button loadFromFileButton = new Button("Load from File");
         loadFromFileButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
@@ -76,15 +78,12 @@ public class UserStoryViewerApp extends Application {
             );
             File file = fileChooser.showOpenDialog(stage);
             if (file != null) {
-                System.out.println("Selected file: " + file.getAbsolutePath());
-                // Future: pass file to UserStoryParser and load results into userStories
+                parseFile(file);
             }
         });
 
-        // Top layout with both buttons
         HBox topControls = new HBox(10, dummyButton, loadFromFileButton);
 
-        // Layout
         BorderPane root = new BorderPane();
         root.setTop(topControls);
         root.setCenter(tableView);
@@ -94,13 +93,32 @@ public class UserStoryViewerApp extends Application {
         stage.show();
     }
 
-    /**
-     * Loads example User Story data into the table.
-     * This method is used for demonstration before the parser is available.
-     */
+    private void parseFile(File file) {
+        userStories.clear();
+        try {
+            StoryParserOpenNLP parser = new StoryParserOpenNLP();
+            List<String> lines = Files.readAllLines(file.toPath());
+            List<UserStory> parsedStories = lines.stream()
+                    .map(String::trim)
+                    .filter(line -> !line.isEmpty())
+                    .map(parser::parse)
+                    .collect(Collectors.toList());
+            userStories.addAll(parsedStories);
+        } catch (Exception ex) {
+            showError("Parsing Error", "Failed to parse file: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    private void showError(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     private void loadDummyData() {
         userStories.clear();
-
         userStories.add(new UserStory(
                 "#U01#",
                 "As a Student, I want to search for courses so that I can find suitable ones.",
@@ -108,8 +126,8 @@ public class UserStoryViewerApp extends Application {
                 new Action(List.of("search"), List.of("find")),
                 new Entity(List.of("courses"), List.of("suitable ones")),
                 "Find suitable courses.",
-                List.of(), // Annotations
-                List.of()  // Relations
+                List.of(),
+                List.of()
         ));
     }
 

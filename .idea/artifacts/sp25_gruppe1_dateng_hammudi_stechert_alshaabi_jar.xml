@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="sp25_gruppe1_dateng_hammudi_stechert_alshaabi:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/sp25_gruppe1_dateng_hammudi_stechert_alshaabi_jar</output-path>
+    <root id="archive" name="sp25_gruppe1_dateng_hammudi_stechert_alshaabi.jar">
+      <element id="module-output" name="userstory-analyzer" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/opennlp/opennlp-tools/2.3.0/opennlp-tools-2.3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
