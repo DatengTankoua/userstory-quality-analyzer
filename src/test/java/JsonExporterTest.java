@@ -12,9 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testklasse für die {@link JsonExporter}-Klasse.
- *
- * Stellt sicher, dass User Stories korrekt im JSON-Format exportiert werden
- * und die Struktur der erzeugten Datei dem erwarteten Format entspricht.
  */
 class JsonExporterTest {
 
@@ -53,7 +50,7 @@ class JsonExporterTest {
         // Detailprüfung auf konkrete Inhalte (strukturell)
         String normalized = jsonOutput.replaceAll("\\s+", "");
         assertTrue(normalized.contains("\"Goal\":[\"Search\"]"));
-        assertTrue(normalized.contains("\"BenefitEntity\":[\"properties\""));
+        assertTrue(normalized.contains("\"BenefitEntity\":[\"publiclyavailableinformation\""));
     }
 
     /**

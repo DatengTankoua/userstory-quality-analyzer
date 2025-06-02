@@ -8,7 +8,7 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Information" ],
-    "Benefit Entity" : [ "properties", "processes", "publicly available information", "County services", "other general information" ]
+    "Benefit Entity" : [ "publicly available information", "properties", "County services", "processes", "other general information" ]
   },
   "Benefit" : "I can obtain publicly available information concerning properties, County services, processes and other general information",
   "Triggers" : [ [ "Public User", "Search" ] ],
