@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class UserStory {
 
     @JsonProperty("PID")
-    private final String pid;
+    public String pid;
 
     @JsonProperty("Text")
     private final String text;
@@ -138,7 +138,6 @@ public class UserStory {
                 "  " + entity.toString() + ",\n" +
                 "  benefit='" + benefit + "',\n" +
                 "  annotations=" + annotations + ",\n" +
-                "  relations=" + relations + ",\n" +
                 "  triggers=" + formatRelationList(triggers) + ",\n" +
                 "  targets=" + formatRelationList(targets) + ",\n" +
                 "  contains=" + formatRelationList(contains) + "\n" +
