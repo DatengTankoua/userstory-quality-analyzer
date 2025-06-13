@@ -23,13 +23,13 @@
     "Benefit" : [ "find" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "requirements", "a service" ],
-    "Benefit Entity" : [ "the relevant service", "application type", "the online portal" ]
+    "Goal Entity" : [ "requirements", "service" ],
+    "Benefit Entity" : [ "relevant service", "application type", "online portal" ]
   },
   "Benefit" : "I can find the relevant service and/or application type to initiate via the online portal",
   "Triggers" : [ [ "ProspectiveApplicant", "research" ], [ "ProspectiveApplicant", "select" ] ],
-  "Targets" : [ [ "research", "requirements" ], [ "research", "a service" ], [ "select", "requirements" ], [ "select", "a service" ], [ "find", "the relevant service" ], [ "find", "application type" ], [ "find", "the online portal" ] ],
-  "Contains" : [ [ "requirements", "the relevant service" ], [ "requirements", "application type" ], [ "requirements", "the online portal" ], [ "a service", "the relevant service" ], [ "a service", "application type" ], [ "a service", "the online portal" ] ]
+  "Targets" : [ [ "research", "requirements" ], [ "research", "service" ], [ "select", "requirements" ], [ "select", "service" ], [ "find", "relevant service" ], [ "find", "application type" ], [ "find", "online portal" ] ],
+  "Contains" : [ [ "requirements", "relevant service" ], [ "requirements", "application type" ], [ "requirements", "online portal" ], [ "service", "relevant service" ], [ "service", "application type" ], [ "service", "online portal" ] ]
 }, {
   "PID" : "#GO2#",
   "Text" : "As an Applicant, I want to Request PreApplication Assistance, so that I can receive a response to a request for a meeting or information that is a result of the preapplication assistance.",
@@ -40,12 +40,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "PreApplication Assistance" ],
-    "Benefit Entity" : [ "a response to a request for a meeting", "information", "a result of the preapplication assistance" ]
+    "Benefit Entity" : [ "response to", "request for", "meeting", "information", "result of", "preapplication assistance" ]
   },
   "Benefit" : "I can receive a response to a request for a meeting or information that is a result of the preapplication assistance",
   "Triggers" : [ [ "Applicant", "Request" ] ],
-  "Targets" : [ [ "Request", "PreApplication Assistance" ], [ "receive", "a response to a request for a meeting" ], [ "receive", "information" ], [ "receive", "a result of the preapplication assistance" ], [ "result", "a response to a request for a meeting" ], [ "result", "information" ], [ "result", "a result of the preapplication assistance" ] ],
-  "Contains" : [ [ "PreApplication Assistance", "a response to a request for a meeting" ], [ "PreApplication Assistance", "information" ], [ "PreApplication Assistance", "a result of the preapplication assistance" ] ]
+  "Targets" : [ [ "Request", "PreApplication Assistance" ], [ "receive", "response to" ], [ "receive", "request for" ], [ "receive", "meeting" ], [ "receive", "information" ], [ "receive", "result of" ], [ "receive", "preapplication assistance" ], [ "result", "response to" ], [ "result", "request for" ], [ "result", "meeting" ], [ "result", "information" ], [ "result", "result of" ], [ "result", "preapplication assistance" ] ],
+  "Contains" : [ [ "PreApplication Assistance", "response to" ], [ "PreApplication Assistance", "request for" ], [ "PreApplication Assistance", "meeting" ], [ "PreApplication Assistance", "information" ], [ "PreApplication Assistance", "result of" ], [ "PreApplication Assistance", "preapplication assistance" ] ]
 }, {
   "PID" : "#GO3#",
   "Text" : "As a Customer, I want to Create a Customer Portal User Account, so that I can log on to the Customer Portal and perform transactions that first require user authentication.",
@@ -55,13 +55,13 @@
     "Benefit" : [ "log", "perform", "require" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Customer Portal User Account" ],
-    "Benefit Entity" : [ "the Customer Portal", "transactions", "first", "user authentication" ]
+    "Goal Entity" : [ "Customer Portal User Account" ],
+    "Benefit Entity" : [ "Customer Portal", "transactions", "first", "user authentication" ]
   },
   "Benefit" : "I can log on to the Customer Portal and perform transactions that first require user authentication",
   "Triggers" : [ [ "Customer", "Create" ] ],
-  "Targets" : [ [ "Create", "a Customer Portal User Account" ], [ "log", "the Customer Portal" ], [ "log", "transactions" ], [ "log", "first" ], [ "log", "user authentication" ], [ "perform", "the Customer Portal" ], [ "perform", "transactions" ], [ "perform", "first" ], [ "perform", "user authentication" ], [ "require", "the Customer Portal" ], [ "require", "transactions" ], [ "require", "first" ], [ "require", "user authentication" ] ],
-  "Contains" : [ [ "a Customer Portal User Account", "the Customer Portal" ], [ "a Customer Portal User Account", "transactions" ], [ "a Customer Portal User Account", "first" ], [ "a Customer Portal User Account", "user authentication" ] ]
+  "Targets" : [ [ "Create", "Customer Portal User Account" ], [ "log", "Customer Portal" ], [ "log", "transactions" ], [ "log", "first" ], [ "log", "user authentication" ], [ "perform", "Customer Portal" ], [ "perform", "transactions" ], [ "perform", "first" ], [ "perform", "user authentication" ], [ "require", "Customer Portal" ], [ "require", "transactions" ], [ "require", "first" ], [ "require", "user authentication" ] ],
+  "Contains" : [ [ "Customer Portal User Account", "Customer Portal" ], [ "Customer Portal User Account", "transactions" ], [ "Customer Portal User Account", "first" ], [ "Customer Portal User Account", "user authentication" ] ]
 }, {
   "PID" : "#GO4#",
   "Text" : "As an Applicant, I want to Submit Application, so that I can provide my information, plans and/or documents to initiate a transaction with the County.",
@@ -72,12 +72,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Application" ],
-    "Benefit Entity" : [ "information", "plans", "documents", "a transaction with the County" ]
+    "Benefit Entity" : [ "information", "plans", "documents", "transaction with", "County" ]
   },
   "Benefit" : "I can provide my information, plans and/or documents to initiate a transaction with the County",
   "Triggers" : [ [ "Applicant", "Submit" ] ],
-  "Targets" : [ [ "Submit", "Application" ], [ "provide", "information" ], [ "provide", "plans" ], [ "provide", "documents" ], [ "provide", "a transaction with the County" ] ],
-  "Contains" : [ [ "Application", "information" ], [ "Application", "plans" ], [ "Application", "documents" ], [ "Application", "a transaction with the County" ] ]
+  "Targets" : [ [ "Submit", "Application" ], [ "provide", "information" ], [ "provide", "plans" ], [ "provide", "documents" ], [ "provide", "transaction with" ], [ "provide", "County" ] ],
+  "Contains" : [ [ "Application", "information" ], [ "Application", "plans" ], [ "Application", "documents" ], [ "Application", "transaction with" ], [ "Application", "County" ] ]
 }, {
   "PID" : "#GO5#",
   "Text" : "As an Applicant, I want to Submit Supporting Documentation, so that I can satisfy documentation requirements for my application.",
@@ -104,11 +104,11 @@
   },
   "Entity" : {
     "Goal Entity" : [ ],
-    "Benefit Entity" : [ "outstanding charge", "the service", "the County" ]
+    "Benefit Entity" : [ "outstanding charge", "service", "County" ]
   },
   "Benefit" : "I can satisfy outstanding charge associated with the service requested or received from the County",
   "Triggers" : [ [ "Applicant", "Pay" ] ],
-  "Targets" : [ [ "satisfy", "outstanding charge" ], [ "satisfy", "the service" ], [ "satisfy", "the County" ] ],
+  "Targets" : [ [ "satisfy", "outstanding charge" ], [ "satisfy", "service" ], [ "satisfy", "County" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO7#",
@@ -119,13 +119,13 @@
     "Benefit" : [ "understand", "process" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the Status of a transaction" ],
-    "Benefit Entity" : [ "the provisioning of", "service", "the process", "such as information", "service levels", "fees", "plan review", "permit", "inspection results" ]
+    "Goal Entity" : [ "Status of", "transaction" ],
+    "Benefit Entity" : [ "provisioning of", "service", "process", "such as information", "service levels", "fees", "plan review", "permit", "inspection results" ]
   },
   "Benefit" : "I can understand where the provisioning of my service is in the process, such as information related to service levels, fees, plan review, permit, or inspection results",
   "Triggers" : [ [ "Applicant", "Check" ] ],
-  "Targets" : [ [ "Check", "the Status of a transaction" ], [ "understand", "the provisioning of" ], [ "understand", "service" ], [ "understand", "the process" ], [ "understand", "such as information" ], [ "understand", "service levels" ], [ "understand", "fees" ], [ "understand", "plan review" ], [ "understand", "permit" ], [ "understand", "inspection results" ], [ "process", "the provisioning of" ], [ "process", "service" ], [ "process", "the process" ], [ "process", "such as information" ], [ "process", "service levels" ], [ "process", "fees" ], [ "process", "plan review" ], [ "process", "permit" ], [ "process", "inspection results" ] ],
-  "Contains" : [ [ "the Status of a transaction", "the provisioning of" ], [ "the Status of a transaction", "service" ], [ "the Status of a transaction", "the process" ], [ "the Status of a transaction", "such as information" ], [ "the Status of a transaction", "service levels" ], [ "the Status of a transaction", "fees" ], [ "the Status of a transaction", "plan review" ], [ "the Status of a transaction", "permit" ], [ "the Status of a transaction", "inspection results" ] ]
+  "Targets" : [ [ "Check", "Status of" ], [ "Check", "transaction" ], [ "understand", "provisioning of" ], [ "understand", "service" ], [ "understand", "process" ], [ "understand", "such as information" ], [ "understand", "service levels" ], [ "understand", "fees" ], [ "understand", "plan review" ], [ "understand", "permit" ], [ "understand", "inspection results" ], [ "process", "provisioning of" ], [ "process", "service" ], [ "process", "process" ], [ "process", "such as information" ], [ "process", "service levels" ], [ "process", "fees" ], [ "process", "plan review" ], [ "process", "permit" ], [ "process", "inspection results" ] ],
+  "Contains" : [ [ "Status of", "provisioning of" ], [ "Status of", "service" ], [ "Status of", "process" ], [ "Status of", "such as information" ], [ "Status of", "service levels" ], [ "Status of", "fees" ], [ "Status of", "plan review" ], [ "Status of", "permit" ], [ "Status of", "inspection results" ], [ "transaction", "provisioning of" ], [ "transaction", "service" ], [ "transaction", "process" ], [ "transaction", "such as information" ], [ "transaction", "service levels" ], [ "transaction", "fees" ], [ "transaction", "plan review" ], [ "transaction", "permit" ], [ "transaction", "inspection results" ] ]
 }, {
   "PID" : "#GO8#",
   "Text" : "As an Applicant, I want to Modify my Application, so that I can successfully change information on an application.",
@@ -136,12 +136,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Application" ],
-    "Benefit Entity" : [ "information on an application" ]
+    "Benefit Entity" : [ "information on", "application" ]
   },
   "Benefit" : "I can successfully change information on an application",
   "Triggers" : [ [ "Applicant", "Modify" ] ],
-  "Targets" : [ [ "Modify", "Application" ], [ "change", "information on an application" ] ],
-  "Contains" : [ [ "Application", "information on an application" ] ]
+  "Targets" : [ [ "Modify", "Application" ], [ "change", "information on" ], [ "change", "application" ] ],
+  "Contains" : [ [ "Application", "information on" ], [ "Application", "application" ] ]
 }, {
   "PID" : "#GO9#",
   "Text" : "As a Staff member, I want to Perform a Completeness Review, so that I can validate when an application is complete and eligible for further technical review.",
@@ -151,13 +151,13 @@
     "Benefit" : [ "validate", "complete", "eligible" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Completeness Review" ],
-    "Benefit Entity" : [ "an application", "complete", "eligible for further technical review" ]
+    "Goal Entity" : [ "Completeness Review" ],
+    "Benefit Entity" : [ "application", "complete", "eligible for further technical review" ]
   },
   "Benefit" : "I can validate when an application is complete and eligible for further technical review",
   "Triggers" : [ [ "Staff member", "Perform" ] ],
-  "Targets" : [ [ "Perform", "a Completeness Review" ], [ "validate", "an application" ], [ "validate", "complete" ], [ "validate", "eligible for further technical review" ], [ "complete", "an application" ], [ "complete", "complete" ], [ "complete", "eligible for further technical review" ], [ "eligible", "an application" ], [ "eligible", "complete" ], [ "eligible", "eligible for further technical review" ] ],
-  "Contains" : [ [ "a Completeness Review", "an application" ], [ "a Completeness Review", "complete" ], [ "a Completeness Review", "eligible for further technical review" ] ]
+  "Targets" : [ [ "Perform", "Completeness Review" ], [ "validate", "application" ], [ "validate", "complete" ], [ "validate", "eligible for further technical review" ], [ "complete", "application" ], [ "complete", "complete" ], [ "complete", "eligible for further technical review" ], [ "eligible", "application" ], [ "eligible", "complete" ], [ "eligible", "eligible for further technical review" ] ],
+  "Contains" : [ [ "Completeness Review", "application" ], [ "Completeness Review", "complete" ], [ "Completeness Review", "eligible for further technical review" ] ]
 }, {
   "PID" : "#GO10#",
   "Text" : "As a Staff member, I want to Record an Internal Note, so that I can share information with other Staff collaborating on the record.",
@@ -167,13 +167,13 @@
     "Benefit" : [ "share" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "an Internal Note" ],
-    "Benefit Entity" : [ "information with other Staff", "the record" ]
+    "Goal Entity" : [ "Internal Note" ],
+    "Benefit Entity" : [ "information with other Staff", "record" ]
   },
   "Benefit" : "I can share information with other Staff collaborating on the record",
   "Triggers" : [ [ "Staff member", "Record" ] ],
-  "Targets" : [ [ "Record", "an Internal Note" ], [ "share", "information with other Staff" ], [ "share", "the record" ] ],
-  "Contains" : [ [ "an Internal Note", "information with other Staff" ], [ "an Internal Note", "the record" ] ]
+  "Targets" : [ [ "Record", "Internal Note" ], [ "share", "information with other Staff" ], [ "share", "record" ] ],
+  "Contains" : [ [ "Internal Note", "information with other Staff" ], [ "Internal Note", "record" ] ]
 }, {
   "PID" : "#GO11#",
   "Text" : "As a Staff member, I want to Assign an Application for Detailed Review, so that I can review the for compliance and subsequently approved or denied.",
@@ -183,13 +183,13 @@
     "Benefit" : [ "review", "denied" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "an Application for Detailed Review" ],
-    "Benefit Entity" : [ "the for compliance", "subsequently" ]
+    "Goal Entity" : [ "Application for Detailed Review" ],
+    "Benefit Entity" : [ "compliance", "subsequently" ]
   },
   "Benefit" : "I can review the for compliance and subsequently approved or denied",
   "Triggers" : [ [ "Staff member", "Assign" ] ],
-  "Targets" : [ [ "Assign", "an Application for Detailed Review" ], [ "review", "the for compliance" ], [ "review", "subsequently" ], [ "denied", "the for compliance" ], [ "denied", "subsequently" ] ],
-  "Contains" : [ [ "an Application for Detailed Review", "the for compliance" ], [ "an Application for Detailed Review", "subsequently" ] ]
+  "Targets" : [ [ "Assign", "Application for Detailed Review" ], [ "review", "compliance" ], [ "review", "subsequently" ], [ "denied", "compliance" ], [ "denied", "subsequently" ] ],
+  "Contains" : [ [ "Application for Detailed Review", "compliance" ], [ "Application for Detailed Review", "subsequently" ] ]
 }, {
   "PID" : "#GO12#",
   "Text" : "As a Staff member, I want to Apply a Hold, so that I can prevent progression through the workflow or other actions in the system until the issue is resolved.",
@@ -200,11 +200,11 @@
   },
   "Entity" : {
     "Goal Entity" : [ ],
-    "Benefit Entity" : [ "progression through the workflow", "other actions in the system until the issue" ]
+    "Benefit Entity" : [ "progression through", "workflow", "other actions in", "system until", "issue" ]
   },
   "Benefit" : "I can prevent progression through the workflow or other actions in the system until the issue is resolved",
   "Triggers" : [ [ "Staff member", "Apply" ], [ "Staff member", "Hold" ] ],
-  "Targets" : [ [ "prevent", "progression through the workflow" ], [ "prevent", "other actions in the system until the issue" ] ],
+  "Targets" : [ [ "prevent", "progression through" ], [ "prevent", "workflow" ], [ "prevent", "other actions in" ], [ "prevent", "system until" ], [ "prevent", "issue" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO13#",
@@ -216,11 +216,11 @@
   },
   "Entity" : {
     "Goal Entity" : [ ],
-    "Benefit Entity" : [ "progression through the workflow", "other actions in the system now that the issue" ]
+    "Benefit Entity" : [ "progression through", "workflow", "other actions in", "system now that", "issue" ]
   },
   "Benefit" : "I can allow progression through the workflow or other actions in the system now that the issue has been resolved",
   "Triggers" : [ [ "Staff member", "Remove" ], [ "Staff member", "Hold" ] ],
-  "Targets" : [ [ "allow", "progression through the workflow" ], [ "allow", "other actions in the system now that the issue" ] ],
+  "Targets" : [ [ "allow", "progression through" ], [ "allow", "workflow" ], [ "allow", "other actions in" ], [ "allow", "system now that" ], [ "allow", "issue" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO14#",
@@ -231,13 +231,13 @@
     "Benefit" : [ "satisfy" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Formal Response to Applicant" ],
+    "Goal Entity" : [ "Formal Response to Applicant" ],
     "Benefit Entity" : [ "communication", "records responsibilities" ]
   },
   "Benefit" : "I can satisfy communication and records responsibilities",
   "Triggers" : [ [ "Staff member", "Send" ] ],
-  "Targets" : [ [ "Send", "a Formal Response to Applicant" ], [ "satisfy", "communication" ], [ "satisfy", "records responsibilities" ] ],
-  "Contains" : [ [ "a Formal Response to Applicant", "communication" ], [ "a Formal Response to Applicant", "records responsibilities" ] ]
+  "Targets" : [ [ "Send", "Formal Response to Applicant" ], [ "satisfy", "communication" ], [ "satisfy", "records responsibilities" ] ],
+  "Contains" : [ [ "Formal Response to Applicant", "communication" ], [ "Formal Response to Applicant", "records responsibilities" ] ]
 }, {
   "PID" : "#GO15#",
   "Text" : "As a Staff member, I want to Track  the Draft Proffers, so that I can preserve the history of draft proffer statements submitted by the Applicant.",
@@ -248,11 +248,11 @@
   },
   "Entity" : {
     "Goal Entity" : [ ],
-    "Benefit Entity" : [ "the history of draft", "statements", "the Applicant" ]
+    "Benefit Entity" : [ "history of draft", "statements", "Applicant" ]
   },
   "Benefit" : "I can preserve the history of draft proffer statements submitted by the Applicant",
   "Triggers" : [ ],
-  "Targets" : [ [ "preserve", "the history of draft" ], [ "preserve", "statements" ], [ "preserve", "the Applicant" ] ],
+  "Targets" : [ [ "preserve", "history of draft" ], [ "preserve", "statements" ], [ "preserve", "Applicant" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO16#",
@@ -264,12 +264,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Approved Proffers" ],
-    "Benefit Entity" : [ "compliance with", "satisfaction of the", "the future" ]
+    "Benefit Entity" : [ "compliance with", "satisfaction of", "future" ]
   },
   "Benefit" : "I can ensure compliance with and satisfaction of the proffer in the future",
   "Triggers" : [ [ "Staff member", "Manage" ] ],
-  "Targets" : [ [ "Manage", "Approved Proffers" ], [ "ensure", "compliance with" ], [ "ensure", "satisfaction of the" ], [ "ensure", "the future" ] ],
-  "Contains" : [ [ "Approved Proffers", "compliance with" ], [ "Approved Proffers", "satisfaction of the" ], [ "Approved Proffers", "the future" ] ]
+  "Targets" : [ [ "Manage", "Approved Proffers" ], [ "ensure", "compliance with" ], [ "ensure", "satisfaction of" ], [ "ensure", "future" ] ],
+  "Contains" : [ [ "Approved Proffers", "compliance with" ], [ "Approved Proffers", "satisfaction of" ], [ "Approved Proffers", "future" ] ]
 }, {
   "PID" : "#GO17#",
   "Text" : "As a Staff member, I want to Manage Ordinances, so that I can maintain accurate ordinance information in the System.",
@@ -280,12 +280,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Ordinances" ],
-    "Benefit Entity" : [ "accurate ordinance information in the System" ]
+    "Benefit Entity" : [ "accurate ordinance information in", "System" ]
   },
   "Benefit" : "I can maintain accurate ordinance information in the System",
   "Triggers" : [ [ "Staff member", "Manage" ] ],
-  "Targets" : [ [ "Manage", "Ordinances" ], [ "maintain", "accurate ordinance information in the System" ] ],
-  "Contains" : [ [ "Ordinances", "accurate ordinance information in the System" ] ]
+  "Targets" : [ [ "Manage", "Ordinances" ], [ "maintain", "accurate ordinance information in" ], [ "maintain", "System" ] ],
+  "Contains" : [ [ "Ordinances", "accurate ordinance information in" ], [ "Ordinances", "System" ] ]
 }, {
   "PID" : "#GO18#",
   "Text" : "As a Staff member, I want to Schedule a Meeting, so that I can bring the required parties together at a specific date/time to address an issue.",
@@ -295,13 +295,13 @@
     "Benefit" : [ "bring" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Meeting" ],
-    "Benefit Entity" : [ "parties together at a specific date", "time", "an issue" ]
+    "Goal Entity" : [ "Meeting" ],
+    "Benefit Entity" : [ "parties together at", "specific date", "time", "issue" ]
   },
   "Benefit" : "I can bring the required parties together at a specific date/time to address an issue",
   "Triggers" : [ [ "Staff member", "Schedule" ] ],
-  "Targets" : [ [ "Schedule", "a Meeting" ], [ "bring", "parties together at a specific date" ], [ "bring", "time" ], [ "bring", "an issue" ] ],
-  "Contains" : [ [ "a Meeting", "parties together at a specific date" ], [ "a Meeting", "time" ], [ "a Meeting", "an issue" ] ]
+  "Targets" : [ [ "Schedule", "Meeting" ], [ "bring", "parties together at" ], [ "bring", "specific date" ], [ "bring", "time" ], [ "bring", "issue" ] ],
+  "Contains" : [ [ "Meeting", "parties together at" ], [ "Meeting", "specific date" ], [ "Meeting", "time" ], [ "Meeting", "issue" ] ]
 }, {
   "PID" : "#GO19#",
   "Text" : "As a staff member, I want to denote an application with a Final Action status. So that I can finish it.",
@@ -311,12 +311,12 @@
     "Benefit" : [ "finish" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "an application with a Final Action status" ],
+    "Goal Entity" : [ "application with", "Final Action status" ],
     "Benefit Entity" : [ ]
   },
   "Benefit" : "I can finish it",
   "Triggers" : [ [ "staff member", "denote" ] ],
-  "Targets" : [ [ "denote", "an application with a Final Action status" ] ],
+  "Targets" : [ [ "denote", "application with" ], [ "denote", "Final Action status" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO20#",
@@ -328,12 +328,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Studies" ],
-    "Benefit Entity" : [ "work in process", "outcome", "location", "information", "the Plan" ]
+    "Benefit Entity" : [ "work in process", "outcome", "location", "information", "Plan" ]
   },
   "Benefit" : "I can record work in process, outcome, and location-based information related to the Plan(s)",
   "Triggers" : [ [ "Planning Staff member", "Planning" ] ],
-  "Targets" : [ [ "Planning", "Studies" ], [ "record", "work in process" ], [ "record", "outcome" ], [ "record", "location" ], [ "record", "information" ], [ "record", "the Plan" ] ],
-  "Contains" : [ [ "Studies", "work in process" ], [ "Studies", "outcome" ], [ "Studies", "location" ], [ "Studies", "information" ], [ "Studies", "the Plan" ] ]
+  "Targets" : [ [ "Planning", "Studies" ], [ "record", "work in process" ], [ "record", "outcome" ], [ "record", "location" ], [ "record", "information" ], [ "record", "Plan" ] ],
+  "Contains" : [ [ "Studies", "work in process" ], [ "Studies", "outcome" ], [ "Studies", "location" ], [ "Studies", "information" ], [ "Studies", "Plan" ] ]
 }, {
   "PID" : "#GO21#",
   "Text" : "As a Planning Staff member, I want to Generate Planning-related Reports, so that I can access, analyze and/or export the needed information in the format I requested.",
@@ -344,12 +344,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Planning", "Reports" ],
-    "Benefit Entity" : [ "export the", "information in the format" ]
+    "Benefit Entity" : [ "export", "information in", "format" ]
   },
   "Benefit" : "I can access, analyze and/or export the needed information in the format I requested",
   "Triggers" : [ [ "Planning Staff member", "Generate" ], [ "Planning Staff member", "related" ] ],
-  "Targets" : [ [ "Generate", "Planning" ], [ "Generate", "Reports" ], [ "related", "Planning" ], [ "related", "Reports" ], [ "access", "export the" ], [ "access", "information in the format" ], [ "analyze", "export the" ], [ "analyze", "information in the format" ], [ "requested", "export the" ], [ "requested", "information in the format" ] ],
-  "Contains" : [ [ "Planning", "export the" ], [ "Planning", "information in the format" ], [ "Reports", "export the" ], [ "Reports", "information in the format" ] ]
+  "Targets" : [ [ "Generate", "Planning" ], [ "Generate", "Reports" ], [ "related", "Planning" ], [ "related", "Reports" ], [ "access", "export" ], [ "access", "information in" ], [ "access", "format" ], [ "analyze", "export" ], [ "analyze", "information in" ], [ "analyze", "format" ], [ "requested", "export" ], [ "requested", "information in" ], [ "requested", "format" ] ],
+  "Contains" : [ [ "Planning", "export" ], [ "Planning", "information in" ], [ "Planning", "format" ], [ "Reports", "export" ], [ "Reports", "information in" ], [ "Reports", "format" ] ]
 }, {
   "PID" : "#GO22#",
   "Text" : "As a Planning Staff member, I want to Evaluate Consistency with the Comprehensive Plan, so that I can complete my required review of a plan set and/or application.",
@@ -359,13 +359,13 @@
     "Benefit" : [ "complete" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "Consistency with the Comprehensive Plan" ],
-    "Benefit Entity" : [ "review of a plan", "application" ]
+    "Goal Entity" : [ "Consistency with", "Comprehensive Plan" ],
+    "Benefit Entity" : [ "review of", "plan", "application" ]
   },
   "Benefit" : "I can complete my required review of a plan set and/or application",
   "Triggers" : [ [ "Planning Staff member", "Evaluate" ] ],
-  "Targets" : [ [ "Evaluate", "Consistency with the Comprehensive Plan" ], [ "complete", "review of a plan" ], [ "complete", "application" ] ],
-  "Contains" : [ [ "Consistency with the Comprehensive Plan", "review of a plan" ], [ "Consistency with the Comprehensive Plan", "application" ] ]
+  "Targets" : [ [ "Evaluate", "Consistency with" ], [ "Evaluate", "Comprehensive Plan" ], [ "complete", "review of" ], [ "complete", "plan" ], [ "complete", "application" ] ],
+  "Contains" : [ [ "Consistency with", "review of" ], [ "Consistency with", "plan" ], [ "Consistency with", "application" ], [ "Comprehensive Plan", "review of" ], [ "Comprehensive Plan", "plan" ], [ "Comprehensive Plan", "application" ] ]
 }, {
   "PID" : "#GO23#",
   "Text" : "As a Staff member, I want to Perform a Staff Review, so that I can validate compliance of an application with the Zoning Ordinance and impact approval/denial of the application accordingly.",
@@ -375,13 +375,13 @@
     "Benefit" : [ "validate" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Staff Review" ],
-    "Benefit Entity" : [ "compliance of an application with the Zoning Ordinance", "impact approval", "denial of the application accordingly" ]
+    "Goal Entity" : [ "Staff Review" ],
+    "Benefit Entity" : [ "compliance of", "application with", "Zoning Ordinance", "impact approval", "denial of", "application accordingly" ]
   },
   "Benefit" : "I can validate compliance of an application with the Zoning Ordinance and impact approval/denial of the application accordingly",
   "Triggers" : [ [ "Staff member", "Perform" ] ],
-  "Targets" : [ [ "Perform", "a Staff Review" ], [ "validate", "compliance of an application with the Zoning Ordinance" ], [ "validate", "impact approval" ], [ "validate", "denial of the application accordingly" ] ],
-  "Contains" : [ [ "a Staff Review", "compliance of an application with the Zoning Ordinance" ], [ "a Staff Review", "impact approval" ], [ "a Staff Review", "denial of the application accordingly" ] ]
+  "Targets" : [ [ "Perform", "Staff Review" ], [ "validate", "compliance of" ], [ "validate", "application with" ], [ "validate", "Zoning Ordinance" ], [ "validate", "impact approval" ], [ "validate", "denial of" ], [ "validate", "application accordingly" ] ],
+  "Contains" : [ [ "Staff Review", "compliance of" ], [ "Staff Review", "application with" ], [ "Staff Review", "Zoning Ordinance" ], [ "Staff Review", "impact approval" ], [ "Staff Review", "denial of" ], [ "Staff Review", "application accordingly" ] ]
 }, {
   "PID" : "#GO24#",
   "Text" : "As a Zoning Staff member, I want to Process the Requests for Zoning Information, so that I can capture my response to the request in the system and also send a communication from the system to the Applicant.",
@@ -391,13 +391,13 @@
     "Benefit" : [ "capture", "send" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the Requests for Zoning Information" ],
-    "Benefit Entity" : [ "response to the request in the system", "also", "a communication from the system to the Applicant" ]
+    "Goal Entity" : [ "Requests for Zoning Information" ],
+    "Benefit Entity" : [ "response to", "request in", "system", "also", "communication from", "system to", "Applicant" ]
   },
   "Benefit" : "I can capture my response to the request in the system and also send a communication from the system to the Applicant",
   "Triggers" : [ [ "Zoning Staff member", "Process" ] ],
-  "Targets" : [ [ "Process", "the Requests for Zoning Information" ], [ "capture", "response to the request in the system" ], [ "capture", "also" ], [ "capture", "a communication from the system to the Applicant" ], [ "send", "response to the request in the system" ], [ "send", "also" ], [ "send", "a communication from the system to the Applicant" ] ],
-  "Contains" : [ [ "the Requests for Zoning Information", "response to the request in the system" ], [ "the Requests for Zoning Information", "also" ], [ "the Requests for Zoning Information", "a communication from the system to the Applicant" ] ]
+  "Targets" : [ [ "Process", "Requests for Zoning Information" ], [ "capture", "response to" ], [ "capture", "request in" ], [ "capture", "system" ], [ "capture", "also" ], [ "capture", "communication from" ], [ "capture", "system to" ], [ "capture", "Applicant" ], [ "send", "response to" ], [ "send", "request in" ], [ "send", "system" ], [ "send", "also" ], [ "send", "communication from" ], [ "send", "system to" ], [ "send", "Applicant" ] ],
+  "Contains" : [ [ "Requests for Zoning Information", "response to" ], [ "Requests for Zoning Information", "request in" ], [ "Requests for Zoning Information", "system" ], [ "Requests for Zoning Information", "also" ], [ "Requests for Zoning Information", "communication from" ], [ "Requests for Zoning Information", "system to" ], [ "Requests for Zoning Information", "Applicant" ] ]
 }, {
   "PID" : "#GO25#",
   "Text" : "As a Zoning Staff member, I want to Issue the Zoning-Related Permits, so that I can satisfy an Applicant's request for service that has proven to be eligible and in compliance with the Zoning Ordinance.",
@@ -407,13 +407,13 @@
     "Benefit" : [ "satisfy", "proven" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the Zoning", "Permits" ],
-    "Benefit Entity" : [ "an Applicant", "request for service", "eligible", "compliance with the Zoning Ordinance" ]
+    "Goal Entity" : [ "Zoning", "Permits" ],
+    "Benefit Entity" : [ "Applicant", "request for service", "eligible", "compliance with", "Zoning Ordinance" ]
   },
   "Benefit" : "I can satisfy an Applicant's request for service that has proven to be eligible and in compliance with the Zoning Ordinance",
   "Triggers" : [ [ "Zoning Staff member", "Issue" ], [ "Zoning Staff member", "Related" ] ],
-  "Targets" : [ [ "Issue", "the Zoning" ], [ "Issue", "Permits" ], [ "Related", "the Zoning" ], [ "Related", "Permits" ], [ "satisfy", "an Applicant" ], [ "satisfy", "request for service" ], [ "satisfy", "eligible" ], [ "satisfy", "compliance with the Zoning Ordinance" ], [ "proven", "an Applicant" ], [ "proven", "request for service" ], [ "proven", "eligible" ], [ "proven", "compliance with the Zoning Ordinance" ] ],
-  "Contains" : [ [ "the Zoning", "an Applicant" ], [ "the Zoning", "request for service" ], [ "the Zoning", "eligible" ], [ "the Zoning", "compliance with the Zoning Ordinance" ], [ "Permits", "an Applicant" ], [ "Permits", "request for service" ], [ "Permits", "eligible" ], [ "Permits", "compliance with the Zoning Ordinance" ] ]
+  "Targets" : [ [ "Issue", "Zoning" ], [ "Issue", "Permits" ], [ "Related", "Zoning" ], [ "Related", "Permits" ], [ "satisfy", "Applicant" ], [ "satisfy", "request for service" ], [ "satisfy", "eligible" ], [ "satisfy", "compliance with" ], [ "satisfy", "Zoning Ordinance" ], [ "proven", "Applicant" ], [ "proven", "request for service" ], [ "proven", "eligible" ], [ "proven", "compliance with" ], [ "proven", "Zoning Ordinance" ] ],
+  "Contains" : [ [ "Zoning", "Applicant" ], [ "Zoning", "request for service" ], [ "Zoning", "eligible" ], [ "Zoning", "compliance with" ], [ "Zoning", "Zoning Ordinance" ], [ "Permits", "Applicant" ], [ "Permits", "request for service" ], [ "Permits", "eligible" ], [ "Permits", "compliance with" ], [ "Permits", "Zoning Ordinance" ] ]
 }, {
   "PID" : "#GO26#",
   "Text" : "As a Staff member, I want to Develop a Staff Report, so that I can publish and distribute the report according to business rules.",
@@ -423,13 +423,13 @@
     "Benefit" : [ "publish", "distribute" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Staff Report" ],
-    "Benefit Entity" : [ "the report", "business rules" ]
+    "Goal Entity" : [ "Staff Report" ],
+    "Benefit Entity" : [ "report", "business rules" ]
   },
   "Benefit" : "I can publish and distribute the report according to business rules",
   "Triggers" : [ [ "Staff member", "Develop" ] ],
-  "Targets" : [ [ "Develop", "a Staff Report" ], [ "publish", "the report" ], [ "publish", "business rules" ], [ "distribute", "the report" ], [ "distribute", "business rules" ] ],
-  "Contains" : [ [ "a Staff Report", "the report" ], [ "a Staff Report", "business rules" ] ]
+  "Targets" : [ [ "Develop", "Staff Report" ], [ "publish", "report" ], [ "publish", "business rules" ], [ "distribute", "report" ], [ "distribute", "business rules" ] ],
+  "Contains" : [ [ "Staff Report", "report" ], [ "Staff Report", "business rules" ] ]
 }, {
   "PID" : "#GO27#",
   "Text" : "As a Staff member, I want to Manage Hearing Calendars, so that I can track hearing-related activities and due dates.",
@@ -456,12 +456,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Date" ],
-    "Benefit Entity" : [ "the application to the appropriate governing body within the timelines", "the relevant County rules", "procedures" ]
+    "Benefit Entity" : [ "application to", "appropriate governing body within", "timelines", "relevant County rules", "procedures" ]
   },
   "Benefit" : "I can present the application to the appropriate governing body within the timelines dictated by the relevant County rules and procedures",
   "Triggers" : [ [ "Staff member", "Assign" ], [ "Staff member", "Hearing" ] ],
-  "Targets" : [ [ "Assign", "Date" ], [ "Hearing", "Date" ], [ "present", "the application to the appropriate governing body within the timelines" ], [ "present", "the relevant County rules" ], [ "present", "procedures" ], [ "dictated", "the application to the appropriate governing body within the timelines" ], [ "dictated", "the relevant County rules" ], [ "dictated", "procedures" ] ],
-  "Contains" : [ [ "Date", "the application to the appropriate governing body within the timelines" ], [ "Date", "the relevant County rules" ], [ "Date", "procedures" ] ]
+  "Targets" : [ [ "Assign", "Date" ], [ "Hearing", "Date" ], [ "present", "application to" ], [ "present", "appropriate governing body within" ], [ "present", "timelines" ], [ "present", "relevant County rules" ], [ "present", "procedures" ], [ "dictated", "application to" ], [ "dictated", "appropriate governing body within" ], [ "dictated", "timelines" ], [ "dictated", "relevant County rules" ], [ "dictated", "procedures" ] ],
+  "Contains" : [ [ "Date", "application to" ], [ "Date", "appropriate governing body within" ], [ "Date", "timelines" ], [ "Date", "relevant County rules" ], [ "Date", "procedures" ] ]
 }, {
   "PID" : "#GO29#",
   "Text" : "As a Staff member, I want to Manage Affidavits, so that I can ensure compliance with the requirements prior to the hearing.",
@@ -472,12 +472,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Affidavits" ],
-    "Benefit Entity" : [ "compliance with the requirements prior to the hearing" ]
+    "Benefit Entity" : [ "compliance with", "requirements prior to", "hearing" ]
   },
   "Benefit" : "I can ensure compliance with the requirements prior to the hearing",
   "Triggers" : [ [ "Staff member", "Manage" ] ],
-  "Targets" : [ [ "Manage", "Affidavits" ], [ "ensure", "compliance with the requirements prior to the hearing" ] ],
-  "Contains" : [ [ "Affidavits", "compliance with the requirements prior to the hearing" ] ]
+  "Targets" : [ [ "Manage", "Affidavits" ], [ "ensure", "compliance with" ], [ "ensure", "requirements prior to" ], [ "ensure", "hearing" ] ],
+  "Contains" : [ [ "Affidavits", "compliance with" ], [ "Affidavits", "requirements prior to" ], [ "Affidavits", "hearing" ] ]
 }, {
   "PID" : "#GO30#",
   "Text" : "As an Applicant, I want to Satisfy Hearing Requirements, so that I can ensure all pre-hearing requirements are satisfied in time for the hearing.",
@@ -488,12 +488,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Requirements" ],
-    "Benefit Entity" : [ "all pre-hearing requirements", "satisfied in time for the hearing" ]
+    "Benefit Entity" : [ "pre-hearing requirements", "satisfied in time for", "hearing" ]
   },
   "Benefit" : "I can ensure all pre-hearing requirements are satisfied in time for the hearing",
   "Triggers" : [ [ "Applicant", "Satisfy" ], [ "Applicant", "Hearing" ] ],
-  "Targets" : [ [ "Satisfy", "Requirements" ], [ "Hearing", "Requirements" ], [ "ensure", "all pre-hearing requirements" ], [ "ensure", "satisfied in time for the hearing" ] ],
-  "Contains" : [ [ "Requirements", "all pre-hearing requirements" ], [ "Requirements", "satisfied in time for the hearing" ] ]
+  "Targets" : [ [ "Satisfy", "Requirements" ], [ "Hearing", "Requirements" ], [ "ensure", "pre-hearing requirements" ], [ "ensure", "satisfied in time for" ], [ "ensure", "hearing" ] ],
+  "Contains" : [ [ "Requirements", "pre-hearing requirements" ], [ "Requirements", "satisfied in time for" ], [ "Requirements", "hearing" ] ]
 }, {
   "PID" : "#GO31#",
   "Text" : "As a Staff member, I want to Prepare for and Support Hearing Execution, so that I can ensure all pre-hearing requirements are satisfied and staff and Applicant are ready for the hearing.",
@@ -504,12 +504,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Support", "Execution" ],
-    "Benefit Entity" : [ "all pre-hearing requirements", "satisfied", "staff", "Applicant", "ready for the hearing" ]
+    "Benefit Entity" : [ "pre-hearing requirements", "satisfied", "staff", "Applicant", "ready for", "hearing" ]
   },
   "Benefit" : "I can ensure all pre-hearing requirements are satisfied and staff and Applicant are ready for the hearing",
   "Triggers" : [ [ "Staff member", "Prepare" ], [ "Staff member", "Hearing" ] ],
-  "Targets" : [ [ "Prepare", "Support" ], [ "Prepare", "Execution" ], [ "Hearing", "Support" ], [ "Hearing", "Execution" ], [ "ensure", "all pre-hearing requirements" ], [ "ensure", "satisfied" ], [ "ensure", "staff" ], [ "ensure", "Applicant" ], [ "ensure", "ready for the hearing" ], [ "satisfied", "all pre-hearing requirements" ], [ "satisfied", "satisfied" ], [ "satisfied", "staff" ], [ "satisfied", "Applicant" ], [ "satisfied", "ready for the hearing" ], [ "ready", "all pre-hearing requirements" ], [ "ready", "satisfied" ], [ "ready", "staff" ], [ "ready", "Applicant" ], [ "ready", "ready for the hearing" ] ],
-  "Contains" : [ [ "Support", "all pre-hearing requirements" ], [ "Support", "satisfied" ], [ "Support", "staff" ], [ "Support", "Applicant" ], [ "Support", "ready for the hearing" ], [ "Execution", "all pre-hearing requirements" ], [ "Execution", "satisfied" ], [ "Execution", "staff" ], [ "Execution", "Applicant" ], [ "Execution", "ready for the hearing" ] ]
+  "Targets" : [ [ "Prepare", "Support" ], [ "Prepare", "Execution" ], [ "Hearing", "Support" ], [ "Hearing", "Execution" ], [ "ensure", "pre-hearing requirements" ], [ "ensure", "satisfied" ], [ "ensure", "staff" ], [ "ensure", "Applicant" ], [ "ensure", "ready for" ], [ "ensure", "hearing" ], [ "satisfied", "pre-hearing requirements" ], [ "satisfied", "satisfied" ], [ "satisfied", "staff" ], [ "satisfied", "Applicant" ], [ "satisfied", "ready for" ], [ "satisfied", "hearing" ], [ "ready", "pre-hearing requirements" ], [ "ready", "satisfied" ], [ "ready", "staff" ], [ "ready", "Applicant" ], [ "ready", "ready for" ], [ "ready", "hearing" ] ],
+  "Contains" : [ [ "Support", "pre-hearing requirements" ], [ "Support", "satisfied" ], [ "Support", "staff" ], [ "Support", "Applicant" ], [ "Support", "ready for" ], [ "Support", "hearing" ], [ "Execution", "pre-hearing requirements" ], [ "Execution", "satisfied" ], [ "Execution", "staff" ], [ "Execution", "Applicant" ], [ "Execution", "ready for" ], [ "Execution", "hearing" ] ]
 }, {
   "PID" : "#GO32#",
   "Text" : "As a Staff member, I want to Capture a Hearing Decision, so that I can enforce the system.",
@@ -520,12 +520,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Decision" ],
-    "Benefit Entity" : [ "the system" ]
+    "Benefit Entity" : [ "system" ]
   },
   "Benefit" : "I can enforce the system",
   "Triggers" : [ [ "Staff member", "Capture" ], [ "Staff member", "Hearing" ] ],
-  "Targets" : [ [ "Capture", "Decision" ], [ "Hearing", "Decision" ], [ "enforce", "the system" ] ],
-  "Contains" : [ [ "Decision", "the system" ] ]
+  "Targets" : [ [ "Capture", "Decision" ], [ "Hearing", "Decision" ], [ "enforce", "system" ] ],
+  "Contains" : [ [ "Decision", "system" ] ]
 }, {
   "PID" : "#GO33#",
   "Text" : "As a Staff member, I want to Process the Appeals, so that I can track the outcome and record the impact on the relevant records.",
@@ -535,13 +535,13 @@
     "Benefit" : [ "track", "record" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the Appeals" ],
-    "Benefit Entity" : [ "the outcome", "the impact on the relevant records" ]
+    "Goal Entity" : [ "Appeals" ],
+    "Benefit Entity" : [ "outcome", "impact on", "relevant records" ]
   },
   "Benefit" : "I can track the outcome and record the impact on the relevant records",
   "Triggers" : [ [ "Staff member", "Process" ] ],
-  "Targets" : [ [ "Process", "the Appeals" ], [ "track", "the outcome" ], [ "track", "the impact on the relevant records" ], [ "record", "the outcome" ], [ "record", "the impact on the relevant records" ] ],
-  "Contains" : [ [ "the Appeals", "the outcome" ], [ "the Appeals", "the impact on the relevant records" ] ]
+  "Targets" : [ [ "Process", "Appeals" ], [ "track", "outcome" ], [ "track", "impact on" ], [ "track", "relevant records" ], [ "record", "outcome" ], [ "record", "impact on" ], [ "record", "relevant records" ] ],
+  "Contains" : [ [ "Appeals", "outcome" ], [ "Appeals", "impact on" ], [ "Appeals", "relevant records" ] ]
 }, {
   "PID" : "#GO34#",
   "Text" : "As a Plan Review Staff member, I want to Assign Plans for Review, so that I can ensure plans have been assigned to the appropriate Plan Reviewer.",
@@ -552,12 +552,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Plans for Review" ],
-    "Benefit Entity" : [ "plans", "the appropriate Plan Reviewer" ]
+    "Benefit Entity" : [ "plans", "appropriate Plan Reviewer" ]
   },
   "Benefit" : "I can ensure plans have been assigned to the appropriate Plan Reviewer",
   "Triggers" : [ [ "Plan Review Staff member", "Assign" ] ],
-  "Targets" : [ [ "Assign", "Plans for Review" ], [ "ensure", "plans" ], [ "ensure", "the appropriate Plan Reviewer" ] ],
-  "Contains" : [ [ "Plans for Review", "plans" ], [ "Plans for Review", "the appropriate Plan Reviewer" ] ]
+  "Targets" : [ [ "Assign", "Plans for Review" ], [ "ensure", "plans" ], [ "ensure", "appropriate Plan Reviewer" ] ],
+  "Contains" : [ [ "Plans for Review", "plans" ], [ "Plans for Review", "appropriate Plan Reviewer" ] ]
 }, {
   "PID" : "#GO35#",
   "Text" : "As a Plan Review Staff Supervisor, I want to Manage Plan Reviewer Workload, so that I can monitor and effectively adjust workload as necessary and ensure service levels are met",
@@ -583,13 +583,13 @@
     "Benefit" : [ "meet" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Plan Review Meeting" ],
-    "Benefit Entity" : [ "the Plan Review Staff", "the plan review" ]
+    "Goal Entity" : [ "Plan Review Meeting" ],
+    "Benefit Entity" : [ "Plan Review Staff", "plan review" ]
   },
   "Benefit" : "I can meet with the Plan Review Staff regarding the plan review",
   "Triggers" : [ [ "Applicant", "Request" ] ],
-  "Targets" : [ [ "Request", "a Plan Review Meeting" ], [ "meet", "the Plan Review Staff" ], [ "meet", "the plan review" ] ],
-  "Contains" : [ [ "a Plan Review Meeting", "the Plan Review Staff" ], [ "a Plan Review Meeting", "the plan review" ] ]
+  "Targets" : [ [ "Request", "Plan Review Meeting" ], [ "meet", "Plan Review Staff" ], [ "meet", "plan review" ] ],
+  "Contains" : [ [ "Plan Review Meeting", "Plan Review Staff" ], [ "Plan Review Meeting", "plan review" ] ]
 }, {
   "PID" : "#GO37#",
   "Text" : "As a Plan Review Staff member, I want to successfully Conduct a Plan Review Meeting with the Applicant and record the outcome, so that I can listen to it again.",
@@ -599,13 +599,13 @@
     "Benefit" : [ "listen" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the outcome" ],
+    "Goal Entity" : [ "outcome" ],
     "Benefit Entity" : [ "again" ]
   },
   "Benefit" : "I can listen to it again",
   "Triggers" : [ [ "Plan Review Staff member", "record" ] ],
-  "Targets" : [ [ "record", "the outcome" ], [ "listen", "again" ] ],
-  "Contains" : [ [ "the outcome", "again" ] ]
+  "Targets" : [ [ "record", "outcome" ], [ "listen", "again" ] ],
+  "Contains" : [ [ "outcome", "again" ] ]
 }, {
   "PID" : "#GO38#",
   "Text" : "As a Plan Review Staff member, I want to Review Plans, so that I can review them for compliance and either approve, or fail or deny the plans and record any conditions, clearances, or corrections needed from the Applicant.",
@@ -616,12 +616,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Plans" ],
-    "Benefit Entity" : [ "compliance", "the plans", "any conditions", "clearances", "corrections", "the Applicant" ]
+    "Benefit Entity" : [ "compliance", "plans", "conditions", "clearances", "corrections", "Applicant" ]
   },
   "Benefit" : "I can review them for compliance and either approve, or fail or deny the plans and record any conditions, clearances, or corrections needed from the Applicant",
   "Triggers" : [ [ "Plan Review Staff member", "Review" ] ],
-  "Targets" : [ [ "Review", "Plans" ], [ "review", "compliance" ], [ "review", "the plans" ], [ "review", "any conditions" ], [ "review", "clearances" ], [ "review", "corrections" ], [ "review", "the Applicant" ], [ "approve", "compliance" ], [ "approve", "the plans" ], [ "approve", "any conditions" ], [ "approve", "clearances" ], [ "approve", "corrections" ], [ "approve", "the Applicant" ] ],
-  "Contains" : [ [ "Plans", "compliance" ], [ "Plans", "the plans" ], [ "Plans", "any conditions" ], [ "Plans", "clearances" ], [ "Plans", "corrections" ], [ "Plans", "the Applicant" ] ]
+  "Targets" : [ [ "Review", "Plans" ], [ "review", "compliance" ], [ "review", "plans" ], [ "review", "conditions" ], [ "review", "clearances" ], [ "review", "corrections" ], [ "review", "Applicant" ], [ "approve", "compliance" ], [ "approve", "plans" ], [ "approve", "conditions" ], [ "approve", "clearances" ], [ "approve", "corrections" ], [ "approve", "Applicant" ] ],
+  "Contains" : [ [ "Plans", "compliance" ], [ "Plans", "plans" ], [ "Plans", "conditions" ], [ "Plans", "clearances" ], [ "Plans", "corrections" ], [ "Plans", "Applicant" ] ]
 }, {
   "PID" : "#GO39#",
   "Text" : "As an Applicant, I want to Resubmit Plans, so that I can review revised plans. ",
@@ -647,13 +647,13 @@
     "Benefit" : [ "review", "approved" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the Code Modifications", "the Applicant" ],
-    "Benefit Entity" : [ "the request", "the appropriate project" ]
+    "Goal Entity" : [ "Code Modifications", "Applicant" ],
+    "Benefit Entity" : [ "request", "appropriate project" ]
   },
   "Benefit" : "I can review the request and if approved, associate it with the appropriate project",
   "Triggers" : [ [ "Plan Review Staff Member", "Review" ], [ "Plan Review Staff Member", "submitted" ] ],
-  "Targets" : [ [ "Review", "the Code Modifications" ], [ "Review", "the Applicant" ], [ "submitted", "the Code Modifications" ], [ "submitted", "the Applicant" ], [ "review", "the request" ], [ "review", "the appropriate project" ], [ "approved", "the request" ], [ "approved", "the appropriate project" ] ],
-  "Contains" : [ [ "the Code Modifications", "the request" ], [ "the Code Modifications", "the appropriate project" ], [ "the Applicant", "the request" ], [ "the Applicant", "the appropriate project" ] ]
+  "Targets" : [ [ "Review", "Code Modifications" ], [ "Review", "Applicant" ], [ "submitted", "Code Modifications" ], [ "submitted", "Applicant" ], [ "review", "request" ], [ "review", "appropriate project" ], [ "approved", "request" ], [ "approved", "appropriate project" ] ],
+  "Contains" : [ [ "Code Modifications", "request" ], [ "Code Modifications", "appropriate project" ], [ "Applicant", "request" ], [ "Applicant", "appropriate project" ] ]
 }, {
   "PID" : "#GO41#",
   "Text" : "As a Plan Review Staff member, I want to Track the Completion of Required Plan Reviews, so that I can ensure all plan review tasks are completed, results have been sent to the Applicant and any downstream steps are initiated such has a final review or payment for permit issuance.",
@@ -664,12 +664,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Plan Reviews" ],
-    "Benefit Entity" : [ "all plan review tasks", "results", "the Applicant", "any downstream steps", "such", "a final review", "payment for permit issuance" ]
+    "Benefit Entity" : [ "plan review tasks", "results", "Applicant", "downstream steps", "such", "final review", "payment for permit issuance" ]
   },
   "Benefit" : "I can ensure all plan review tasks are completed, results have been sent to the Applicant and any downstream steps are initiated such has a final review or payment for permit issuance",
   "Triggers" : [ [ "Plan Review Staff member", "Required" ] ],
-  "Targets" : [ [ "Required", "Plan Reviews" ], [ "ensure", "all plan review tasks" ], [ "ensure", "results" ], [ "ensure", "the Applicant" ], [ "ensure", "any downstream steps" ], [ "ensure", "such" ], [ "ensure", "a final review" ], [ "ensure", "payment for permit issuance" ] ],
-  "Contains" : [ [ "Plan Reviews", "all plan review tasks" ], [ "Plan Reviews", "results" ], [ "Plan Reviews", "the Applicant" ], [ "Plan Reviews", "any downstream steps" ], [ "Plan Reviews", "such" ], [ "Plan Reviews", "a final review" ], [ "Plan Reviews", "payment for permit issuance" ] ]
+  "Targets" : [ [ "Required", "Plan Reviews" ], [ "ensure", "plan review tasks" ], [ "ensure", "results" ], [ "ensure", "Applicant" ], [ "ensure", "downstream steps" ], [ "ensure", "such" ], [ "ensure", "final review" ], [ "ensure", "payment for permit issuance" ] ],
+  "Contains" : [ [ "Plan Reviews", "plan review tasks" ], [ "Plan Reviews", "results" ], [ "Plan Reviews", "Applicant" ], [ "Plan Reviews", "downstream steps" ], [ "Plan Reviews", "such" ], [ "Plan Reviews", "final review" ], [ "Plan Reviews", "payment for permit issuance" ] ]
 }, {
   "PID" : "#GO42#",
   "Text" : "As a Development Staff member, I want to Issue a Development-related Permit, so that I can grant the request to the Applicant to begin work",
@@ -679,13 +679,13 @@
     "Benefit" : [ "grant" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Development", "Permit" ],
-    "Benefit Entity" : [ "the request to the Applicant", "work" ]
+    "Goal Entity" : [ "Development", "Permit" ],
+    "Benefit Entity" : [ "request to", "Applicant", "work" ]
   },
   "Benefit" : "I can grant the request to the Applicant to begin work",
   "Triggers" : [ [ "Development Staff member", "Issue" ], [ "Development Staff member", "related" ] ],
-  "Targets" : [ [ "Issue", "a Development" ], [ "Issue", "Permit" ], [ "related", "a Development" ], [ "related", "Permit" ], [ "grant", "the request to the Applicant" ], [ "grant", "work" ] ],
-  "Contains" : [ [ "a Development", "the request to the Applicant" ], [ "a Development", "work" ], [ "Permit", "the request to the Applicant" ], [ "Permit", "work" ] ]
+  "Targets" : [ [ "Issue", "Development" ], [ "Issue", "Permit" ], [ "related", "Development" ], [ "related", "Permit" ], [ "grant", "request to" ], [ "grant", "Applicant" ], [ "grant", "work" ] ],
+  "Contains" : [ [ "Development", "request to" ], [ "Development", "Applicant" ], [ "Development", "work" ], [ "Permit", "request to" ], [ "Permit", "Applicant" ], [ "Permit", "work" ] ]
 }, {
   "PID" : "#GO43#",
   "Text" : "As a Staff member, I want to Manage Bonds, so that I can track and manage bonds throughout the lifecycle of the project until release.",
@@ -696,12 +696,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Bonds" ],
-    "Benefit Entity" : [ "bonds throughout the lifecycle of the project until release" ]
+    "Benefit Entity" : [ "bonds throughout", "lifecycle of", "project until release" ]
   },
   "Benefit" : "I can track and manage bonds throughout the lifecycle of the project until release",
   "Triggers" : [ [ "Staff member", "Manage" ] ],
-  "Targets" : [ [ "Manage", "Bonds" ], [ "track", "bonds throughout the lifecycle of the project until release" ], [ "manage", "bonds throughout the lifecycle of the project until release" ] ],
-  "Contains" : [ [ "Bonds", "bonds throughout the lifecycle of the project until release" ] ]
+  "Targets" : [ [ "Manage", "Bonds" ], [ "track", "bonds throughout" ], [ "track", "lifecycle of" ], [ "track", "project until release" ], [ "manage", "bonds throughout" ], [ "manage", "lifecycle of" ], [ "manage", "project until release" ] ],
+  "Contains" : [ [ "Bonds", "bonds throughout" ], [ "Bonds", "lifecycle of" ], [ "Bonds", "project until release" ] ]
 }, {
   "PID" : "#GO44#",
   "Text" : "As an Applicant, I want to Complete Building Development Project, so that I can receive any posted bond and/or obtain occupancy.",
@@ -744,12 +744,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Inspection" ],
-    "Benefit Entity" : [ "an inspection of", "project" ]
+    "Benefit Entity" : [ "inspection of", "project" ]
   },
   "Benefit" : "a County inspector is assigned to perform an inspection of my project",
   "Triggers" : [ [ "Customer", "Request" ] ],
   "Targets" : [ [ "Request", "Inspection" ] ],
-  "Contains" : [ [ "Inspection", "an inspection of" ], [ "Inspection", "project" ] ]
+  "Contains" : [ [ "Inspection", "inspection of" ], [ "Inspection", "project" ] ]
 }, {
   "PID" : "#GO47#",
   "Text" : "As an Inspection Staff member, I want to Create an Inspection, so that I can schedule and assign the inspection.",
@@ -759,13 +759,13 @@
     "Benefit" : [ "schedule", "assign" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "an Inspection" ],
-    "Benefit Entity" : [ "the inspection" ]
+    "Goal Entity" : [ "Inspection" ],
+    "Benefit Entity" : [ "inspection" ]
   },
   "Benefit" : "I can schedule and assign the inspection",
   "Triggers" : [ [ "Inspection Staff member", "Create" ] ],
-  "Targets" : [ [ "Create", "an Inspection" ], [ "schedule", "the inspection" ], [ "assign", "the inspection" ] ],
-  "Contains" : [ [ "an Inspection", "the inspection" ] ]
+  "Targets" : [ [ "Create", "Inspection" ], [ "schedule", "inspection" ], [ "assign", "inspection" ] ],
+  "Contains" : [ [ "Inspection", "inspection" ] ]
 }, {
   "PID" : "#GO48#",
   "Text" : "As an Inspection Staff Supervisor, I want to Assign Inspections, so that I can make sure the appropriate Inspector receives the work.",
@@ -776,12 +776,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Inspections" ],
-    "Benefit Entity" : [ "sure the appropriate Inspector", "the work" ]
+    "Benefit Entity" : [ "sure", "appropriate Inspector", "work" ]
   },
   "Benefit" : "I can make sure the appropriate Inspector receives the work",
   "Triggers" : [ [ "Inspection Staff Supervisor", "Assign" ] ],
-  "Targets" : [ [ "Assign", "Inspections" ], [ "make", "sure the appropriate Inspector" ], [ "make", "the work" ], [ "receives", "sure the appropriate Inspector" ], [ "receives", "the work" ] ],
-  "Contains" : [ [ "Inspections", "sure the appropriate Inspector" ], [ "Inspections", "the work" ] ]
+  "Targets" : [ [ "Assign", "Inspections" ], [ "make", "sure" ], [ "make", "appropriate Inspector" ], [ "make", "work" ], [ "receives", "sure" ], [ "receives", "appropriate Inspector" ], [ "receives", "work" ] ],
+  "Contains" : [ [ "Inspections", "sure" ], [ "Inspections", "appropriate Inspector" ], [ "Inspections", "work" ] ]
 }, {
   "PID" : "#GO49#",
   "Text" : "As an Inspection Supervisor, I want to Manage Inspector Workload, so that I can meet service level and quality requirements.",
@@ -808,11 +808,11 @@
   },
   "Entity" : {
     "Goal Entity" : [ ],
-    "Benefit Entity" : [ "Customer compliance with code", "regulations", "results of the inspection to the Customer" ]
+    "Benefit Entity" : [ "Customer compliance with code", "regulations", "results of", "inspection to", "Customer" ]
   },
   "Benefit" : "I can validate Customer compliance with code and regulations and provide results of the inspection to the Customer",
   "Triggers" : [ ],
-  "Targets" : [ [ "validate", "Customer compliance with code" ], [ "validate", "regulations" ], [ "validate", "results of the inspection to the Customer" ], [ "provide", "Customer compliance with code" ], [ "provide", "regulations" ], [ "provide", "results of the inspection to the Customer" ] ],
+  "Targets" : [ [ "validate", "Customer compliance with code" ], [ "validate", "regulations" ], [ "validate", "results of" ], [ "validate", "inspection to" ], [ "validate", "Customer" ], [ "provide", "Customer compliance with code" ], [ "provide", "regulations" ], [ "provide", "results of" ], [ "provide", "inspection to" ], [ "provide", "Customer" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO51#",
@@ -823,13 +823,13 @@
     "Benefit" : [ "provide" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a Notice of Violation" ],
-    "Benefit Entity" : [ "formal communication to the responsible party" ]
+    "Goal Entity" : [ "Notice of Violation" ],
+    "Benefit Entity" : [ "formal communication to", "responsible party" ]
   },
   "Benefit" : "I can provide formal communication to the responsible party",
   "Triggers" : [ [ "Enforcement Staff member", "Issue" ] ],
-  "Targets" : [ [ "Issue", "a Notice of Violation" ], [ "provide", "formal communication to the responsible party" ] ],
-  "Contains" : [ [ "a Notice of Violation", "formal communication to the responsible party" ] ]
+  "Targets" : [ [ "Issue", "Notice of Violation" ], [ "provide", "formal communication to" ], [ "provide", "responsible party" ] ],
+  "Contains" : [ [ "Notice of Violation", "formal communication to" ], [ "Notice of Violation", "responsible party" ] ]
 }, {
   "PID" : "#GO52#",
   "Text" : "As a l Staff member, I want to search for Property information, so that I can obtain all associated current and historic owners, permits, and applications.",
@@ -840,12 +840,12 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Property information" ],
-    "Benefit Entity" : [ "all associated current", "historic owners", "permits", "applications" ]
+    "Benefit Entity" : [ "associated current", "historic owners", "permits", "applications" ]
   },
   "Benefit" : "I can obtain all associated current and historic owners, permits, and applications",
   "Triggers" : [ [ "l Staff member", "search" ] ],
-  "Targets" : [ [ "search", "Property information" ], [ "obtain", "all associated current" ], [ "obtain", "historic owners" ], [ "obtain", "permits" ], [ "obtain", "applications" ] ],
-  "Contains" : [ [ "Property information", "all associated current" ], [ "Property information", "historic owners" ], [ "Property information", "permits" ], [ "Property information", "applications" ] ]
+  "Targets" : [ [ "search", "Property information" ], [ "obtain", "associated current" ], [ "obtain", "historic owners" ], [ "obtain", "permits" ], [ "obtain", "applications" ] ],
+  "Contains" : [ [ "Property information", "associated current" ], [ "Property information", "historic owners" ], [ "Property information", "permits" ], [ "Property information", "applications" ] ]
 }, {
   "PID" : "#GO53#",
   "Text" : "As a Staff member, I need to be notified when Geospatial attributes change, so that I can ensure that I am reviewing the permit/application to the most current data and appropriate standards.",
@@ -856,11 +856,11 @@
   },
   "Entity" : {
     "Goal Entity" : [ ],
-    "Benefit Entity" : [ "the permit", "application to the most current data", "appropriate standards" ]
+    "Benefit Entity" : [ "permit", "application to", "most current data", "appropriate standards" ]
   },
   "Benefit" : "I can ensure that I am reviewing the permit/application to the most current data and appropriate standards",
   "Triggers" : [ ],
-  "Targets" : [ [ "ensure", "the permit" ], [ "ensure", "application to the most current data" ], [ "ensure", "appropriate standards" ], [ "reviewing", "the permit" ], [ "reviewing", "application to the most current data" ], [ "reviewing", "appropriate standards" ] ],
+  "Targets" : [ [ "ensure", "permit" ], [ "ensure", "application to" ], [ "ensure", "most current data" ], [ "ensure", "appropriate standards" ], [ "reviewing", "permit" ], [ "reviewing", "application to" ], [ "reviewing", "most current data" ], [ "reviewing", "appropriate standards" ] ],
   "Contains" : [ ]
 }, {
   "PID" : "#GO54#",
@@ -871,13 +871,13 @@
     "Benefit" : [ "fulfill" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "a custom query", "report outside of the common querying", "reporting functionality" ],
-    "Benefit Entity" : [ "a request" ]
+    "Goal Entity" : [ "custom query", "report outside of", "common querying", "reporting functionality" ],
+    "Benefit Entity" : [ "request" ]
   },
   "Benefit" : "I can fulfill a request",
   "Triggers" : [ [ "County Staff Member", "create" ] ],
-  "Targets" : [ [ "create", "a custom query" ], [ "create", "report outside of the common querying" ], [ "create", "reporting functionality" ], [ "fulfill", "a request" ] ],
-  "Contains" : [ [ "a custom query", "a request" ], [ "report outside of the common querying", "a request" ], [ "reporting functionality", "a request" ] ]
+  "Targets" : [ [ "create", "custom query" ], [ "create", "report outside of" ], [ "create", "common querying" ], [ "create", "reporting functionality" ], [ "fulfill", "request" ] ],
+  "Contains" : [ [ "custom query", "request" ], [ "report outside of", "request" ], [ "common querying", "request" ], [ "reporting functionality", "request" ] ]
 }, {
   "PID" : "#GO55#",
   "Text" : "As a Staff member, I want to create each condo unit, so that I can associate it to the child parcel and address after the condominiums are recorded in the system.",
@@ -887,13 +887,13 @@
     "Benefit" : [ "associate" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "each condo unit" ],
-    "Benefit Entity" : [ "the child parcel", "address after the condominiums", "the system" ]
+    "Goal Entity" : [ "condo unit" ],
+    "Benefit Entity" : [ "child parcel", "address after", "condominiums", "system" ]
   },
   "Benefit" : "I can associate it to the child parcel and address after the condominiums are recorded in the system",
   "Triggers" : [ [ "Staff member", "create" ] ],
-  "Targets" : [ [ "create", "each condo unit" ], [ "associate", "the child parcel" ], [ "associate", "address after the condominiums" ], [ "associate", "the system" ] ],
-  "Contains" : [ [ "each condo unit", "the child parcel" ], [ "each condo unit", "address after the condominiums" ], [ "each condo unit", "the system" ] ]
+  "Targets" : [ [ "create", "condo unit" ], [ "associate", "child parcel" ], [ "associate", "address after" ], [ "associate", "condominiums" ], [ "associate", "system" ] ],
+  "Contains" : [ [ "condo unit", "child parcel" ], [ "condo unit", "address after" ], [ "condo unit", "condominiums" ], [ "condo unit", "system" ] ]
 }, {
   "PID" : "#GO56#",
   "Text" : "As a Technical Staff member, I want to update the GIS Property Management, so that I can successfully update the transactional Parcel Pin to reference the GIS layer where the Split or Merged Parcel Pin exists.",
@@ -903,13 +903,13 @@
     "Benefit" : [ "update", "exists", "exists" ]
   },
   "Entity" : {
-    "Goal Entity" : [ "the GIS Property Management" ],
-    "Benefit Entity" : [ "the transactional Parcel Pin to reference the GIS layer", "the Split", "Merged Parcel Pin" ]
+    "Goal Entity" : [ "GIS Property Management" ],
+    "Benefit Entity" : [ "transactional Parcel Pin to reference", "GIS layer", "Split", "Merged Parcel Pin" ]
   },
   "Benefit" : "I can successfully update the transactional Parcel Pin to reference the GIS layer where the Split or Merged Parcel Pin exists",
   "Triggers" : [ [ "Technical Staff member", "update" ] ],
-  "Targets" : [ [ "update", "the GIS Property Management" ], [ "update", "the transactional Parcel Pin to reference the GIS layer" ], [ "update", "the Split" ], [ "update", "Merged Parcel Pin" ], [ "exists", "the transactional Parcel Pin to reference the GIS layer" ], [ "exists", "the Split" ], [ "exists", "Merged Parcel Pin" ], [ "exists", "the transactional Parcel Pin to reference the GIS layer" ], [ "exists", "the Split" ], [ "exists", "Merged Parcel Pin" ] ],
-  "Contains" : [ [ "the GIS Property Management", "the transactional Parcel Pin to reference the GIS layer" ], [ "the GIS Property Management", "the Split" ], [ "the GIS Property Management", "Merged Parcel Pin" ] ]
+  "Targets" : [ [ "update", "GIS Property Management" ], [ "update", "transactional Parcel Pin to reference" ], [ "update", "GIS layer" ], [ "update", "Split" ], [ "update", "Merged Parcel Pin" ], [ "exists", "transactional Parcel Pin to reference" ], [ "exists", "GIS layer" ], [ "exists", "Split" ], [ "exists", "Merged Parcel Pin" ], [ "exists", "transactional Parcel Pin to reference" ], [ "exists", "GIS layer" ], [ "exists", "Split" ], [ "exists", "Merged Parcel Pin" ] ],
+  "Contains" : [ [ "GIS Property Management", "transactional Parcel Pin to reference" ], [ "GIS Property Management", "GIS layer" ], [ "GIS Property Management", "Split" ], [ "GIS Property Management", "Merged Parcel Pin" ] ]
 }, {
   "PID" : "#GO57#",
   "Text" : "As a Staff member, I want to Send or Post Citations and Fines, so that I can successfully send the Notice Of Violation document to the property owner and log information about the action.",
@@ -920,10 +920,10 @@
   },
   "Entity" : {
     "Goal Entity" : [ "Citations", "Fines" ],
-    "Benefit Entity" : [ "the Notice Of Violation document to the property owner", "log information about the action" ]
+    "Benefit Entity" : [ "Notice Of Violation document to", "property owner", "log information about", "action" ]
   },
   "Benefit" : "I can successfully send the Notice Of Violation document to the property owner and log information about the action",
   "Triggers" : [ [ "Staff member", "Send" ], [ "Staff member", "Post" ] ],
-  "Targets" : [ [ "Send", "Citations" ], [ "Send", "Fines" ], [ "Post", "Citations" ], [ "Post", "Fines" ], [ "send", "the Notice Of Violation document to the property owner" ], [ "send", "log information about the action" ] ],
-  "Contains" : [ [ "Citations", "the Notice Of Violation document to the property owner" ], [ "Citations", "log information about the action" ], [ "Fines", "the Notice Of Violation document to the property owner" ], [ "Fines", "log information about the action" ] ]
+  "Targets" : [ [ "Send", "Citations" ], [ "Send", "Fines" ], [ "Post", "Citations" ], [ "Post", "Fines" ], [ "send", "Notice Of Violation document to" ], [ "send", "property owner" ], [ "send", "log information about" ], [ "send", "action" ] ],
+  "Contains" : [ [ "Citations", "Notice Of Violation document to" ], [ "Citations", "property owner" ], [ "Citations", "log information about" ], [ "Citations", "action" ], [ "Fines", "Notice Of Violation document to" ], [ "Fines", "property owner" ], [ "Fines", "log information about" ], [ "Fines", "action" ] ]
 } ]

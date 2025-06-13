@@ -209,7 +209,7 @@ public class StoryParserOpenNLP {
 
                 if (foundMainVerb) {
                     if (pos.startsWith("NN") || pos.equals("JJ") || pos.equals("JJR") || pos.equals("JJS")
-                            || pos.equals("DT") || pos.equals("RB") || pos.equals("RBR") || pos.equals("RBS")) {
+                            || pos.equals("RB") || pos.equals("RBR") || pos.equals("RBS")) {
                         if (!currentEntity.isEmpty()) currentEntity.append(" ");
                         currentEntity.append(word);
                     } else if (pos.equals("IN")) {
