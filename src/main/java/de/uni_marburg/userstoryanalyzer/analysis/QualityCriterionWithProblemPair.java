@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
-class QualityCriterionWithProblemPair extends QualityCriterion {
+public class QualityCriterionWithProblemPair extends QualityCriterion {
 
     public QualityCriterionWithProblemPair(){
         super();

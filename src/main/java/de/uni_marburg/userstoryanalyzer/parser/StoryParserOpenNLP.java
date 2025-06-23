@@ -78,8 +78,8 @@ public class StoryParserOpenNLP {
         String pid = extractPid(text);
         String cleanText = text.replace(pid != null ? pid : "", "").trim();
 
-        String role = extract(cleanText, "As (?:a |an |the )?(.*?), I want");
-        String goalText = extract(cleanText, "(I want to .*?)(?:,\\s*so that|\\.)");
+        String role = extract(cleanText, "As (?:a |an |the )?([A-Za-z][^,\\n]+?),\\s*(I want|\\.*)");
+        String goalText = extract(cleanText, "(?i)(i want .*?|the system (?:needs|must|should) .*?|the user (?:needs|must|should) .*?)(?:\\s*so that|\\.|,|$)");
         String benefitText = extract(cleanText, "so that (.*?)(\\.|$)");
 
         List<String> personas = !role.isEmpty() ? List.of(role) : List.of();
@@ -148,7 +148,7 @@ public class StoryParserOpenNLP {
 
         for (CoreLabel token : doc.get(CoreAnnotations.TokensAnnotation.class)) {
             String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
-            if (pos.startsWith("VB") && !List.of("want", "need", "like").contains(token.originalText().toLowerCase())) {
+            if (pos.startsWith("VB") && isAuxiliaryVerb(token.originalText().toLowerCase())) {
                 verbs.add(token.originalText());
             }
         }
@@ -174,7 +174,8 @@ public class StoryParserOpenNLP {
             for (SemanticGraphEdge edge : dependencies.edgeIterable()) {
                 if (edge.getRelation().getShortName().equals("nsubj")) {
                     String verb = edge.getGovernor().originalText();
-                    verbs.add(verb);
+                    if (isAuxiliaryVerb(verb))
+                        verbs.add(verb);
                 }
             }
         }
@@ -240,7 +241,7 @@ public class StoryParserOpenNLP {
      * @return {@code true}, wenn es sich um ein Hilfsverb handelt
      */
     private boolean isAuxiliaryVerb(String word) {
-        return !List.of("is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "will", "would", "shall", "should", "can", "could", "may", "might", "must", "do", "does", "did", "want", "need", "like")
+        return !List.of("is", "are", "was", "were", "be", "been", "being", "has", "had", "will", "would", "shall", "should", "can", "could", "may", "might", "must", "do", "does", "did", "want", "need", "like")
                 .contains(word.toLowerCase());
     }
 

@@ -7,17 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QualityCriterionReport {
-    public List<UserStory> stories = new ArrayList<>();
+
     @JsonProperty("Stories")
-    public List<String> storiesText = new ArrayList<>();
+    public List<String> stories = new ArrayList<>();
     @JsonProperty("nicht_analysierbar")
     public List<String> nicht_analysierbar = new ArrayList<>();
 
 
+    @JsonProperty("Wohlgeformtheit")
     public Wohlgeformtheit Wohlgeformtheit = new Wohlgeformtheit();
+    @JsonProperty("Atomaritaet")
     public Atomaritaet Atomaritaet = new Atomaritaet();
+    @JsonProperty("Uniformitaet")
     public Uniformitaet Uniformitaet = new Uniformitaet();
+    @JsonProperty("Minimalitaet")
     public Minimalitaet Minimalitaet = new Minimalitaet();
+    @JsonProperty("Vollstaendigkeit")
     public Vollstaendigkeit Vollstaendigkeit = new Vollstaendigkeit();
-    public Redundanzfreiheit Redundanzfreiheit = new Redundanzfreiheit();
 }

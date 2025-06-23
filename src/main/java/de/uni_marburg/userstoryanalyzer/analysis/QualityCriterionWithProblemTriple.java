@@ -1,6 +1,6 @@
 package de.uni_marburg.userstoryanalyzer.analysis;
 
-class QualityCriterionWithProblemTriple extends QualityCriterion {
+public class QualityCriterionWithProblemTriple extends QualityCriterion {
 
     public QualityCriterionWithProblemTriple(){
         super();
