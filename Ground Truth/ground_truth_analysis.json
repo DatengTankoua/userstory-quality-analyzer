@@ -1,0 +1,53 @@
+{
+  "stories": [
+    "As a Customer, I want to be able to view only my own order details, so that I can keep my purchase history private.",
+    "As a User, I want ignorance, so that I dont have to deal with my incompetence.",
+    "As a User <Role>, I want website to have a Darkmode <Goal>, so that I can also work at night <Benefit>.",
+    "As a Player, I want the game to have local cooperative multiplayer support, so that i can play with my friends on the couch.",
+    "As a, I want a user-friendly UI, so that navigating through the Application is easy for the customer.",
+    "As a american, I want Obama, so we can get free healthcare."
+  ],
+  "nicht_analysiert": [],
+  "Wohlgeformtheit": {
+    "AnzahlVonProblemen": 4,
+    "AnzahlVonProblemlosen": 2,
+    "QualitaetsProbleme": [
+      ["As a User, I want ignorance, so that I dont have to deal with my incompetence.", "Fehlender oder unvollständiger Nutzen"],
+      ["As a User <Role>, I want website to have a Darkmode <Goal>, so that I can also work at night <Benefit>.", "Unerwünschte Tags im Text"],
+      ["As a, I want a user-friendly UI, so that navigating through the Application is easy for the customer.", "Fehlende Rolle"],
+      ["As a american, I want Obama, so we can get free healthcare.", "Unvollständiger oder unangemessener Nutzen"]
+    ]
+  },
+  "Atomaritat": {
+    "AnzahlVonProblemen": 3,
+    "AnzahlVonProblemlosen": 3,
+    "QualitaetsProbleme": [
+      ["As a User, I want ignorance, so that I dont have to deal with my incompetence.", "Unvollständige User Story"],
+      ["As a, I want a user-friendly UI, so that navigating through the Application is easy for the customer.", "Fehlende Rolle"],
+      ["As a american, I want Obama, so we can get free healthcare.", "Unvollständige User Story"]
+    ]
+  },
+  "Uniformitat": {
+    "AnzahlVonProblemen": 4,
+    "AnzahlVonProblemlosen": 2,
+    "QualitaetsProbleme": [
+      ["As a User, I want ignorance, so that I dont have to deal with my incompetence.", "Inkonsistente Terminologie"],
+      ["As a User <Role>, I want website to have a Darkmode <Goal>, so that I can also work at night <Benefit>.", "Tags im Text"],
+      ["As a, I want a user-friendly UI, so that navigating through the Application is easy for the customer.", "Inkonsistente Terminologie: 'customer' vs. 'User'"],
+      ["As a american, I want Obama, so we can get free healthcare.", "Inkonsistente Terminologie"]
+    ]
+  },
+  "Minimalitat": {
+    "AnzahlVonProblemen": 2,
+    "AnzahlVonProblemlosen": 4,
+    "QualitaetsProbleme": [
+      ["As a User <Role>, I want website to have a Darkmode <Goal>, so that I can also work at night <Benefit>.", "Unnötige Tags im Text"],
+      ["As a american, I want Obama, so we can get free healthcare.", "Unangemessener Inhalt"]
+    ]
+  },
+  "Redundanzfreiheit": {
+    "AnzahlVonProblemen": 0,
+    "AnzahlVonProblemlosen": 6,
+    "QualitaetsProbleme": []
+  }
+}
