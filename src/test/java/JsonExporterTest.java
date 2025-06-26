@@ -11,51 +11,51 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Testklasse für die {@link JsonExporter}-Klasse.
+ * Test class for the {@link JsonExporter}.
  */
 class JsonExporterTest {
 
     /**
-     * Testet, ob {@link JsonExporter#writeToJson(List, String)} korrekt eine JSON-Datei erzeugt
-     * und die Struktur der User Story mit allen notwendigen Feldern vorhanden ist.
+     * Checks if {@link JsonExporter#writeToJson(List, String)} creates a valid JSON file
+     * and whether the structure of the User Story includes all necessary fields.
      */
     @Test
     void testWriteToJson_createsCorrectJsonStructure() throws Exception {
-        // Eine Beispiel-UserStory erzeugen
+        // Create a sample user story to work with
         UserStory story = getUserStory();
 
-        // Datei im Projektverzeichnis erzeugen, damit sie sichtbar ist
+        // Create the output file in the project directory so we can see it afterwards
         File outputFile = new File("src/test/resources/output/userstories.json");
-        outputFile.getParentFile().mkdirs(); // Ordnerstruktur erstellen, falls nicht vorhanden
+        outputFile.getParentFile().mkdirs(); // Make sure the directory structure exists
 
-        // JSON-Export durchführen
+        // Run the export
         JsonExporter exporter = new JsonExporter();
         exporter.writeToJson(List.of(story), outputFile.getAbsolutePath());
 
-        // JSON-Inhalt aus Datei lesen
+        // Read the generated JSON file
         String jsonOutput = Files.readString(outputFile.toPath());
 
-        // Basisprüfungen auf Inhalt
+        // Basic checks to see if something was written and key fields are present
         assertNotNull(jsonOutput);
         assertTrue(jsonOutput.contains("\"PID\""));
         assertTrue(jsonOutput.contains("\"Triggers\""));
         assertTrue(jsonOutput.contains("\"Targets\""));
         assertTrue(jsonOutput.contains("\"Contains\""));
 
-        // Strukturprüfung durch erneutes Parsen mit Jackson
+        // Use Jackson to parse it back and check the structure
         ObjectMapper mapper = new ObjectMapper();
         List<?> parsedJson = mapper.readValue(outputFile, new TypeReference<>() {});
         assertEquals(1, parsedJson.size());
 
-        // Detailprüfung auf konkrete Inhalte (strukturell)
+        // Do some more detailed checks to make sure specific content is correct
         String normalized = jsonOutput.replaceAll("\\s+", "");
         assertTrue(normalized.contains("\"Goal\":[\"Search\"]"));
         assertTrue(normalized.contains("\"BenefitEntity\":[\"publiclyavailableinformation\""));
     }
 
     /**
-     * Hilfsmethode zum Erzeugen eines Beispiels einer User Story.
-     * @return Eine vollständig strukturierte {@link UserStory}-Instanz.
+     * Helper method to generate a sample User Story with full structure.
+     * @return A fully constructed {@link UserStory} instance.
      */
     private static UserStory getUserStory() {
         Action action = new Action(
@@ -81,8 +81,8 @@ class JsonExporterTest {
                 action,
                 entity,
                 "I can obtain publicly available information concerning properties, County services, processes and other general information",
-                List.of(), // keine Annotationen
-                List.of(   // Relationen der User Story
+                List.of(), // no annotations
+                List.of(   // relations between the elements in the user story
                         new Relation(RelationType.TRIGGERS, "Public User", "Search"),
                         new Relation(RelationType.TARGETS, "Search", "Information"),
                         new Relation(RelationType.TARGETS, "obtain", "publicly available information"),
