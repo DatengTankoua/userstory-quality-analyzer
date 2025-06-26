@@ -23,14 +23,36 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * JavaFX application for visualizing and analyzing the quality of User Stories.
+ * <p>
+ * Features:
+ * <ul>
+ *     <li>Load and parse User Stories from a text file</li>
+ *     <li>Analyze User Stories based on quality criteria</li>
+ *     <li>Display stories and issues in tables</li>
+ *     <li>Export analysis results as a JSON report</li>
+ * </ul>
+ */
 public class UserStoryViewerApp extends Application {
 
+    /** Table for displaying parsed User Stories */
     private final TableView<UserStory> storyTable = new TableView<>();
+
+    /** List of parsed User Stories */
     private final ObservableList<UserStory> userStories = FXCollections.observableArrayList();
 
+    /** Tabs for displaying quality problems by category */
     private final TabPane qualityTabs = new TabPane();
+
+    /** Stores the analysis report */
     private QualityCriterionReport currentReport;
 
+    /**
+     * Application start point for JavaFX.
+     *
+     * @param stage JavaFX primary stage
+     */
     @Override
     public void start(Stage stage) {
         stage.setTitle("User Story Quality Analyzer");
@@ -61,12 +83,24 @@ public class UserStoryViewerApp extends Application {
         stage.show();
     }
 
+    /**
+     * Creates a table column with a custom string extractor.
+     *
+     * @param title     Column title
+     * @param extractor Function to extract cell content
+     * @return Configured TableColumn
+     */
     private TableColumn<UserStory, String> createColumn(String title, javafx.util.Callback<UserStory, String> extractor) {
         TableColumn<UserStory, String> col = new TableColumn<>(title);
         col.setCellValueFactory(data -> new SimpleStringProperty(extractor.call(data.getValue())));
         return col;
     }
 
+    /**
+     * Opens file dialog, loads, parses and analyzes stories, and updates the UI.
+     *
+     * @param stage Application window
+     */
     private void loadAndAnalyze(Stage stage) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open User Stories File");
@@ -95,6 +129,11 @@ public class UserStoryViewerApp extends Application {
         }
     }
 
+    /**
+     * Exports the current analysis result as a JSON file.
+     *
+     * @param stage Application window
+     */
     private void exportJson(Stage stage) {
         if (currentReport == null) {
             showError("Export Error", "No analysis available to export.");
@@ -116,6 +155,9 @@ public class UserStoryViewerApp extends Application {
         }
     }
 
+    /**
+     * Updates the quality tabs with current analysis results.
+     */
     private void refreshQualityTabs() {
         qualityTabs.getTabs().clear();
         addQualityTabWithTable("Wohlgeformtheit", currentReport.Wohlgeformtheit.qualitaetsProbleme);
@@ -132,6 +174,12 @@ public class UserStoryViewerApp extends Application {
         }
     }
 
+    /**
+     * Adds a new tab with a table showing stories and corresponding quality problems.
+     *
+     * @param name     Name of the quality criterion
+     * @param problems List of problems for the criterion
+     */
     private void addQualityTabWithTable(String name, List<?> problems) {
         TableView<Object> table = new TableView<>();
 
@@ -161,6 +209,12 @@ public class UserStoryViewerApp extends Application {
         qualityTabs.getTabs().add(new Tab(name, table));
     }
 
+    /**
+     * Shows an error alert dialog.
+     *
+     * @param title Dialog title
+     * @param msg   Error message
+     */
     private void showError(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -169,6 +223,12 @@ public class UserStoryViewerApp extends Application {
         alert.showAndWait();
     }
 
+    /**
+     * Shows an informational alert dialog.
+     *
+     * @param title Dialog title
+     * @param msg   Message to display
+     */
     private void showInfo(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -177,6 +237,11 @@ public class UserStoryViewerApp extends Application {
         alert.showAndWait();
     }
 
+    /**
+     * Main entry point of the JavaFX application.
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         launch();
     }
