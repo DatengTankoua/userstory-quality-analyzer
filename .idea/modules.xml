@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/sp25_gruppe1_dateng_hammudi_stechert_alshaabi.iml" filepath="$PROJECT_DIR$/sp25_gruppe1_dateng_hammudi_stechert_alshaabi.iml" />
       <module fileurl="file://$PROJECT_DIR$/user-story-analyzer.iml" filepath="$PROJECT_DIR$/user-story-analyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/userstory-analyzer.iml" filepath="$PROJECT_DIR$/userstory-analyzer.iml" />
     </modules>
   </component>
 </project>

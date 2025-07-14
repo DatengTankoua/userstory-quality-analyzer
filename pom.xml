@@ -97,6 +97,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -200,6 +205,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.bin</include>
+                    <include>**/*.xml</include>
                 </includes>
             </resource>
         </resources>

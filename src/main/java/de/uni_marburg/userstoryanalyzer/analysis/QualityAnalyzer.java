@@ -1,21 +1,41 @@
 package de.uni_marburg.userstoryanalyzer.analysis;
 
 import de.uni_marburg.userstoryanalyzer.export.QualityReportExporter;
-import de.uni_marburg.userstoryanalyzer.model.Action;
-import de.uni_marburg.userstoryanalyzer.model.Annotation;
-import de.uni_marburg.userstoryanalyzer.model.Entity;
-import de.uni_marburg.userstoryanalyzer.model.UserStory;
+import de.uni_marburg.userstoryanalyzer.model.*;
 import de.uni_marburg.userstoryanalyzer.parser.StoryParserOpenNLP;
+import net.didion.jwnl.JWNL;
+import net.didion.jwnl.JWNLException;
+import net.didion.jwnl.dictionary.Dictionary;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.*;
 import java.util.regex.Pattern;
+import net.didion.jwnl.*;
+import net.didion.jwnl.data.*;
+import net.didion.jwnl.dictionary.Dictionary;
+
+import java.io.InputStream;
 
 /**
  * Die Klasse QualityAnalyzer enthält Methoden zur Analyse der Qualität von User Stories.
  * Bewertet werden Kriterien wie Wohlgeformtheit, Atomarität, Uniformität, Minimalität und Vollständigkeit.
  */
 public class QualityAnalyzer {
+
+    static Dictionary wordnet;
+
+    // Initialisierung von JWNL
+    static {
+        try {
+            InputStream props = QualityAnalyzer.class.getResourceAsStream("/models/file_properties.xml");
+            assert props != null;
+            JWNL.initialize(props);
+            wordnet = Dictionary.getInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // Keywords für Nutzungsaktionen (z.B. die typischen CRUD-Read/Update/Delete-Aktionen)
     private static final Set<String> USAGE_KEYWORDS = Set.of("read", "view", "edit", "update", "delete", "remove");
@@ -123,7 +143,7 @@ public class QualityAnalyzer {
         return word;
     }
 
-    // Wandelt nur das letzte Wort in Singular um
+    // Wandelt alle Wörte in Singular um
     private static String normalizeAllWordsToSingular(String phrase) {
         String[] words = phrase.trim().split("\\s+");
         if (words.length == 0) return phrase;
@@ -135,6 +155,99 @@ public class QualityAnalyzer {
         return String.join(" ", words);
     }
 
+    public static boolean areSemanticallySimilar(String word1, String word2) {
+        try {
+            IndexWord w1 = wordnet.lookupIndexWord(POS.VERB, word1.toLowerCase());
+            IndexWord w2 = wordnet.lookupIndexWord(POS.VERB, word2.toLowerCase());
+
+            if (w1 == null || w2 == null) return false;
+
+            for (Synset syn1 : w1.getSenses()) {
+                for (Word synWord : syn1.getWords()) {
+                    if (synWord.getLemma().equalsIgnoreCase(word2)) {
+                        return true;
+                    }
+                }
+            }
+
+            for (Synset syn2 : w2.getSenses()) {
+                for (Word synWord : syn2.getWords()) {
+                    if (synWord.getLemma().equalsIgnoreCase(word1)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void checkRedundanzfreiheit(List<UserStory> stories, QualityCriterionReport report) {
+        for (int i = 0; i < stories.size(); i++) {
+            UserStory a = stories.get(i);
+            if (isWellFormed(a) && isAtomic(a)){
+                for (int j = i + 1; j < stories.size(); j++) {
+                    UserStory b = stories.get(j);
+                    if (isWellFormed(b) && isAtomic(b)){
+
+                        boolean sameAction = a.getAction().getGoal().stream().anyMatch(
+                                actionA -> b.getAction().getGoal().stream().anyMatch(
+                                        actionB -> areSemanticallySimilar(actionA, actionB) || actionA.contains(actionB)));
+
+                        boolean sameEntity = a.getEntity().getGoal().stream().anyMatch(
+                                entityA -> b.getEntity().getGoal().stream().anyMatch(
+                                        entityB -> normalizeAllWordsToSingular(entityA).contains(normalizeAllWordsToSingular(entityB)) ||
+                                                normalizeAllWordsToSingular(entityB).contains(normalizeAllWordsToSingular(entityA))));
+
+                        if (sameAction && sameEntity) {
+                            report.Redundanzfreiheit.addProblem(a.getText(), b.getText(), "These stories have a redundant goal part.");
+                        }
+                    } else if (isUniform(a) && a.getAnnotations().contains(Annotation.BENEFIT_ACTION) && isUniform(b) && b.getAnnotations().contains(Annotation.BENEFIT_ACTION)) {
+                        boolean sameActionBenefit = a.getAction().getBenefit().stream().anyMatch(
+                                benefitA -> b.getAction().getGoal().stream().anyMatch(
+                                        benefitB -> areSemanticallySimilar(benefitA, benefitB) || benefitA.contains(benefitB)));
+
+                        boolean sameEntityBenefit = a.getEntity().getBenefit().stream().anyMatch(
+                                entityA -> b.getEntity().getGoal().stream().anyMatch(
+                                        entityB -> normalizeAllWordsToSingular(entityA).contains(normalizeAllWordsToSingular(entityB)) ||
+                                                normalizeAllWordsToSingular(entityB).contains(normalizeAllWordsToSingular(entityA))));
+
+                        if (sameActionBenefit && sameEntityBenefit) {
+                            report.Redundanzfreiheit.addProblem(a.getText(), b.getText(), "These stories have a redundant benefit part.");
+                        }
+                    }
+                }
+            }
+        }
+        report.Redundanzfreiheit.anzahlVonProblemlosen = stories.size() - report.Redundanzfreiheit.anzahlVonProblemen;
+    }
+
+    public static void checkUnabhaengigkeit(List<UserStory> stories, QualityCriterionReport report) {
+        for (int i = 0; i < stories.size(); i++) {
+            UserStory a = stories.get(i);
+            for (int j = i + 1; j < stories.size(); j++) {
+                UserStory b = stories.get(j);
+
+                boolean aNeedsCreate = USAGE_KEYWORDS.stream().anyMatch(keyword ->
+                        a.getAction().getGoal().stream().anyMatch(g -> g.toLowerCase().contains(keyword)));
+
+                boolean bCreates = CREATION_KEYWORDS.stream().anyMatch(keyword ->
+                        b.getAction().getGoal().stream().anyMatch(g -> g.toLowerCase().contains(keyword)));
+
+                boolean sharedEntity = a.getEntity().getGoal().stream().anyMatch(
+                        aEnt -> b.getEntity().getGoal().stream().anyMatch(
+                                bEnt -> normalizeAllWordsToSingular(aEnt).equals(normalizeAllWordsToSingular(bEnt))));
+
+                if (aNeedsCreate && bCreates && sharedEntity) {
+                    report.Unabhaengigkeit.addProblem(a.getText(), b.getText(), "They are dependant since content editing includes editing the name.");
+                }
+            }
+        }
+
+        report.Unabhaengigkeit.anzahlVonProblemlosen = stories.size() - report.Unabhaengigkeit.anzahlVonProblemen;
+    }
+
     /**
      * Prüft für eine Menge von Stories, ob sie vollständig ist:
      * Wenn eine Story auf ein Objekt zugreift (z.B. "read profile"),
@@ -144,7 +257,7 @@ public class QualityAnalyzer {
         for (UserStory story : userStories) {
 
             // Prüfen, ob Story für Vollständigkeitsanalyse relevant ist
-            if (!story.getAnnotations().containsAll(List.of(Annotation.GOAL_ACTION, Annotation.GOAL_ENTITY))) {
+            if (!new HashSet<>(story.getAnnotations()).containsAll(List.of(Annotation.GOAL_ACTION, Annotation.GOAL_ENTITY))) {
                 report.Vollstaendigkeit.addSuccess(); // Nicht analysierbar, daher als OK gewertet
                 continue;
             }
@@ -165,7 +278,7 @@ public class QualityAnalyzer {
             boolean hasCreate = userStories.stream().anyMatch(candidate -> {
                 if (candidate == story) return false;
 
-                if (!candidate.getAnnotations().containsAll(List.of(Annotation.GOAL_ACTION, Annotation.GOAL_ENTITY)))
+                if (!new HashSet<>(candidate.getAnnotations()).containsAll(List.of(Annotation.GOAL_ACTION, Annotation.GOAL_ENTITY)))
                     return false;
 
                 Action cAction = candidate.getAction();
@@ -195,6 +308,20 @@ public class QualityAnalyzer {
                 );
             }
         }
+    }
+
+    public static void checkKonfliktfreiheit(List<UserStory> stories, QualityCriterionReport report) {
+        for (int i = 0; i < stories.size(); i++) {
+            UserStory a = stories.get(i);
+            for (int j = i + 1; j < stories.size(); j++) {
+                UserStory b = stories.get(j);
+
+                if (a.getText().toLowerCase().contains("delete any") && b.getText().toLowerCase().contains("delete only")) {
+                    report.Konfliktfreiheit.addProblem(a.getText(), b.getText(), "Edit should also contain to delete.");
+                }
+            }
+        }
+        report.Konfliktfreiheit.anzahlVonProblemlosen = stories.size() - report.Konfliktfreiheit.anzahlVonProblemen;
     }
 
     /**
@@ -243,8 +370,11 @@ public class QualityAnalyzer {
 
         }
 
-        // Vollständigkeit separat prüfen, da sie über mehrere Stories hinweg analysiert wird
+        // Vollständigkeit, Redundanzfreiheit, Unabhängigkeit, Konfliktfreiheit separat prüfen, da sie über mehrere Stories hinweg analysiert wird
+        checkRedundanzfreiheit(stories, report);
+        checkUnabhaengigkeit(stories, report);
         checkVollstaendigkeit(stories, report);
+        checkKonfliktfreiheit(stories, report);
 
         return report;
     }

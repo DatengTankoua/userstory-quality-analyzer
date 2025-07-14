@@ -1,0 +1,35 @@
+As a Customer, I want to be able to view only my own order details, so that I can keep my purchase history private.
+As a User, I want ignorance, so that I dont have to deal with my incompetence.
+As a User <Role>, I want website to have a Darkmode <Goal>, so that I can also work at night <Benefit>.
+As a Player, I want the game to have local cooperative multiplayer support, so that i can play with my friends on the couch.
+As a, I want a user-friendly UI, so that navigating through the Application is easy for the customer.
+As a american, I want Obama, so we can get free healthcare.
+As a Vibe Coder, I want the IDE to hide exceptions and make the font color green, so that the code looks clean.
+As a Computer Science Student, I want a Button that uninstalls Java from my computer and then installs Python, so that I can finally write code without Semicolons.
+I want to Role, as a Goal, so that i can Benefit.
+As a Administrator, I want to be the only one that can edit user accounts permission rights.
+As a Librarian, the System needs to have a Screen magnifier.
+As a User, I want to be able to edit any post on the forum, so that I can correct any misinformation.
+As a Social Media Manager, I want the app to notify me whenever a customer posts something controversial.
+As a User, I want to log in to the system so that I can access my dashboard.
+As a Customer, I want to add items to my shopping cart so that I can purchase them later.
+As an Administrator, I want to assign specific roles to a user account, so that users have appropriate access levels.
+As a Cashier, because I cant remember the Numerical code for the Fruits, I want the App to have Pictures for each Numerical code.
+As a Product Owner (the boss), I want the Mouse Cursor(of my Website) to look like my Ferrari (Ferrari GTC4Lusso).
+As a Marketing Manager, I want the app to have a feature that allows me to compare the advertising revenue of Influencer campaigns with each other.
+As a Social Media Manager, I want the app to notify me whenever a Client posts something controversial.
+As a Player, I want the Game to support local coop, so that I can play with my friends on the couch.
+As a User, I want to reset my password so that I can regain access to my account if I forget my password.
+As an Administrator, I want to create a new user account, so that new employees can access the system.
+As a User, I want to edit my existing blog posts so that I can correct any mistakes or update the content.
+As a Customer, I want to view my order history so that I can keep track of my purchases.
+As an Administrator, I want to delete user accounts so that I can remove inactive or inappropriate accounts.
+As a User, I want to be able to change my account permission rights.
+I generally like apps with lots of pictures.
+As a Customer, I want to be able to view all order details, so that I can track any order in the system.
+As a User, I want to be able to edit only the posts that I have created, so that I can maintain control over my own content.
+As a Customer, I want to proceed to checkout so that I can complete my purchase.
+As a depressed, I want to pass the SW-Internship, so that im happy.
+As a Marketing Manager, I want the app to have a feature that allows me to analyze the advertising revenue of Influencer campaigns.
+As a secretary, I want the Program to work without 5G, so I dont have to wear my Tinfoil hat for work, it is to heavy.
+As a Plant, I want, so I can survive.

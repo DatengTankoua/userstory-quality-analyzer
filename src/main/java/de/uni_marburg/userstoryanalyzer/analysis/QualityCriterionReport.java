@@ -22,6 +22,12 @@ public class QualityCriterionReport {
     public Uniformitaet Uniformitaet = new Uniformitaet();
     @JsonProperty("Minimalitaet")
     public Minimalitaet Minimalitaet = new Minimalitaet();
+    @JsonProperty("Redundanzfreiheit")
+    public Redundanzfreiheit Redundanzfreiheit = new Redundanzfreiheit();
+    @JsonProperty("Unabhaengigkeit")
+    public Unabhaengigkeit Unabhaengigkeit = new Unabhaengigkeit();
     @JsonProperty("Vollstaendigkeit")
     public Vollstaendigkeit Vollstaendigkeit = new Vollstaendigkeit();
+    @JsonProperty("Konfliktfreiheit")
+    public Konfliktfreiheit Konfliktfreiheit = new Konfliktfreiheit();
 }
