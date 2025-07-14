@@ -1,0 +1,21 @@
+{
+  "Stories": [
+    "As a user, I want to click on the address, so that it takes me to a new tab with Google Maps.",
+    "As a user, I want to be able to anonymously view public information, so that I know about recycling centers near me before creating an account.",
+    "As a user, I want to be able to enter my zip code and get a list of nearby recycling facilities, so that I can determine which ones I should consider.",
+    "As a user, I want to be able to get the hours of each recycling facility, so that I can arrange drop-offs on my off days or during after-work hours.",
+    "As a user, I want to have a flexible pick up time, so that I can more conveniently use the website."
+  ],
+  "nicht_analysierbar": [],
+  "Redundanzfreiheit": {
+    "AnzahlVonProblemen": 1,
+    "AnzahlVonProblemlosen": 4,
+    "QualitaetsProbleme": [
+      {
+        "Story1": "As a user, I want to have a flexible pick up time, so that I can more conveniently use the website.",
+        "Story2": "As a user, I want to choose a flexible pick up time, so that I can more conveniently use the website.",
+        "Problem": "These stories have a redundant goal part and similar action."
+      }
+    ]
+  }
+}
