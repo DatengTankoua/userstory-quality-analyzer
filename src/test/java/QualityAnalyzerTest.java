@@ -2,6 +2,7 @@ import de.uni_marburg.userstoryanalyzer.analysis.QualityAnalyzer;
 import de.uni_marburg.userstoryanalyzer.analysis.QualityCriterionReport;
 import de.uni_marburg.userstoryanalyzer.model.*;
 import de.uni_marburg.userstoryanalyzer.parser.StoryParserOpenNLP;
+import net.didion.jwnl.JWNLException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
@@ -127,7 +128,7 @@ class QualityAnalyzerTest {
     }
 
     @Test
-    void testCheckUnabhaengigkeit() {
+    void testCheckUnabhaengigkeit() throws JWNLException {
         UserStory viewStory = buildStory("As a user, I want to view my orders.");
         UserStory createStory = buildStory("As a user, I want to create an order.");
         UserStory unrelatedStory = buildStory("As an admin, I want to manage users.");
@@ -155,7 +156,7 @@ class QualityAnalyzerTest {
     }
 
     @Test
-    void testAnalyzeStories_Integration() {
+    void testAnalyzeStories_Integration() throws JWNLException {
         UserStory wellFormed = buildStory("As a student, I want to view grades so that I can track performance.");
         UserStory notWellFormed = buildStory("View grades to track performance.");
         UserStory atomic = buildStory("As a teacher, I want to upload grades so that students can see them.");

@@ -16,6 +16,7 @@ import net.didion.jwnl.data.*;
 import net.didion.jwnl.dictionary.Dictionary;
 
 import java.io.InputStream;
+import java.util.stream.Collectors;
 
 /**
  * Die Klasse QualityAnalyzer enthält Methoden zur Analyse der Qualität von User Stories.
@@ -38,16 +39,64 @@ public class QualityAnalyzer {
     }
 
     // Keywords für Nutzungsaktionen (z.B. die typischen CRUD-Read/Update/Delete-Aktionen)
-    private static final Set<String> USAGE_KEYWORDS = Set.of("read", "view", "edit", "update", "delete", "remove");
+    private static final Set<String> USAGE_KEYWORDS = Set.of("read", "view", "edit", "update", "delete", "remove", "change");
 
     // Keywords für Erstellung einer Entität
     private static final Set<String> CREATION_KEYWORDS = Set.of("create", "add", "register", "insert");
+
+    private static Set<String> expandedUsage;
+
+    static {
+        try {
+            expandedUsage = expandKeywordsWithSynonyms(wordnet, USAGE_KEYWORDS, POS.VERB);
+        } catch (JWNLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static Set<String> expandedCreation;
+
+    static {
+        try {
+            expandedCreation = expandKeywordsWithSynonyms(wordnet, CREATION_KEYWORDS, POS.VERB);
+        } catch (JWNLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Hinweise auf unnötige Zusatzinformationen (nicht minimal)
     private static final List<String> EXTRA_INDICATORS = List.of(
             "note", "see", "mockup", "example", "e.g.", "i.e.",
             "first", "then", "afterwards", "because", "which means", "in other words"
     );
+
+    private static final Map<String, List<String>> conflictingPhrasesMap = Map.of(
+            "delete", List.of("delete any", "delete only", "can delete", "cannot delete", "not allowed to delete", "allowed to delete"),
+            "edit", List.of("edit any", "edit only", "can edit", "cannot edit", "not allowed to edit", "allowed to edit"),
+            "view", List.of("view all", "view only own", "can view", "not allowed to view"),
+            "change", List.of("change any", "change only", "can change", "cannot change")
+    );
+
+
+    public QualityAnalyzer() throws JWNLException {
+    }
+
+    public static Set<String> expandKeywordsWithSynonyms(Dictionary dictionary, Set<String> baseWords, POS pos) throws JWNLException {
+        Set<String> allWords = new HashSet<>(baseWords);
+
+        for (String word : baseWords) {
+            IndexWord indexWord = dictionary.lookupIndexWord(pos, word);
+            if (indexWord == null) continue;
+
+            for (Synset synset : indexWord.getSenses()) {
+                for (Word w : synset.getWords()) {
+                    allWords.add(w.getLemma().replace('_', ' ')); // z.B. "log_in"
+                }
+            }
+        }
+
+        return allWords;
+    }
 
     /**
      * Prüft, ob der Text analysierbar ist (d.h. einer Grundstruktur folgt).
@@ -223,30 +272,78 @@ public class QualityAnalyzer {
         report.Redundanzfreiheit.anzahlVonProblemlosen = stories.size() - report.Redundanzfreiheit.anzahlVonProblemen;
     }
 
-    public static void checkUnabhaengigkeit(List<UserStory> stories, QualityCriterionReport report) {
-        for (int i = 0; i < stories.size(); i++) {
-            UserStory a = stories.get(i);
-            for (int j = i + 1; j < stories.size(); j++) {
-                UserStory b = stories.get(j);
+    public static boolean isHyponym(POS pos, String specific, String general) throws JWNLException {
+        IndexWord word = wordnet.getIndexWord(pos, specific);
+        if (word == null) return false;
 
-                boolean aNeedsCreate = USAGE_KEYWORDS.stream().anyMatch(keyword ->
-                        a.getAction().getGoal().stream().anyMatch(g -> g.toLowerCase().contains(keyword)));
-
-                boolean bCreates = CREATION_KEYWORDS.stream().anyMatch(keyword ->
-                        b.getAction().getGoal().stream().anyMatch(g -> g.toLowerCase().contains(keyword)));
-
-                boolean sharedEntity = a.getEntity().getGoal().stream().anyMatch(
-                        aEnt -> b.getEntity().getGoal().stream().anyMatch(
-                                bEnt -> normalizeAllWordsToSingular(aEnt).equals(normalizeAllWordsToSingular(bEnt))));
-
-                if (aNeedsCreate && bCreates && sharedEntity) {
-                    report.Unabhaengigkeit.addProblem(a.getText(), b.getText(), "They are dependant since content editing includes editing the name.");
+        for (Synset sense : word.getSenses()) {
+            for (Pointer ptr : sense.getPointers(PointerType.HYPONYM)) {
+                Synset hypo = (Synset) ptr.getTarget();
+                for (Word w : hypo.getWords()) {
+                    if (w.getLemma().equalsIgnoreCase(general)) {
+                        return true;
+                    }
                 }
             }
         }
-
-        report.Unabhaengigkeit.anzahlVonProblemlosen = stories.size() - report.Unabhaengigkeit.anzahlVonProblemen;
+        return false;
     }
+
+
+
+
+    public static void checkUnabhaengigkeit(Collection<UserStory> stories, QualityCriterionReport report) throws JWNLException {
+
+        List<UserStory> list = stories.stream()
+                .filter(us -> us.getPersona() != null && !us.getPersona().isEmpty())
+                .collect(Collectors.toList());
+
+        Map<UserStory, Set<String>> normalizedEntities = new HashMap<>();
+        for (UserStory us : list) {
+            Set<String> normalized = us.getEntity().getGoal().stream()
+                    .map(e -> normalizeAllWordsToSingular(e).toLowerCase())
+                    .collect(Collectors.toSet());
+            normalizedEntities.put(us, normalized);
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            UserStory a = list.get(i);
+            Set<String> aEnt = normalizedEntities.get(a);
+            boolean aUses = a.getAction().getGoal().stream()
+                    .map(String::toLowerCase)
+                    .anyMatch(g -> expandedUsage.stream().anyMatch(g::contains));
+            String personaA = a.getPersona().get(0).toLowerCase();
+
+            for (int j = i + 1; j < list.size(); j++) {
+                UserStory b = list.get(j);
+                boolean bCreates = b.getAction().getGoal().stream()
+                        .map(String::toLowerCase)
+                        .anyMatch(g -> expandedCreation.stream().anyMatch(g::contains));
+
+                String personaB = b.getPersona().get(0).toLowerCase();
+                if (!personaA.equals(personaB)) continue; // Nur gleiche Personas vergleichen
+
+                Set<String> bEnt = normalizedEntities.get(b);
+
+                // Direkt identische oder sich überschneidende Entitäten
+                boolean hasSharedEntity = !Collections.disjoint(aEnt, bEnt);
+
+                // Mögliche Unabhängigkeit brechende Kombinationen
+                if ((hasSharedEntity) || (aUses && bCreates)) {
+                    report.Unabhaengigkeit.addProblem(
+                            a.getText(),
+                            b.getText(),
+                            !(aUses && bCreates)
+                                    ? "Semantically dependent (hyponymy detected)."
+                                    : "Dependent by create/use on same entity."
+                    );
+                }
+            }
+        }
+        report.Unabhaengigkeit.anzahlVonProblemlosen =
+                stories.size() - report.Unabhaengigkeit.anzahlVonProblemen;
+    }
+
 
     /**
      * Prüft für eine Menge von Stories, ob sie vollständig ist:
@@ -313,21 +410,52 @@ public class QualityAnalyzer {
     public static void checkKonfliktfreiheit(List<UserStory> stories, QualityCriterionReport report) {
         for (int i = 0; i < stories.size(); i++) {
             UserStory a = stories.get(i);
+            String textA = a.getText().toLowerCase();
+
             for (int j = i + 1; j < stories.size(); j++) {
                 UserStory b = stories.get(j);
+                String textB = b.getText().toLowerCase();
 
-                if (a.getText().toLowerCase().contains("delete any") && b.getText().toLowerCase().contains("delete only")) {
-                    report.Konfliktfreiheit.addProblem(a.getText(), b.getText(), "Edit should also contain to delete.");
+                for (Map.Entry<String, List<String>> entry : conflictingPhrasesMap.entrySet()) {
+                    String action = entry.getKey();
+                    List<String> phrases = entry.getValue();
+
+                    List<String> matchedA = phrases.stream().filter(textA::contains).collect(Collectors.toList());
+                    List<String> matchedB = phrases.stream().filter(textB::contains).collect(Collectors.toList());
+
+                    if (!matchedA.isEmpty() && !matchedB.isEmpty()) {
+                        if (isContradictory(matchedA.get(0), matchedB.get(0))) {
+                            report.Konfliktfreiheit.addProblem(
+                                    a.getText(),
+                                    b.getText(),
+                                    "Conflict regarding access to " + action + ": Contradictory permissions (" + matchedA.get(0) + " vs. " + matchedB.get(0) + ")."
+
+                            );
+                        }
+                    }
                 }
             }
         }
-        report.Konfliktfreiheit.anzahlVonProblemlosen = stories.size() - report.Konfliktfreiheit.anzahlVonProblemen;
+
+        report.Konfliktfreiheit.anzahlVonProblemlosen =
+                stories.size() - report.Konfliktfreiheit.anzahlVonProblemen;
     }
+
+    private static boolean isContradictory(String phrase1, String phrase2) {
+        if (phrase1.equals(phrase2)) return false;
+
+        return (phrase1.contains("any") && phrase2.contains("only")) ||
+                (phrase1.contains("only") && phrase2.contains("any")) ||
+                (phrase1.contains("can") && (phrase2.contains("cannot") || phrase2.contains("not allowed"))) ||
+                ((phrase1.contains("cannot") || phrase1.contains("not allowed")) && phrase2.contains("can"));
+    }
+
+
 
     /**
      * Hauptmethode zur Analyse aller User Stories anhand mehrerer Qualitätskriterien.
      */
-    public static QualityCriterionReport analyzeStories(List<UserStory> stories) {
+    public static QualityCriterionReport analyzeStories(List<UserStory> stories) throws JWNLException {
         QualityCriterionReport report = new QualityCriterionReport();
 
         for (UserStory userStory : stories) {
@@ -381,7 +509,7 @@ public class QualityAnalyzer {
 
 
 
-    public static QualityCriterionReport analyzeStories(List<UserStory> stories, Set<String> selectedCriteria) {
+    public static QualityCriterionReport analyzeStories(List<UserStory> stories, Set<String> selectedCriteria) throws JWNLException {
         QualityCriterionReport report = new QualityCriterionReport();
 
         for (UserStory userStory : stories) {

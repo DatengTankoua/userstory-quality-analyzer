@@ -33,3 +33,7 @@ As a depressed, I want to pass the SW-Internship, so that im happy.
 As a Marketing Manager, I want the app to have a feature that allows me to analyze the advertising revenue of Influencer campaigns.
 As a secretary, I want the Program to work without 5G, so I dont have to wear my Tinfoil hat for work, it is to heavy.
 As a Plant, I want, so I can survive.
+As an Adminstrator, I want to create a new user account.
+As an Adminstrator, I want to change the permission rights of a user account.
+As a App-User, I want to be able to edit the content that I added to a person’s profile page.
+As a App-User, I want to be able to edit the name that I added to a person’s profile page.
