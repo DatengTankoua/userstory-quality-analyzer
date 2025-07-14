@@ -379,6 +379,72 @@ public class QualityAnalyzer {
         return report;
     }
 
+
+
+    public static QualityCriterionReport analyzeStories(List<UserStory> stories, Set<String> selectedCriteria) {
+        QualityCriterionReport report = new QualityCriterionReport();
+
+        for (UserStory userStory : stories) {
+            String storyText = userStory.getText();
+
+            if (isAnalysable(userStory)) {
+                report.stories.add(storyText);
+
+                if (selectedCriteria.contains("Wohlgeformtheit")) {
+                    if (!isWellFormed(userStory)) {
+                        report.Wohlgeformtheit.addProblem(storyText, "Story lacks required annotations.");
+                    } else {
+                        report.Wohlgeformtheit.addSuccess();
+                    }
+                }
+
+                if (selectedCriteria.contains("Atomaritaet")) {
+                    if (!isAtomic(userStory)) {
+                        report.Atomaritaet.addProblem(storyText, "More than one requirement or missing benefit.");
+                    } else {
+                        report.Atomaritaet.addSuccess();
+                    }
+                }
+
+                if (selectedCriteria.contains("Uniformitaet")) {
+                    if (!isUniform(userStory)) {
+                        report.Uniformitaet.addProblem(storyText, "Does not follow uniform structure.");
+                    } else {
+                        report.Uniformitaet.addSuccess();
+                    }
+                }
+
+                if (selectedCriteria.contains("Minimalitaet")) {
+                    if (!isMinimal(storyText)) {
+                        report.Minimalitaet.addProblem(storyText, "Story contains extra information or notes.");
+                    } else {
+                        report.Minimalitaet.addSuccess();
+                    }
+                }
+
+            } else {
+                report.nicht_analysierbar.add(storyText);
+            }
+        }
+
+        // المعايير التي تعتمد على أكثر من قصة يجب فحصها بعد الحلقة
+        if (selectedCriteria.contains("Redundanzfreiheit")) {
+            checkRedundanzfreiheit(stories, report);
+        }
+        if (selectedCriteria.contains("Unabhaengigkeit")) {
+            checkUnabhaengigkeit(stories, report);
+        }
+        if (selectedCriteria.contains("Vollstaendigkeit")) {
+            checkVollstaendigkeit(stories, report);
+        }
+        if (selectedCriteria.contains("Konfliktfreiheit")) {
+            checkKonfliktfreiheit(stories, report);
+        }
+
+        return report;
+    }
+
+
     public static void main(String[] args) throws Exception {
 
         StoryParserOpenNLP parser = new StoryParserOpenNLP();

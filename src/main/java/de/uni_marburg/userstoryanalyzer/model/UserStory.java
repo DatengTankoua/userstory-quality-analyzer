@@ -2,10 +2,16 @@ package de.uni_marburg.userstoryanalyzer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserStory {
+
+    private final SimpleBooleanProperty selected = new SimpleBooleanProperty(true);
+
+
 
     @JsonProperty("PID")
     public String pid;
@@ -148,6 +154,19 @@ public class UserStory {
         return relationList.stream()
                 .map(pair -> "[" + String.join(", ", pair) + "]")
                 .collect(Collectors.joining(", ", "[", "]"));
+    }
+
+
+    public boolean isSelected() {
+        return selected.get();
+    }
+
+    public void setSelected(boolean value) {
+        selected.set(value);
+    }
+
+    public SimpleBooleanProperty selectedProperty() {
+        return selected;
     }
 
 }
