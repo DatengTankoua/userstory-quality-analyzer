@@ -7,12 +7,19 @@
  * auf verschiedenen Kriterien wie Wohlgeformtheit, Atomarität, Uniformität, etc. und verwendet OpenNLP zur
  * Sprachverarbeitung.
  *
- * @author
+ * Features:
+ * - Laden von User Stories aus Textdateien
+ * - Auswahl und Analyse von Qualitätskriterien
+ * - Darstellung der Analyseergebnisse in Tabs
+ * - Export der Ergebnisse als JSON
+ * - Anzeige guter User Stories (optional)
+ *
+ * @author Ayham Alshaabi
  * @version 1.0
  * @since 2025-07-14
  */
 package de.uni_marburg.userstoryanalyzer.gui;
-
+// Alle notwendigen Imports hier
 import de.uni_marburg.userstoryanalyzer.analysis.*;
 import de.uni_marburg.userstoryanalyzer.export.QualityReportExporter;
 import de.uni_marburg.userstoryanalyzer.model.UserStory;
@@ -35,19 +42,31 @@ import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Hauptklasse der JavaFX-Anwendung zur Qualitätsanalyse von User Stories.
+ * Diese Klasse stellt die Benutzeroberfläche bereit, ermöglicht das Laden von User Stories,
+ * die Auswahl von Qualitätskriterien, die Analyse sowie den Export der Ergebnisse.
+ */
 public class UserStoryViewerApp extends Application {
 
+    /** Tabelle zur Anzeige aller geladenen User Stories */
     private final TableView<UserStory> storyTable = new TableView<>();
+    /** Observable-Liste für alle User Stories */
     private final ObservableList<UserStory> userStories = FXCollections.observableArrayList();
+    /** TabPane für Analyseergebnisse */
     private final TabPane qualityTabs = new TabPane();
+    /** Menge der vom Benutzer gewählten Qualitätskriterien */
     private final Set<String> selectedCriteria = new HashSet<>();
+    /** Aktueller Analysebericht */
     private QualityCriterionReport currentReport;
+    /** Checkbox zum Anzeigen der "guten" User Stories */
     private final CheckBox showGoodStoriesCheck = new CheckBox("Show good stories");
 
     /**
-     * Einstiegspunkt der JavaFX-Anwendung. Initialisiert die GUI-Komponenten und zeigt das Hauptfenster an.
+     * Einstiegspunkt der JavaFX-Anwendung. Initialisiert alle GUI-Komponenten,
+     * richtet das Layout ein und zeigt das Hauptfenster an.
      *
-     * @param stage das Hauptfenster der JavaFX-Anwendung
+     * @param stage Das primäre Stage-Objekt der Anwendung
      */
     @Override
     public void start(Stage stage) {
@@ -98,7 +117,16 @@ public class UserStoryViewerApp extends Application {
         exportBtn.setOnAction(e -> exportJson(stage));
 
         HBox buttonBar = new HBox(10, loadBtn, analyzeBtn, exportBtn);
-        VBox leftPane = new VBox(buttonBar, new Label("Select Criteria:"), criteriaBox, showGoodStoriesCheck, storyTable);
+        VBox topControls = new VBox(10, buttonBar, new Label("Select Criteria:"), criteriaBox, showGoodStoriesCheck);
+
+        SplitPane leftSplitPane = new SplitPane();
+        leftSplitPane.setOrientation(Orientation.VERTICAL);
+        leftSplitPane.getItems().addAll(topControls, storyTable);
+        leftSplitPane.setDividerPositions(0.38);
+
+        VBox leftPane = new VBox(leftSplitPane);
+        VBox.setVgrow(leftSplitPane, Priority.ALWAYS);
+
 
         SplitPane splitPane = new SplitPane();
         splitPane.setOrientation(Orientation.HORIZONTAL);
@@ -111,11 +139,11 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Hilfsmethode zum Erstellen einer Tabellen-Spalte mit einem bestimmten Titel und einem Wert-Extraktor.
+     * Erstellt eine neue Spalte für die User Story Tabelle basierend auf dem gegebenen Titel und Extraktor.
      *
      * @param title     Titel der Spalte
-     * @param extractor Funktion zum Extrahieren des Zellinhalts aus einem UserStory-Objekt
-     * @return die konfigurierte TableColumn
+     * @param extractor Funktion zur Extraktion der Werte aus einem UserStory-Objekt
+     * @return TableColumn für die Tabelle
      */
     private TableColumn<UserStory, String> createColumn(String title, javafx.util.Callback<UserStory, String> extractor) {
         TableColumn<UserStory, String> col = new TableColumn<>(title);
@@ -124,9 +152,9 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Lädt User Stories aus einer Textdatei über einen FileChooser und analysiert sie mit dem OpenNLP Parser.
+     * Lädt User Stories aus einer Datei über einen FileChooser und parst sie mit StoryParserOpenNLP.
      *
-     * @param stage das JavaFX-Stage-Objekt zum Anzeigen des Datei-Auswahldialogs
+     * @param stage Stage zur Anzeige des Datei-Dialogs
      */
     private void loadStories(Stage stage) {
         FileChooser fileChooser = new FileChooser();
@@ -156,7 +184,8 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Analysiert die aktuell ausgewählten User Stories anhand der ausgewählten Qualitätskriterien.
+     * Analysiert die vom Benutzer ausgewählten User Stories anhand der ausgewählten Kriterien.
+     * Zeigt Warnungen, falls keine Auswahl getroffen wurde.
      */
     private void analyzeSelectedStories() {
         if (selectedCriteria.isEmpty()) {
@@ -173,15 +202,21 @@ public class UserStoryViewerApp extends Application {
             return;
         }
 
-        currentReport = QualityAnalyzer.analyzeStories(selected, selectedCriteria);
-        refreshQualityTabs();
-        showInfo("Analysis Complete", "Quality analysis finished successfully.");
+        try {
+            currentReport = QualityAnalyzer.analyzeStories(selected, selectedCriteria);
+            refreshQualityTabs();
+            showInfo("Analysis Complete", "Quality analysis finished successfully.");
+        } catch (net.didion.jwnl.JWNLException e) {
+            e.printStackTrace();
+            showError("Analysis Error", "A JWNL error occurred during analysis:\n" + e.getMessage());
+        }
     }
 
+
     /**
-     * Exportiert das aktuelle Analyseergebnis als JSON-Datei.
+     * Exportiert die Ergebnisse der Analyse im JSON-Format.
      *
-     * @param stage das JavaFX-Stage-Objekt zum Anzeigen des Datei-Speichern-Dialogs
+     * @param stage Stage zur Anzeige des Datei-Speichern-Dialogs
      */
     private void exportJson(Stage stage) {
         if (currentReport == null) {
@@ -205,7 +240,7 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Erstellt Tabs für jedes ausgewählte Qualitätskriterium mit den zugehörigen Problemen und ggf. den guten Stories.
+     * Aktualisiert die Analyse-Tabs basierend auf dem aktuellen Bericht und den gewählten Kriterien.
      */
     private void refreshQualityTabs() {
         qualityTabs.getTabs().clear();
@@ -235,13 +270,12 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Erstellt einen neuen Tab für ein bestimmtes Qualitätskriterium und zeigt die zugehörigen Probleme an.
+     * Erstellt einen neuen Tab zur Anzeige der Probleme und optional der guten Stories für ein bestimmtes Kriterium.
      *
-     * @param name     Name des Tabs (Kriterium)
-     * @param criterion Objekt mit den Qualitätsproblemen
+     * @param name Name des Kriteriums/Tabs
+     * @param criterion Die Analyseergebnisse zum Kriterium
      */
     private void addQualityTabWithTable(String name, QualityCriterion criterion) {
-        VBox container = new VBox(5);
         TableView<Object> table = new TableView<>();
 
         TableColumn<Object, String> storyCol = new TableColumn<>("Story");
@@ -264,8 +298,13 @@ public class UserStoryViewerApp extends Application {
 
         table.getColumns().addAll(storyCol, problemCol);
         table.setItems(FXCollections.observableArrayList(criterion.qualitaetsProbleme));
-        container.getChildren().add(new Label("Problems:"));
-        container.getChildren().add(table);
+
+        SplitPane verticalSplit = new SplitPane();
+        verticalSplit.setOrientation(Orientation.VERTICAL);
+
+        VBox topPart = new VBox(5, new Label("Problems:"), table);
+        VBox.setVgrow(table, Priority.ALWAYS);
+        verticalSplit.getItems().add(topPart);
 
         if (showGoodStoriesCheck.isSelected()) {
             List<String> goodStories = currentReport.stories.stream()
@@ -275,24 +314,32 @@ public class UserStoryViewerApp extends Application {
                     .collect(Collectors.toList());
 
             if (!goodStories.isEmpty()) {
-                TextArea goodArea = new TextArea(String.join("\n", goodStories));
-                goodArea.setEditable(false);
-                container.getChildren().add(new Label("Good Stories:"));
-                container.getChildren().add(goodArea);
+                TableView<String> goodTable = new TableView<>();
+                TableColumn<String, String> goodCol = new TableColumn<>("Good Story");
+                goodCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+                goodCol.setPrefWidth(1000); // أو يمكنك ضبط الحجم تلقائيًا
+
+                goodTable.getColumns().add(goodCol);
+                goodTable.setItems(FXCollections.observableArrayList(goodStories));
+                VBox bottomPart = new VBox(5, new Label("Good Stories:"), goodTable);
+                VBox.setVgrow(goodTable, Priority.ALWAYS);
+                verticalSplit.getItems().add(bottomPart);
             }
         }
 
-        ScrollPane scrollPane = new ScrollPane(container);
+        verticalSplit.setDividerPositions(0.5);
+        ScrollPane scrollPane = new ScrollPane(verticalSplit);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
         qualityTabs.getTabs().add(new Tab(name, scrollPane));
     }
 
+
     /**
-     * Zeigt eine Fehlermeldung in einem JavaFX-Dialog an.
+     * Zeigt einen Fehlerdialog mit der gegebenen Nachricht.
      *
      * @param title Titel des Dialogs
-     * @param msg   Fehlermeldung
+     * @param msg Nachricht/Fehlerbeschreibung
      */
     private void showError(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -303,10 +350,10 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Zeigt eine Information in einem JavaFX-Dialog an.
+     * Zeigt einen Informationsdialog mit der gegebenen Nachricht.
      *
      * @param title Titel des Dialogs
-     * @param msg   Nachricht
+     * @param msg Nachricht/Information
      */
     private void showInfo(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -317,7 +364,7 @@ public class UserStoryViewerApp extends Application {
     }
 
     /**
-     * Startmethode der Anwendung.
+     * Startet die JavaFX-Anwendung.
      *
      * @param args Kommandozeilenargumente
      */

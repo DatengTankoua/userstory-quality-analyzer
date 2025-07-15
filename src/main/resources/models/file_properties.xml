@@ -2,7 +2,7 @@
 <jwnl_properties language="en">
 <version publisher="Princeton" number="3.0" language="en"/>
 <dictionary class="net.didion.jwnl.dictionary.FileBackedDictionary">
-<param name="dictionary_path" value="C:\Users\daten\Downloads\wn3.1.dict\dict"/>
+<param name="dictionary_path" value="C:\Users\ayham\Downloads\wn3.1.dict\dict"/>
 <param name="morphological_processor" value="net.didion.jwnl.dictionary.morph.DefaultMorphologicalProcessor">
 <param name="operations">
 	<param value="net.didion.jwnl.dictionary.morph.LookupExceptionsOperation"/>
@@ -39,7 +39,7 @@
 <param name="dictionary_element_factory" value="net.didion.jwnl.princeton.data.PrincetonWN17FileDictionaryElementFactory"/>
 <param name="file_manager" value="net.didion.jwnl.dictionary.file_manager.FileManagerImpl">
 <param name="file_type" value="net.didion.jwnl.princeton.file.PrincetonRandomAccessDictionaryFile"/>
-<param name="dictionary_path" value="C:\\Users\\daten\\Downloads\\wn3.1.dict\\dict"/>
+<param name="dictionary_path" value="C:\Users\ayham\Downloads\wn3.1.dict\dict"/>
 </param>
 		</dictionary>
 <resource class="PrincetonResource"/>

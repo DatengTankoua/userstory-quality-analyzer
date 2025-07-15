@@ -25,6 +25,14 @@
             <version>2.3.0</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>net.sf.jwordnet</groupId>
+            <artifactId>jwnl</artifactId>
+            <version>1.4_rc3</version>
+        </dependency>
+
+
         <!-- JUnit (nur eine Version!) -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

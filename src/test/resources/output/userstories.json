@@ -1,4 +1,5 @@
 [ {
+  "selected" : true,
   "PID" : "#G03#",
   "Text" : "#G03# As a Public User, I want to Search for Information, so that I can obtain publicly available information concerning properties, County services, processes and other general information.",
   "Persona" : [ "Public User" ],
