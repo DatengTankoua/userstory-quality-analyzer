@@ -4,8 +4,7 @@
 #
 #  Branch strategy
 #    feature/*  →  build + test
-#    develop    →  build + test + package + staging deploy
-#    main       →  build + test + package + production deploy (manual)
+#    main       →  build + test + package + staging (auto) + production (manual)
 # ============================================================
 
 stages:
@@ -107,15 +106,11 @@ package:jar:
     expire_in: 30 days
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
-    - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH =~ /^release\/.*/'
-    - if: '$CI_COMMIT_BRANCH =~ /^hotfix\/.*/'
 
 # ============================================================
 #  STAGE 4 — DEPLOY
 #
-#  Staging  → develop branch, automatic
-#  Production → main branch, manual gate (requires approval)
+#  main → Staging (automatic) → Production (manual gate)
 # ============================================================
 
 # ── Staging deployment ───────────────────────────────────────
@@ -138,7 +133,8 @@ deploy:staging:
       echo "  Download: $CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/download"
       echo "============================================"
   rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
 
 # ── Production deployment ────────────────────────────────────
 deploy:production:
