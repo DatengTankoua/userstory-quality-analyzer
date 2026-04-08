@@ -64,7 +64,15 @@ unit-tests:
   needs: [compile]
   <<: *maven-cache
   script:
-    - mvn $MAVEN_CLI_OPTS test jacoco:report
+    - |
+      set +e
+      mvn $MAVEN_CLI_OPTS test jacoco:report
+      EXIT_CODE=$?
+      if [ ! -d target/site/jacoco ]; then
+        echo "Tests failed before JaCoCo report — generating report from recorded data..."
+        mvn $MAVEN_CLI_OPTS jacoco:report || true
+      fi
+      exit $EXIT_CODE
   coverage: '/Total.*?([0-9]{1,3})%/'
   artifacts:
     when: always
