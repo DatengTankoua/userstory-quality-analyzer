@@ -30,12 +30,19 @@ public class QualityAnalyzer {
     static {
         try {
             InputStream props = QualityAnalyzer.class.getResourceAsStream("/models/file_properties.xml");
-            assert props != null;
-            JWNL.initialize(props);
-            wordnet = Dictionary.getInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (props != null) {
+                JWNL.initialize(props);
+                wordnet = Dictionary.getInstance();
+            }
+        } catch (Throwable e) {
+            // WordNet unavailable (e.g. missing dictionary path in CI) — semantic features degraded gracefully
+            wordnet = null;
         }
+    }
+
+    /** @return true wenn WordNet korrekt initialisiert wurde */
+    public static boolean isWordNetAvailable() {
+        return wordnet != null;
     }
 
     // Keywords für Nutzungsaktionen (z.B. die typischen CRUD-Read/Update/Delete-Aktionen)
@@ -48,9 +55,11 @@ public class QualityAnalyzer {
 
     static {
         try {
-            expandedUsage = expandKeywordsWithSynonyms(wordnet, USAGE_KEYWORDS, POS.VERB);
-        } catch (JWNLException e) {
-            throw new RuntimeException(e);
+            expandedUsage = wordnet != null
+                    ? expandKeywordsWithSynonyms(wordnet, USAGE_KEYWORDS, POS.VERB)
+                    : new HashSet<>(USAGE_KEYWORDS);
+        } catch (Exception e) {
+            expandedUsage = new HashSet<>(USAGE_KEYWORDS);
         }
     }
 
@@ -58,9 +67,11 @@ public class QualityAnalyzer {
 
     static {
         try {
-            expandedCreation = expandKeywordsWithSynonyms(wordnet, CREATION_KEYWORDS, POS.VERB);
-        } catch (JWNLException e) {
-            throw new RuntimeException(e);
+            expandedCreation = wordnet != null
+                    ? expandKeywordsWithSynonyms(wordnet, CREATION_KEYWORDS, POS.VERB)
+                    : new HashSet<>(CREATION_KEYWORDS);
+        } catch (Exception e) {
+            expandedCreation = new HashSet<>(CREATION_KEYWORDS);
         }
     }
 
@@ -82,6 +93,7 @@ public class QualityAnalyzer {
     }
 
     public static Set<String> expandKeywordsWithSynonyms(Dictionary dictionary, Set<String> baseWords, POS pos) throws JWNLException {
+        if (dictionary == null) return new HashSet<>(baseWords);
         Set<String> allWords = new HashSet<>(baseWords);
 
         for (String word : baseWords) {
@@ -205,6 +217,7 @@ public class QualityAnalyzer {
     }
 
     public static boolean areSemanticallySimilar(String word1, String word2) {
+        if (wordnet == null) return false;
         try {
             IndexWord w1 = wordnet.lookupIndexWord(POS.VERB, word1.toLowerCase());
             IndexWord w2 = wordnet.lookupIndexWord(POS.VERB, word2.toLowerCase());

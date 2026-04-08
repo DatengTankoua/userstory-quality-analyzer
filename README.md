@@ -1,93 +1,254 @@
-# SP25_Gruppe1_Dateng_Hammudi_Stechert_Alshaabi
+# User Story Analyzer
 
+> An NLP-powered desktop application for automated quality analysis of Agile user stories — developed at Philipps-Universität Marburg (SP25 · Group 1).
 
+[![Pipeline](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/badges/main/pipeline.svg)](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/-/pipelines)
+[![Coverage](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/badges/main/coverage.svg)](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/-/jobs)
+[![Java 21](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk)](https://adoptium.net/)
+[![JavaFX 21](https://img.shields.io/badge/JavaFX-21-blue?logo=java)](https://openjfx.io/)
+[![Maven](https://img.shields.io/badge/Maven-3.9+-red?logo=apachemaven)](https://maven.apache.org/)
+[![License](https://img.shields.io/badge/License-Academic-lightgrey)](LICENSE)
 
-## Getting started
+---
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Overview
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**User Story Analyzer** automatically evaluates the quality of Agile user stories against **8 linguistic and structural criteria** using state-of-the-art NLP libraries (Apache OpenNLP · Stanford CoreNLP · WordNet). It provides a rich JavaFX desktop GUI, structured JSON exports, and batch analysis capabilities — helping software engineering teams maintain high-quality product backlogs.
 
-## Add your files
+---
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+## Features
+
+| Feature | Description |
+|---|---|
+| **8 Quality Criteria** | Well-formedness, Atomicity, Uniformity, Minimality, Completeness, Non-redundancy, Independence, Non-conflict |
+| **NLP Pipeline** | POS tagging, dependency parsing, lemmatisation via Apache OpenNLP & Stanford CoreNLP |
+| **Semantic Analysis** | WordNet-based synonym/hyponym detection (JWNL) for redundancy and conflict checks |
+| **JavaFX GUI** | Interactive desktop interface — load files, select criteria, inspect results per story |
+| **JSON Export** | Machine-readable quality reports and structured user story models |
+| **Ground Truth** | Bundled annotated datasets for benchmark evaluation |
+| **Unit Tests** | JUnit 5 test suite with JaCoCo code-coverage reporting |
+| **CI/CD Pipeline** | Fully automated build → test → package → release pipeline on GitLab CI |
+
+---
+
+## Quality Criteria
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi.git
-git branch -M main
-git push -uf origin main
+As a <role>, I want <feature> [so that <benefit>].
+    │             │                    │
+    │             └─ Atomicity         └─ Minimality
+    └─ Completeness
+         │
+         ├─ Well-formedness   (correct syntactic structure)
+         ├─ Uniformity        (consistent phrasing across all stories)
+         ├─ Non-redundancy    (no duplicate semantic content)
+         ├─ Independence      (no cross-story coupling)
+         └─ Non-conflict      (no contradictory intents)
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/-/settings/integrations)
+## Technology Stack
 
-## Collaborate with your team
+| Layer | Technology |
+|---|---|
+| Language | Java 21 LTS |
+| GUI | JavaFX 21 |
+| NLP | Apache OpenNLP 2.3, Stanford CoreNLP 4.5, JWNL 1.4 |
+| ML Backend | DeepLearning4J 1.0.0-M2.1, ND4J Native |
+| Serialisation | Jackson 2.15 |
+| Testing | JUnit Jupiter 5.9, JaCoCo 0.8 |
+| Build | Maven 3.9+ |
+| CI/CD | GitLab CI/CD |
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+---
 
-## Test and Deploy
+## Project Structure
 
-Use the built-in continuous integration in GitLab.
+```
+src/
+├── main/java/de/uni_marburg/userstoryanalyzer/
+│   ├── analysis/          # Quality criteria implementations
+│   │   ├── QualityAnalyzer.java
+│   │   ├── Wohlgeformtheit.java    (Well-formedness)
+│   │   ├── Atomaritaet.java        (Atomicity)
+│   │   ├── Uniformitaet.java       (Uniformity)
+│   │   ├── Minimalitaet.java       (Minimality)
+│   │   ├── Vollstaendigkeit.java   (Completeness)
+│   │   ├── Redundanzfreiheit.java  (Non-redundancy)
+│   │   ├── Unabhaengigkeit.java    (Independence)
+│   │   └── Konfliktfreiheit.java   (Non-conflict)
+│   ├── gui/               # JavaFX application
+│   ├── model/             # Domain model (UserStory, Action, Entity …)
+│   ├── parser/            # OpenNLP-based story parser
+│   └── export/            # JSON export
+├── main/resources/
+│   ├── models/            # NLP model files
+│   └── json-files/        # Sample input & output
+└── test/java/             # JUnit 5 test classes
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+---
 
-***
+## Prerequisites
 
-# Editing this README
+| Requirement | Minimum Version |
+|---|---|
+| JDK | **21 LTS** (Eclipse Temurin or Oracle) |
+| Maven | **3.9+** |
+| OS | Windows 10 / macOS 12 / Ubuntu 22.04 |
+| RAM | 4 GB (8 GB recommended — Stanford CoreNLP is memory-intensive) |
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+---
 
-## Suggestions for a good README
+## Installation & Quick Start
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### 1 — Install JDK 21
 
-## Name
-Choose a self-explaining name for your project.
+**Windows (winget)**
+```powershell
+winget install EclipseAdoptium.Temurin.21.JDK
+```
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+**macOS (Homebrew)**
+```bash
+brew install --cask temurin@21
+```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**Ubuntu / Debian**
+```bash
+sudo apt update && sudo apt install temurin-21-jdk
+```
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Verify:
+```bash
+java -version   # should print: openjdk version "21 ..."
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### 2 — Set JAVA_HOME to JDK 21
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+> **Important:** If you have multiple JDKs installed, Maven must use JDK 21 — not an older version. The error `invalid target release: 21` means `JAVA_HOME` points to an older JDK.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+**Windows — current session only**
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot"
+$env:PATH = "$env:JAVA_HOME\bin;" + $env:PATH
+java -version   # confirm: 21
+```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+**Windows — permanent (System Properties → Environment Variables)**
+1. Open *System Properties* → *Environment Variables*
+2. Set `JAVA_HOME` = `C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot`
+3. Move `%JAVA_HOME%\bin` to the top of the `Path` variable
+4. Restart your terminal
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+**macOS / Linux**
+```bash
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)   # macOS
+# or
+export JAVA_HOME=/usr/lib/jvm/temurin-21            # Linux
+export PATH="$JAVA_HOME/bin:$PATH"
+java -version
+```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### 3 — Clone the Repository
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+```bash
+git clone https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi.git
+cd sp25_gruppe1_dateng_hammudi_stechert_alshaabi
+```
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### 4 — Build & Run Tests
+
+```bash
+# Compile + run all unit tests + generate coverage report
+mvn clean verify
+
+# Coverage report is written to:
+#   target/site/jacoco/index.html
+```
+
+### 5 — Run the Application
+
+#### Option A — JavaFX GUI (recommended)
+```bash
+mvn javafx:run
+```
+
+#### Option B — Headless CLI
+```bash
+mvn clean package -DskipTests
+java -jar target/userstory-analyzer-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+
+The CLI parser reads user stories from `src/main/resources/models/g03-loudoun.txt`  
+and writes the structured result to `src/main/resources/json-files/userstories.json`.
+
+---
+
+## Using the GUI
+
+1. **Launch** — `mvn javafx:run`
+2. **Load** — Click *Open File* and choose a `.txt` file with one user story per line
+3. **Select criteria** — Tick the quality dimensions you want to evaluate
+4. **Analyse** — Click *Analyse*; results appear in tabbed panels per criterion
+5. **Export** — Click *Export JSON* to save the full quality report
+
+Expected user story format:
+```
+As a project manager, I want to track sprint velocity so that I can forecast future capacity.
+As a developer, I want automated test execution so that regressions are caught immediately.
+```
+
+---
+
+## CI/CD Pipeline
+
+The project ships with a fully automated **4-stage GitLab CI/CD pipeline**:
+
+```
+feature/*  ──►  [build] ──► [test]
+develop    ──►  [build] ──► [test] ──► [package] ──► [deploy:staging]   (automatic)
+main       ──►  [build] ──► [test] ──► [package] ──► [deploy:production] (manual gate)
+```
+
+| Stage | Job | Trigger | Artefact |
+|---|---|---|---|
+| **build** | `compile` | every push | compiled classes |
+| **test** | `unit-tests` | every push | JUnit XML + JaCoCo HTML report |
+| **package** | `package:jar` | develop / main / release/* | fat JAR |
+| **deploy** | `deploy:staging` | develop (automatic) | staging environment link |
+| **deploy** | `deploy:production` | main (manual approval) | GitLab Release + JAR asset |
+
+The pipeline uses **Maven dependency caching** keyed on `pom.xml` to keep build times fast.
+
+---
+
+## Running Tests Only
+
+```bash
+mvn clean test
+```
+
+Test reports: `target/surefire-reports/`  
+Coverage report: `target/site/jacoco/index.html`
+
+---
+
+## Authors
+
+| Name | Role |
+|---|---|
+| Ayham Alshaabi | GUI Development, Quality Criteria |
+| Hammudi | NLP Pipeline, Parser |
+| Stechert | Architecture, CI/CD |
+| Dateng | Analysis Engine, Testing |
+
+Philipps-Universität Marburg — Software Project 2025
+
+---
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+This project was created for academic purposes at Philipps-Universität Marburg.

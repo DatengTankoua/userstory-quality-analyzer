@@ -1,4 +1,5 @@
 [ {
+  "selected" : true,
   "PID" : "#GO0#",
   "Text" : "As a Public User, I want to Search for Information, so that I can obtain publicly available information concerning properties, County services, processes and other general information.",
   "Persona" : [ "Public User" ],
@@ -15,6 +16,7 @@
   "Targets" : [ [ "Search", "Information" ], [ "obtain", "publicly available information" ], [ "obtain", "properties" ], [ "obtain", "County services" ], [ "obtain", "processes" ], [ "obtain", "other general information" ] ],
   "Contains" : [ [ "Information", "publicly available information" ], [ "Information", "properties" ], [ "Information", "County services" ], [ "Information", "processes" ], [ "Information", "other general information" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO1#",
   "Text" : "As a ProspectiveApplicant, I want to research requirements and to select a service, so that I can find the relevant service and/or application type to initiate via the online portal.",
   "Persona" : [ "ProspectiveApplicant" ],
@@ -31,6 +33,7 @@
   "Targets" : [ [ "research", "requirements" ], [ "research", "service" ], [ "select", "requirements" ], [ "select", "service" ], [ "find", "relevant service" ], [ "find", "application type" ], [ "find", "online portal" ] ],
   "Contains" : [ [ "requirements", "relevant service" ], [ "requirements", "application type" ], [ "requirements", "online portal" ], [ "service", "relevant service" ], [ "service", "application type" ], [ "service", "online portal" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO2#",
   "Text" : "As an Applicant, I want to Request PreApplication Assistance, so that I can receive a response to a request for a meeting or information that is a result of the preapplication assistance.",
   "Persona" : [ "Applicant" ],
@@ -47,6 +50,7 @@
   "Targets" : [ [ "Request", "PreApplication Assistance" ], [ "receive", "response to" ], [ "receive", "request for" ], [ "receive", "meeting" ], [ "receive", "information" ], [ "receive", "result of" ], [ "receive", "preapplication assistance" ], [ "result", "response to" ], [ "result", "request for" ], [ "result", "meeting" ], [ "result", "information" ], [ "result", "result of" ], [ "result", "preapplication assistance" ] ],
   "Contains" : [ [ "PreApplication Assistance", "response to" ], [ "PreApplication Assistance", "request for" ], [ "PreApplication Assistance", "meeting" ], [ "PreApplication Assistance", "information" ], [ "PreApplication Assistance", "result of" ], [ "PreApplication Assistance", "preapplication assistance" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO3#",
   "Text" : "As a Customer, I want to Create a Customer Portal User Account, so that I can log on to the Customer Portal and perform transactions that first require user authentication.",
   "Persona" : [ "Customer" ],
@@ -63,6 +67,7 @@
   "Targets" : [ [ "Create", "Customer Portal User Account" ], [ "log", "Customer Portal" ], [ "log", "transactions" ], [ "log", "first" ], [ "log", "user authentication" ], [ "perform", "Customer Portal" ], [ "perform", "transactions" ], [ "perform", "first" ], [ "perform", "user authentication" ], [ "require", "Customer Portal" ], [ "require", "transactions" ], [ "require", "first" ], [ "require", "user authentication" ] ],
   "Contains" : [ [ "Customer Portal User Account", "Customer Portal" ], [ "Customer Portal User Account", "transactions" ], [ "Customer Portal User Account", "first" ], [ "Customer Portal User Account", "user authentication" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO4#",
   "Text" : "As an Applicant, I want to Submit Application, so that I can provide my information, plans and/or documents to initiate a transaction with the County.",
   "Persona" : [ "Applicant" ],
@@ -79,6 +84,7 @@
   "Targets" : [ [ "Submit", "Application" ], [ "provide", "information" ], [ "provide", "plans" ], [ "provide", "documents" ], [ "provide", "transaction with" ], [ "provide", "County" ] ],
   "Contains" : [ [ "Application", "information" ], [ "Application", "plans" ], [ "Application", "documents" ], [ "Application", "transaction with" ], [ "Application", "County" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO5#",
   "Text" : "As an Applicant, I want to Submit Supporting Documentation, so that I can satisfy documentation requirements for my application.",
   "Persona" : [ "Applicant" ],
@@ -95,6 +101,7 @@
   "Targets" : [ [ "Submit", "Documentation" ], [ "Supporting", "Documentation" ], [ "satisfy", "documentation requirements for" ], [ "satisfy", "application" ] ],
   "Contains" : [ [ "Documentation", "documentation requirements for" ], [ "Documentation", "application" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO6#",
   "Text" : "As an Applicant, I want to Pay Fee, so that I can satisfy outstanding charge associated with the service requested or received from the County.",
   "Persona" : [ "Applicant" ],
@@ -111,6 +118,7 @@
   "Targets" : [ [ "satisfy", "outstanding charge" ], [ "satisfy", "service" ], [ "satisfy", "County" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO7#",
   "Text" : "As an Applicant, I want to Check the Status of a transaction, so that I can understand where the provisioning of my service is in the process, such as information related to service levels, fees, plan review, permit, or inspection results.",
   "Persona" : [ "Applicant" ],
@@ -127,6 +135,7 @@
   "Targets" : [ [ "Check", "Status of" ], [ "Check", "transaction" ], [ "understand", "provisioning of" ], [ "understand", "service" ], [ "understand", "process" ], [ "understand", "such as information" ], [ "understand", "service levels" ], [ "understand", "fees" ], [ "understand", "plan review" ], [ "understand", "permit" ], [ "understand", "inspection results" ], [ "process", "provisioning of" ], [ "process", "service" ], [ "process", "process" ], [ "process", "such as information" ], [ "process", "service levels" ], [ "process", "fees" ], [ "process", "plan review" ], [ "process", "permit" ], [ "process", "inspection results" ] ],
   "Contains" : [ [ "Status of", "provisioning of" ], [ "Status of", "service" ], [ "Status of", "process" ], [ "Status of", "such as information" ], [ "Status of", "service levels" ], [ "Status of", "fees" ], [ "Status of", "plan review" ], [ "Status of", "permit" ], [ "Status of", "inspection results" ], [ "transaction", "provisioning of" ], [ "transaction", "service" ], [ "transaction", "process" ], [ "transaction", "such as information" ], [ "transaction", "service levels" ], [ "transaction", "fees" ], [ "transaction", "plan review" ], [ "transaction", "permit" ], [ "transaction", "inspection results" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO8#",
   "Text" : "As an Applicant, I want to Modify my Application, so that I can successfully change information on an application.",
   "Persona" : [ "Applicant" ],
@@ -143,6 +152,7 @@
   "Targets" : [ [ "Modify", "Application" ], [ "change", "information on" ], [ "change", "application" ] ],
   "Contains" : [ [ "Application", "information on" ], [ "Application", "application" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO9#",
   "Text" : "As a Staff member, I want to Perform a Completeness Review, so that I can validate when an application is complete and eligible for further technical review.",
   "Persona" : [ "Staff member" ],
@@ -159,6 +169,7 @@
   "Targets" : [ [ "Perform", "Completeness Review" ], [ "validate", "application" ], [ "validate", "complete" ], [ "validate", "eligible for further technical review" ], [ "complete", "application" ], [ "complete", "complete" ], [ "complete", "eligible for further technical review" ], [ "eligible", "application" ], [ "eligible", "complete" ], [ "eligible", "eligible for further technical review" ] ],
   "Contains" : [ [ "Completeness Review", "application" ], [ "Completeness Review", "complete" ], [ "Completeness Review", "eligible for further technical review" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO10#",
   "Text" : "As a Staff member, I want to Record an Internal Note, so that I can share information with other Staff collaborating on the record.",
   "Persona" : [ "Staff member" ],
@@ -175,6 +186,7 @@
   "Targets" : [ [ "Record", "Internal Note" ], [ "share", "information with other Staff" ], [ "share", "record" ] ],
   "Contains" : [ [ "Internal Note", "information with other Staff" ], [ "Internal Note", "record" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO11#",
   "Text" : "As a Staff member, I want to Assign an Application for Detailed Review, so that I can review the for compliance and subsequently approved or denied.",
   "Persona" : [ "Staff member" ],
@@ -191,6 +203,7 @@
   "Targets" : [ [ "Assign", "Application for Detailed Review" ], [ "review", "compliance" ], [ "review", "subsequently" ], [ "denied", "compliance" ], [ "denied", "subsequently" ] ],
   "Contains" : [ [ "Application for Detailed Review", "compliance" ], [ "Application for Detailed Review", "subsequently" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO12#",
   "Text" : "As a Staff member, I want to Apply a Hold, so that I can prevent progression through the workflow or other actions in the system until the issue is resolved.",
   "Persona" : [ "Staff member" ],
@@ -207,6 +220,7 @@
   "Targets" : [ [ "prevent", "progression through" ], [ "prevent", "workflow" ], [ "prevent", "other actions in" ], [ "prevent", "system until" ], [ "prevent", "issue" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO13#",
   "Text" : "As a Staff member, I want to Remove a Hold, so that I can allow progression through the workflow or other actions in the system now that the issue has been resolved.",
   "Persona" : [ "Staff member" ],
@@ -223,6 +237,7 @@
   "Targets" : [ [ "allow", "progression through" ], [ "allow", "workflow" ], [ "allow", "other actions in" ], [ "allow", "system now that" ], [ "allow", "issue" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO14#",
   "Text" : "As a Staff member, I want to Send a Formal Response to Applicant, so that I can satisfy communication and records responsibilities.",
   "Persona" : [ "Staff member" ],
@@ -239,6 +254,7 @@
   "Targets" : [ [ "Send", "Formal Response to Applicant" ], [ "satisfy", "communication" ], [ "satisfy", "records responsibilities" ] ],
   "Contains" : [ [ "Formal Response to Applicant", "communication" ], [ "Formal Response to Applicant", "records responsibilities" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO15#",
   "Text" : "As a Staff member, I want to Track  the Draft Proffers, so that I can preserve the history of draft proffer statements submitted by the Applicant.",
   "Persona" : [ "Staff member" ],
@@ -255,6 +271,7 @@
   "Targets" : [ [ "preserve", "history of draft" ], [ "preserve", "statements" ], [ "preserve", "Applicant" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO16#",
   "Text" : "As a Staff member, I want to Manage Approved Proffers, so that I can ensure compliance with and satisfaction of the proffer in the future.",
   "Persona" : [ "Staff member" ],
@@ -271,6 +288,7 @@
   "Targets" : [ [ "Manage", "Approved Proffers" ], [ "ensure", "compliance with" ], [ "ensure", "satisfaction of" ], [ "ensure", "future" ] ],
   "Contains" : [ [ "Approved Proffers", "compliance with" ], [ "Approved Proffers", "satisfaction of" ], [ "Approved Proffers", "future" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO17#",
   "Text" : "As a Staff member, I want to Manage Ordinances, so that I can maintain accurate ordinance information in the System.",
   "Persona" : [ "Staff member" ],
@@ -287,6 +305,7 @@
   "Targets" : [ [ "Manage", "Ordinances" ], [ "maintain", "accurate ordinance information in" ], [ "maintain", "System" ] ],
   "Contains" : [ [ "Ordinances", "accurate ordinance information in" ], [ "Ordinances", "System" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO18#",
   "Text" : "As a Staff member, I want to Schedule a Meeting, so that I can bring the required parties together at a specific date/time to address an issue.",
   "Persona" : [ "Staff member" ],
@@ -303,6 +322,7 @@
   "Targets" : [ [ "Schedule", "Meeting" ], [ "bring", "parties together at" ], [ "bring", "specific date" ], [ "bring", "time" ], [ "bring", "issue" ] ],
   "Contains" : [ [ "Meeting", "parties together at" ], [ "Meeting", "specific date" ], [ "Meeting", "time" ], [ "Meeting", "issue" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO19#",
   "Text" : "As a staff member, I want to denote an application with a Final Action status. So that I can finish it.",
   "Persona" : [ "staff member" ],
@@ -319,6 +339,7 @@
   "Targets" : [ [ "denote", "application with" ], [ "denote", "Final Action status" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO20#",
   "Text" : "As a Planning Staff member, I want to Conduct and Track Plan Amendments and Planning Studies, so that I can record work in process, outcome, and location-based information related to the Plan(s).",
   "Persona" : [ "Planning Staff member" ],
@@ -335,6 +356,7 @@
   "Targets" : [ [ "Planning", "Studies" ], [ "record", "work in process" ], [ "record", "outcome" ], [ "record", "location" ], [ "record", "information" ], [ "record", "Plan" ] ],
   "Contains" : [ [ "Studies", "work in process" ], [ "Studies", "outcome" ], [ "Studies", "location" ], [ "Studies", "information" ], [ "Studies", "Plan" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO21#",
   "Text" : "As a Planning Staff member, I want to Generate Planning-related Reports, so that I can access, analyze and/or export the needed information in the format I requested.",
   "Persona" : [ "Planning Staff member" ],
@@ -351,6 +373,7 @@
   "Targets" : [ [ "Generate", "Planning" ], [ "Generate", "Reports" ], [ "related", "Planning" ], [ "related", "Reports" ], [ "access", "export" ], [ "access", "information in" ], [ "access", "format" ], [ "analyze", "export" ], [ "analyze", "information in" ], [ "analyze", "format" ], [ "requested", "export" ], [ "requested", "information in" ], [ "requested", "format" ] ],
   "Contains" : [ [ "Planning", "export" ], [ "Planning", "information in" ], [ "Planning", "format" ], [ "Reports", "export" ], [ "Reports", "information in" ], [ "Reports", "format" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO22#",
   "Text" : "As a Planning Staff member, I want to Evaluate Consistency with the Comprehensive Plan, so that I can complete my required review of a plan set and/or application.",
   "Persona" : [ "Planning Staff member" ],
@@ -367,6 +390,7 @@
   "Targets" : [ [ "Evaluate", "Consistency with" ], [ "Evaluate", "Comprehensive Plan" ], [ "complete", "review of" ], [ "complete", "plan" ], [ "complete", "application" ] ],
   "Contains" : [ [ "Consistency with", "review of" ], [ "Consistency with", "plan" ], [ "Consistency with", "application" ], [ "Comprehensive Plan", "review of" ], [ "Comprehensive Plan", "plan" ], [ "Comprehensive Plan", "application" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO23#",
   "Text" : "As a Staff member, I want to Perform a Staff Review, so that I can validate compliance of an application with the Zoning Ordinance and impact approval/denial of the application accordingly.",
   "Persona" : [ "Staff member" ],
@@ -383,6 +407,7 @@
   "Targets" : [ [ "Perform", "Staff Review" ], [ "validate", "compliance of" ], [ "validate", "application with" ], [ "validate", "Zoning Ordinance" ], [ "validate", "impact approval" ], [ "validate", "denial of" ], [ "validate", "application accordingly" ] ],
   "Contains" : [ [ "Staff Review", "compliance of" ], [ "Staff Review", "application with" ], [ "Staff Review", "Zoning Ordinance" ], [ "Staff Review", "impact approval" ], [ "Staff Review", "denial of" ], [ "Staff Review", "application accordingly" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO24#",
   "Text" : "As a Zoning Staff member, I want to Process the Requests for Zoning Information, so that I can capture my response to the request in the system and also send a communication from the system to the Applicant.",
   "Persona" : [ "Zoning Staff member" ],
@@ -399,6 +424,7 @@
   "Targets" : [ [ "Process", "Requests for Zoning Information" ], [ "capture", "response to" ], [ "capture", "request in" ], [ "capture", "system" ], [ "capture", "also" ], [ "capture", "communication from" ], [ "capture", "system to" ], [ "capture", "Applicant" ], [ "send", "response to" ], [ "send", "request in" ], [ "send", "system" ], [ "send", "also" ], [ "send", "communication from" ], [ "send", "system to" ], [ "send", "Applicant" ] ],
   "Contains" : [ [ "Requests for Zoning Information", "response to" ], [ "Requests for Zoning Information", "request in" ], [ "Requests for Zoning Information", "system" ], [ "Requests for Zoning Information", "also" ], [ "Requests for Zoning Information", "communication from" ], [ "Requests for Zoning Information", "system to" ], [ "Requests for Zoning Information", "Applicant" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO25#",
   "Text" : "As a Zoning Staff member, I want to Issue the Zoning-Related Permits, so that I can satisfy an Applicant's request for service that has proven to be eligible and in compliance with the Zoning Ordinance.",
   "Persona" : [ "Zoning Staff member" ],
@@ -415,6 +441,7 @@
   "Targets" : [ [ "Issue", "Zoning" ], [ "Issue", "Permits" ], [ "Related", "Zoning" ], [ "Related", "Permits" ], [ "satisfy", "Applicant" ], [ "satisfy", "request for service" ], [ "satisfy", "eligible" ], [ "satisfy", "compliance with" ], [ "satisfy", "Zoning Ordinance" ], [ "proven", "Applicant" ], [ "proven", "request for service" ], [ "proven", "eligible" ], [ "proven", "compliance with" ], [ "proven", "Zoning Ordinance" ] ],
   "Contains" : [ [ "Zoning", "Applicant" ], [ "Zoning", "request for service" ], [ "Zoning", "eligible" ], [ "Zoning", "compliance with" ], [ "Zoning", "Zoning Ordinance" ], [ "Permits", "Applicant" ], [ "Permits", "request for service" ], [ "Permits", "eligible" ], [ "Permits", "compliance with" ], [ "Permits", "Zoning Ordinance" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO26#",
   "Text" : "As a Staff member, I want to Develop a Staff Report, so that I can publish and distribute the report according to business rules.",
   "Persona" : [ "Staff member" ],
@@ -431,6 +458,7 @@
   "Targets" : [ [ "Develop", "Staff Report" ], [ "publish", "report" ], [ "publish", "business rules" ], [ "distribute", "report" ], [ "distribute", "business rules" ] ],
   "Contains" : [ [ "Staff Report", "report" ], [ "Staff Report", "business rules" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO27#",
   "Text" : "As a Staff member, I want to Manage Hearing Calendars, so that I can track hearing-related activities and due dates.",
   "Persona" : [ "Staff member" ],
@@ -447,6 +475,7 @@
   "Targets" : [ [ "Manage", "Calendars" ], [ "Hearing", "Calendars" ], [ "track", "hearing" ], [ "track", "activities" ], [ "track", "dates" ] ],
   "Contains" : [ [ "Calendars", "hearing" ], [ "Calendars", "activities" ], [ "Calendars", "dates" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO28#",
   "Text" : "As a Staff member, I want to Assign a Hearing Date, so that I can present the application to the appropriate governing body within the timelines dictated by the relevant County rules and procedures.",
   "Persona" : [ "Staff member" ],
@@ -463,6 +492,7 @@
   "Targets" : [ [ "Assign", "Date" ], [ "Hearing", "Date" ], [ "present", "application to" ], [ "present", "appropriate governing body within" ], [ "present", "timelines" ], [ "present", "relevant County rules" ], [ "present", "procedures" ], [ "dictated", "application to" ], [ "dictated", "appropriate governing body within" ], [ "dictated", "timelines" ], [ "dictated", "relevant County rules" ], [ "dictated", "procedures" ] ],
   "Contains" : [ [ "Date", "application to" ], [ "Date", "appropriate governing body within" ], [ "Date", "timelines" ], [ "Date", "relevant County rules" ], [ "Date", "procedures" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO29#",
   "Text" : "As a Staff member, I want to Manage Affidavits, so that I can ensure compliance with the requirements prior to the hearing.",
   "Persona" : [ "Staff member" ],
@@ -479,6 +509,7 @@
   "Targets" : [ [ "Manage", "Affidavits" ], [ "ensure", "compliance with" ], [ "ensure", "requirements prior to" ], [ "ensure", "hearing" ] ],
   "Contains" : [ [ "Affidavits", "compliance with" ], [ "Affidavits", "requirements prior to" ], [ "Affidavits", "hearing" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO30#",
   "Text" : "As an Applicant, I want to Satisfy Hearing Requirements, so that I can ensure all pre-hearing requirements are satisfied in time for the hearing.",
   "Persona" : [ "Applicant" ],
@@ -495,6 +526,7 @@
   "Targets" : [ [ "Satisfy", "Requirements" ], [ "Hearing", "Requirements" ], [ "ensure", "pre-hearing requirements" ], [ "ensure", "satisfied in time for" ], [ "ensure", "hearing" ] ],
   "Contains" : [ [ "Requirements", "pre-hearing requirements" ], [ "Requirements", "satisfied in time for" ], [ "Requirements", "hearing" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO31#",
   "Text" : "As a Staff member, I want to Prepare for and Support Hearing Execution, so that I can ensure all pre-hearing requirements are satisfied and staff and Applicant are ready for the hearing.",
   "Persona" : [ "Staff member" ],
@@ -511,6 +543,7 @@
   "Targets" : [ [ "Prepare", "Support" ], [ "Prepare", "Execution" ], [ "Hearing", "Support" ], [ "Hearing", "Execution" ], [ "ensure", "pre-hearing requirements" ], [ "ensure", "satisfied" ], [ "ensure", "staff" ], [ "ensure", "Applicant" ], [ "ensure", "ready for" ], [ "ensure", "hearing" ], [ "satisfied", "pre-hearing requirements" ], [ "satisfied", "satisfied" ], [ "satisfied", "staff" ], [ "satisfied", "Applicant" ], [ "satisfied", "ready for" ], [ "satisfied", "hearing" ], [ "ready", "pre-hearing requirements" ], [ "ready", "satisfied" ], [ "ready", "staff" ], [ "ready", "Applicant" ], [ "ready", "ready for" ], [ "ready", "hearing" ] ],
   "Contains" : [ [ "Support", "pre-hearing requirements" ], [ "Support", "satisfied" ], [ "Support", "staff" ], [ "Support", "Applicant" ], [ "Support", "ready for" ], [ "Support", "hearing" ], [ "Execution", "pre-hearing requirements" ], [ "Execution", "satisfied" ], [ "Execution", "staff" ], [ "Execution", "Applicant" ], [ "Execution", "ready for" ], [ "Execution", "hearing" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO32#",
   "Text" : "As a Staff member, I want to Capture a Hearing Decision, so that I can enforce the system.",
   "Persona" : [ "Staff member" ],
@@ -527,6 +560,7 @@
   "Targets" : [ [ "Capture", "Decision" ], [ "Hearing", "Decision" ], [ "enforce", "system" ] ],
   "Contains" : [ [ "Decision", "system" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO33#",
   "Text" : "As a Staff member, I want to Process the Appeals, so that I can track the outcome and record the impact on the relevant records.",
   "Persona" : [ "Staff member" ],
@@ -543,6 +577,7 @@
   "Targets" : [ [ "Process", "Appeals" ], [ "track", "outcome" ], [ "track", "impact on" ], [ "track", "relevant records" ], [ "record", "outcome" ], [ "record", "impact on" ], [ "record", "relevant records" ] ],
   "Contains" : [ [ "Appeals", "outcome" ], [ "Appeals", "impact on" ], [ "Appeals", "relevant records" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO34#",
   "Text" : "As a Plan Review Staff member, I want to Assign Plans for Review, so that I can ensure plans have been assigned to the appropriate Plan Reviewer.",
   "Persona" : [ "Plan Review Staff member" ],
@@ -559,6 +594,7 @@
   "Targets" : [ [ "Assign", "Plans for Review" ], [ "ensure", "plans" ], [ "ensure", "appropriate Plan Reviewer" ] ],
   "Contains" : [ [ "Plans for Review", "plans" ], [ "Plans for Review", "appropriate Plan Reviewer" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO35#",
   "Text" : "As a Plan Review Staff Supervisor, I want to Manage Plan Reviewer Workload, so that I can monitor and effectively adjust workload as necessary and ensure service levels are met",
   "Persona" : [ "Plan Review Staff Supervisor" ],
@@ -575,6 +611,7 @@
   "Targets" : [ [ "Manage", "Plan Reviewer Workload" ], [ "monitor", "effectively" ], [ "monitor", "workload as necessary" ], [ "monitor", "service levels" ], [ "adjust", "effectively" ], [ "adjust", "workload as necessary" ], [ "adjust", "service levels" ], [ "ensure", "effectively" ], [ "ensure", "workload as necessary" ], [ "ensure", "service levels" ] ],
   "Contains" : [ [ "Plan Reviewer Workload", "effectively" ], [ "Plan Reviewer Workload", "workload as necessary" ], [ "Plan Reviewer Workload", "service levels" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO36#",
   "Text" : "As an Applicant, I want to Request a Plan Review Meeting, so that I can meet with the Plan Review Staff regarding the plan review.",
   "Persona" : [ "Applicant" ],
@@ -591,6 +628,7 @@
   "Targets" : [ [ "Request", "Plan Review Meeting" ], [ "meet", "Plan Review Staff" ], [ "meet", "plan review" ] ],
   "Contains" : [ [ "Plan Review Meeting", "Plan Review Staff" ], [ "Plan Review Meeting", "plan review" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO37#",
   "Text" : "As a Plan Review Staff member, I want to successfully Conduct a Plan Review Meeting with the Applicant and record the outcome, so that I can listen to it again.",
   "Persona" : [ "Plan Review Staff member" ],
@@ -607,6 +645,7 @@
   "Targets" : [ [ "record", "outcome" ], [ "listen", "again" ] ],
   "Contains" : [ [ "outcome", "again" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO38#",
   "Text" : "As a Plan Review Staff member, I want to Review Plans, so that I can review them for compliance and either approve, or fail or deny the plans and record any conditions, clearances, or corrections needed from the Applicant.",
   "Persona" : [ "Plan Review Staff member" ],
@@ -623,6 +662,7 @@
   "Targets" : [ [ "Review", "Plans" ], [ "review", "compliance" ], [ "review", "plans" ], [ "review", "conditions" ], [ "review", "clearances" ], [ "review", "corrections" ], [ "review", "Applicant" ], [ "approve", "compliance" ], [ "approve", "plans" ], [ "approve", "conditions" ], [ "approve", "clearances" ], [ "approve", "corrections" ], [ "approve", "Applicant" ] ],
   "Contains" : [ [ "Plans", "compliance" ], [ "Plans", "plans" ], [ "Plans", "conditions" ], [ "Plans", "clearances" ], [ "Plans", "corrections" ], [ "Plans", "Applicant" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO39#",
   "Text" : "As an Applicant, I want to Resubmit Plans, so that I can review revised plans. ",
   "Persona" : [ "Applicant" ],
@@ -639,6 +679,7 @@
   "Targets" : [ [ "Resubmit", "Plans" ], [ "review", "plans" ] ],
   "Contains" : [ [ "Plans", "plans" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO40#",
   "Text" : "As a Plan Review Staff Member, I want to Review the Code Modifications submitted by the Applicant, so that I can review the request and if approved, associate it with the appropriate project.",
   "Persona" : [ "Plan Review Staff Member" ],
@@ -655,6 +696,7 @@
   "Targets" : [ [ "Review", "Code Modifications" ], [ "Review", "Applicant" ], [ "submitted", "Code Modifications" ], [ "submitted", "Applicant" ], [ "review", "request" ], [ "review", "appropriate project" ], [ "approved", "request" ], [ "approved", "appropriate project" ] ],
   "Contains" : [ [ "Code Modifications", "request" ], [ "Code Modifications", "appropriate project" ], [ "Applicant", "request" ], [ "Applicant", "appropriate project" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO41#",
   "Text" : "As a Plan Review Staff member, I want to Track the Completion of Required Plan Reviews, so that I can ensure all plan review tasks are completed, results have been sent to the Applicant and any downstream steps are initiated such has a final review or payment for permit issuance.",
   "Persona" : [ "Plan Review Staff member" ],
@@ -671,6 +713,7 @@
   "Targets" : [ [ "Required", "Plan Reviews" ], [ "ensure", "plan review tasks" ], [ "ensure", "results" ], [ "ensure", "Applicant" ], [ "ensure", "downstream steps" ], [ "ensure", "such" ], [ "ensure", "final review" ], [ "ensure", "payment for permit issuance" ] ],
   "Contains" : [ [ "Plan Reviews", "plan review tasks" ], [ "Plan Reviews", "results" ], [ "Plan Reviews", "Applicant" ], [ "Plan Reviews", "downstream steps" ], [ "Plan Reviews", "such" ], [ "Plan Reviews", "final review" ], [ "Plan Reviews", "payment for permit issuance" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO42#",
   "Text" : "As a Development Staff member, I want to Issue a Development-related Permit, so that I can grant the request to the Applicant to begin work",
   "Persona" : [ "Development Staff member" ],
@@ -687,6 +730,7 @@
   "Targets" : [ [ "Issue", "Development" ], [ "Issue", "Permit" ], [ "related", "Development" ], [ "related", "Permit" ], [ "grant", "request to" ], [ "grant", "Applicant" ], [ "grant", "work" ] ],
   "Contains" : [ [ "Development", "request to" ], [ "Development", "Applicant" ], [ "Development", "work" ], [ "Permit", "request to" ], [ "Permit", "Applicant" ], [ "Permit", "work" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO43#",
   "Text" : "As a Staff member, I want to Manage Bonds, so that I can track and manage bonds throughout the lifecycle of the project until release.",
   "Persona" : [ "Staff member" ],
@@ -703,6 +747,7 @@
   "Targets" : [ [ "Manage", "Bonds" ], [ "track", "bonds throughout" ], [ "track", "lifecycle of" ], [ "track", "project until release" ], [ "manage", "bonds throughout" ], [ "manage", "lifecycle of" ], [ "manage", "project until release" ] ],
   "Contains" : [ [ "Bonds", "bonds throughout" ], [ "Bonds", "lifecycle of" ], [ "Bonds", "project until release" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO44#",
   "Text" : "As an Applicant, I want to Complete Building Development Project, so that I can receive any posted bond and/or obtain occupancy.",
   "Persona" : [ "Applicant" ],
@@ -719,6 +764,7 @@
   "Targets" : [ [ "Complete", "Building Development Project" ], [ "receive", "bond" ], [ "receive", "occupancy" ] ],
   "Contains" : [ [ "Building Development Project", "bond" ], [ "Building Development Project", "occupancy" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO45#",
   "Text" : "As an Applicant, I want to Complete Building Development Project, so that I can receive any posted bond and/or obtain occupancy.",
   "Persona" : [ "Applicant" ],
@@ -735,6 +781,7 @@
   "Targets" : [ [ "Complete", "Building Development Project" ], [ "receive", "bond" ], [ "receive", "occupancy" ] ],
   "Contains" : [ [ "Building Development Project", "bond" ], [ "Building Development Project", "occupancy" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO46#",
   "Text" : "As a Customer, I want to Request Inspection, so that a County inspector is assigned to perform an inspection of my project.",
   "Persona" : [ "Customer" ],
@@ -751,6 +798,7 @@
   "Targets" : [ [ "Request", "Inspection" ] ],
   "Contains" : [ [ "Inspection", "inspection of" ], [ "Inspection", "project" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO47#",
   "Text" : "As an Inspection Staff member, I want to Create an Inspection, so that I can schedule and assign the inspection.",
   "Persona" : [ "Inspection Staff member" ],
@@ -767,6 +815,7 @@
   "Targets" : [ [ "Create", "Inspection" ], [ "schedule", "inspection" ], [ "assign", "inspection" ] ],
   "Contains" : [ [ "Inspection", "inspection" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO48#",
   "Text" : "As an Inspection Staff Supervisor, I want to Assign Inspections, so that I can make sure the appropriate Inspector receives the work.",
   "Persona" : [ "Inspection Staff Supervisor" ],
@@ -783,6 +832,7 @@
   "Targets" : [ [ "Assign", "Inspections" ], [ "make", "sure" ], [ "make", "appropriate Inspector" ], [ "make", "work" ], [ "receives", "sure" ], [ "receives", "appropriate Inspector" ], [ "receives", "work" ] ],
   "Contains" : [ [ "Inspections", "sure" ], [ "Inspections", "appropriate Inspector" ], [ "Inspections", "work" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO49#",
   "Text" : "As an Inspection Supervisor, I want to Manage Inspector Workload, so that I can meet service level and quality requirements.",
   "Persona" : [ "Inspection Supervisor" ],
@@ -799,6 +849,7 @@
   "Targets" : [ [ "Manage", "Inspector Workload" ], [ "meet", "service level" ], [ "meet", "quality requirements" ] ],
   "Contains" : [ [ "Inspector Workload", "service level" ], [ "Inspector Workload", "quality requirements" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO50#",
   "Text" : "As an Inspector, I want to Conduct Inspections, so that I can validate Customer compliance with code and regulations and provide results of the inspection to the Customer.",
   "Persona" : [ "Inspector" ],
@@ -815,6 +866,7 @@
   "Targets" : [ [ "validate", "Customer compliance with code" ], [ "validate", "regulations" ], [ "validate", "results of" ], [ "validate", "inspection to" ], [ "validate", "Customer" ], [ "provide", "Customer compliance with code" ], [ "provide", "regulations" ], [ "provide", "results of" ], [ "provide", "inspection to" ], [ "provide", "Customer" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO51#",
   "Text" : "As an Enforcement Staff member, I want to Issue a Notice of Violation, so that I can provide formal communication to the responsible party.",
   "Persona" : [ "Enforcement Staff member" ],
@@ -831,6 +883,7 @@
   "Targets" : [ [ "Issue", "Notice of Violation" ], [ "provide", "formal communication to" ], [ "provide", "responsible party" ] ],
   "Contains" : [ [ "Notice of Violation", "formal communication to" ], [ "Notice of Violation", "responsible party" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO52#",
   "Text" : "As a l Staff member, I want to search for Property information, so that I can obtain all associated current and historic owners, permits, and applications.",
   "Persona" : [ "l Staff member" ],
@@ -847,6 +900,7 @@
   "Targets" : [ [ "search", "Property information" ], [ "obtain", "associated current" ], [ "obtain", "historic owners" ], [ "obtain", "permits" ], [ "obtain", "applications" ] ],
   "Contains" : [ [ "Property information", "associated current" ], [ "Property information", "historic owners" ], [ "Property information", "permits" ], [ "Property information", "applications" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO53#",
   "Text" : "As a Staff member, I need to be notified when Geospatial attributes change, so that I can ensure that I am reviewing the permit/application to the most current data and appropriate standards.",
   "Persona" : [ "Staff member" ],
@@ -863,6 +917,7 @@
   "Targets" : [ [ "ensure", "permit" ], [ "ensure", "application to" ], [ "ensure", "most current data" ], [ "ensure", "appropriate standards" ], [ "reviewing", "permit" ], [ "reviewing", "application to" ], [ "reviewing", "most current data" ], [ "reviewing", "appropriate standards" ] ],
   "Contains" : [ ]
 }, {
+  "selected" : true,
   "PID" : "#GO54#",
   "Text" : "As a County Staff Member, I want to create a custom query/report outside of the common querying/reporting functionality, so that I can fulfill a request.",
   "Persona" : [ "County Staff Member" ],
@@ -879,6 +934,7 @@
   "Targets" : [ [ "create", "custom query" ], [ "create", "report outside of" ], [ "create", "common querying" ], [ "create", "reporting functionality" ], [ "fulfill", "request" ] ],
   "Contains" : [ [ "custom query", "request" ], [ "report outside of", "request" ], [ "common querying", "request" ], [ "reporting functionality", "request" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO55#",
   "Text" : "As a Staff member, I want to create each condo unit, so that I can associate it to the child parcel and address after the condominiums are recorded in the system.",
   "Persona" : [ "Staff member" ],
@@ -895,6 +951,7 @@
   "Targets" : [ [ "create", "condo unit" ], [ "associate", "child parcel" ], [ "associate", "address after" ], [ "associate", "condominiums" ], [ "associate", "system" ] ],
   "Contains" : [ [ "condo unit", "child parcel" ], [ "condo unit", "address after" ], [ "condo unit", "condominiums" ], [ "condo unit", "system" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO56#",
   "Text" : "As a Technical Staff member, I want to update the GIS Property Management, so that I can successfully update the transactional Parcel Pin to reference the GIS layer where the Split or Merged Parcel Pin exists.",
   "Persona" : [ "Technical Staff member" ],
@@ -911,6 +968,7 @@
   "Targets" : [ [ "update", "GIS Property Management" ], [ "update", "transactional Parcel Pin to reference" ], [ "update", "GIS layer" ], [ "update", "Split" ], [ "update", "Merged Parcel Pin" ], [ "exists", "transactional Parcel Pin to reference" ], [ "exists", "GIS layer" ], [ "exists", "Split" ], [ "exists", "Merged Parcel Pin" ], [ "exists", "transactional Parcel Pin to reference" ], [ "exists", "GIS layer" ], [ "exists", "Split" ], [ "exists", "Merged Parcel Pin" ] ],
   "Contains" : [ [ "GIS Property Management", "transactional Parcel Pin to reference" ], [ "GIS Property Management", "GIS layer" ], [ "GIS Property Management", "Split" ], [ "GIS Property Management", "Merged Parcel Pin" ] ]
 }, {
+  "selected" : true,
   "PID" : "#GO57#",
   "Text" : "As a Staff member, I want to Send or Post Citations and Fines, so that I can successfully send the Notice Of Violation document to the property owner and log information about the action.",
   "Persona" : [ "Staff member" ],
