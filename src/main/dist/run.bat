@@ -41,7 +41,8 @@ if "!JAVA_CMD!"=="" (
 if "!JAVA_CMD!"=="" set "JAVA_CMD=java"
 
 :: Verify is at least Java 21
-"!JAVA_CMD!" -version >nul 2>&1
+:: Use --version (no quotes in output): "openjdk 21.0.5 2024-10-15 LTS"
+"!JAVA_CMD!" --version >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] Java 21 not found. Please install JDK 21:
     echo   winget install EclipseAdoptium.Temurin.21.JDK
@@ -49,9 +50,12 @@ if errorlevel 1 (
     exit /b 1
 )
 
-for /f "tokens=3" %%v in ('"!JAVA_CMD!" -version 2^>^&1 ^| findstr /i "version"') do set JAVA_VER=%%v
-set JAVA_VER=!JAVA_VER:"=!
-for /f "delims=." %%m in ("!JAVA_VER!") do set JAVA_MAJOR=%%m
+set "JAVA_MAJOR=0"
+for /f "tokens=2" %%v in ('"!JAVA_CMD!" --version 2^>^&1') do (
+    if "!JAVA_MAJOR!"=="0" (
+        for /f "delims=." %%m in ("%%v") do set JAVA_MAJOR=%%m
+    )
+)
 if !JAVA_MAJOR! LSS 21 (
     echo [ERROR] Java !JAVA_MAJOR! found at !JAVA_CMD!, but Java 21+ is required.
     echo   Please install JDK 21:  winget install EclipseAdoptium.Temurin.21.JDK
