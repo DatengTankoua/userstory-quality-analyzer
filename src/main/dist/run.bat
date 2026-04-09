@@ -64,10 +64,26 @@ if !JAVA_MAJOR! LSS 21 (
     exit /b 1
 )
 
+:: Check JAR exists (catches "run from inside ZIP" mistake)
+if not exist "%LAUNCHER_DIR%%JAR_NAME%" (
+    echo [ERROR] JAR file not found:
+    echo   %LAUNCHER_DIR%%JAR_NAME%
+    echo.
+    echo This usually means you ran run.bat directly from inside the ZIP archive.
+    echo Please EXTRACT the ZIP first, then run run.bat from the extracted folder.
+    echo.
+    echo How to extract: Right-click the ZIP ^> "Extract All..." ^> choose a folder ^> click Extract
+    pause
+    exit /b 1
+)
+
 :: Launch
 echo Starting User Story Analyzer (Java !JAVA_MAJOR!)...
 "!JAVA_CMD!" --add-opens java.base/java.lang=ALL-UNNAMED ^
              --add-opens java.base/java.util=ALL-UNNAMED ^
+             --add-opens java.base/java.io=ALL-UNNAMED ^
+             --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED ^
+             --add-exports javafx.base/com.sun.javafx=ALL-UNNAMED ^
              -jar "%LAUNCHER_DIR%%JAR_NAME%"
 
 if errorlevel 1 (
