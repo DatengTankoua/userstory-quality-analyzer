@@ -84,8 +84,10 @@ unit-tests:
 
 # ============================================================
 #  STAGE 3 — PACKAGE
-#  Builds the executable fat JAR (all dependencies bundled).
-#  Runs only on integration and release branches.
+#  3a. Fat JAR                    (maven:temurin-21)
+#  3b. ZIP installer (JAR+scripts) (maven:temurin-21, -Pnative)
+#  3c. Native AppImage            (Liberica Full JDK 21 w/ JavaFX jmods)
+#  All jobs run only on main.
 # ============================================================
 package:jar:
   stage: package
@@ -107,6 +109,42 @@ package:jar:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
+# ── ZIP: JAR + run.bat + run.sh (requires only Java 21 on end-user machine) ──
+package:installer:
+  stage: package
+  needs: [unit-tests]
+  <<: *maven-cache
+  script:
+    - mvn $MAVEN_CLI_OPTS verify -Pnative -DskipTests
+    - |
+      VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+      echo "APP_VERSION=$VERSION" >> build.env
+  artifacts:
+    name: "UserStoryAnalyzer-$CI_COMMIT_REF_SLUG-portable"
+    paths:
+      - target/UserStoryAnalyzer-*.zip
+    expire_in: 30 days
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+# ── Native AppImage via Liberica Full JDK (includes JavaFX jmods) ────────────
+package:native:
+  stage: package
+  needs: [unit-tests]
+  image: bellsoft/liberica-openjre-debian:21-full
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq maven binutils fakeroot
+  script:
+    - mvn $MAVEN_CLI_OPTS package -Pnative -DskipTests
+  artifacts:
+    name: "UserStoryAnalyzer-$CI_COMMIT_REF_SLUG-linux"
+    paths:
+      - target/installer/
+    expire_in: 30 days
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  allow_failure: true  # AppImage build is best-effort; ZIP is the primary artifact
+
 # ============================================================
 #  STAGE 4 — DEPLOY
 #
@@ -118,6 +156,8 @@ deploy:staging:
   stage: deploy
   needs:
     - job: package:jar
+      artifacts: true
+    - job: package:installer
       artifacts: true
   image: curlimages/curl:latest
   environment:
@@ -142,6 +182,8 @@ deploy:production:
   needs:
     - job: package:jar
       artifacts: true
+    - job: package:installer
+      artifacts: true
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   environment:
     name: production
@@ -160,16 +202,21 @@ deploy:production:
 
       Automated production release triggered by pipeline **#$CI_PIPELINE_IID**.
 
-      ### Download
-      Get the executable JAR from the assets below and run:
-      ```
-      java -jar userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar
-      ```
+      ### Download — choose your platform
+      | Platform | Download | Requires |
+      |---|---|---|
+      | Windows / macOS / Linux | `UserStoryAnalyzer-$APP_VERSION.zip` | Java 21+ |
+      | Linux AppImage | `installer/UserStoryAnalyzer/` | nothing |
+      | Fat JAR (advanced) | `userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar` | Java 21+ |
 
-      ### What's included
-      - Full NLP-based quality analysis engine
-      - JavaFX desktop GUI
-      - JSON export for all analysis reports
+      **Windows / macOS / Linux (ZIP):**
+      1. Download and unzip `UserStoryAnalyzer-$APP_VERSION.zip`
+      2. Windows: double-click `run.bat` — macOS/Linux: `bash run.sh`
+
+      **What's included**
+      - Full NLP-based quality analysis engine (OpenNLP + Stanford CoreNLP)
+      - JavaFX desktop GUI — load stories, select criteria, export JSON
+      - Ground Truth datasets
 
       **Commit:** $CI_COMMIT_SHORT_SHA — $CI_COMMIT_TITLE
     tag_name: "v$APP_VERSION-$CI_PIPELINE_IID"
