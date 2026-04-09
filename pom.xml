@@ -242,4 +242,46 @@
             </resource>
         </resources>
     </build>
+
+    <!-- ═══════════════════════════════════════════════════════
+         PROFILE: native
+         Erstellt eine plattformspezifische native Anwendung
+         (Windows .exe, macOS .dmg, Linux AppImage) via jpackage.
+
+         Voraussetzung: Liberica Full JDK 21 (enthält JavaFX jmods)
+           winget install BellSoft.LibericaJDK.21.Full
+
+         Ausführen:
+           mvn -Pnative package
+         ═══════════════════════════════════════════════════════ -->
+    <profiles>
+        <profile>
+            <id>native</id>
+            <build>
+                <plugins>
+                    <!-- ZIP: JAR + Launcher-Skripte -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>3.7.1</version>
+                        <executions>
+                            <execution>
+                                <id>dist-zip</id>
+                                <phase>verify</phase>
+                                <goals><goal>single</goal></goals>
+                                <configuration>
+                                    <descriptors>
+                                        <descriptor>src/assembly/dist.xml</descriptor>
+                                    </descriptors>
+                                    <finalName>UserStoryAnalyzer-${project.version}</finalName>
+                                    <appendAssemblyId>false</appendAssemblyId>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

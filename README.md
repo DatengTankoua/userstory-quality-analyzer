@@ -104,86 +104,111 @@ src/
 
 ## Installation & Quick Start
 
-### 1 — Install JDK 21
+There are **two ways** to run the application:
 
-**Windows (winget)**
+| | Who | Requires |
+|---|---|---|
+| **Option A — Portable ZIP** | End users, reviewers, LinkedIn demo | Java 21 only |
+| **Option B — From Source** | Developers | Java 21 + Maven |
+
+---
+
+### Option A — Portable ZIP (easiest)
+
+> No Maven, no cloning, no build step.
+
+1. Go to **GitLab → Releases** (or **CI/CD → Pipelines → latest main → package:installer → Download**)
+2. Download `UserStoryAnalyzer-1.0-SNAPSHOT.zip`
+3. Unzip it
+
+**Run on Windows:**
+```
+Double-click  run.bat
+```
+**Run on macOS / Linux:**
+```bash
+chmod +x run.sh && ./run.sh
+```
+
+The launcher checks for Java 21 automatically and shows a clear error message if it's missing.
+
+**Java 21 installieren (falls fehlend):**
 ```powershell
+# Windows
 winget install EclipseAdoptium.Temurin.21.JDK
 ```
-
-**macOS (Homebrew)**
 ```bash
+# macOS
 brew install --cask temurin@21
+# Linux
+sudo apt install temurin-21-jdk
 ```
 
-**Ubuntu / Debian**
-```bash
-sudo apt update && sudo apt install temurin-21-jdk
+---
+
+### Option B — From Source (developers)
+
+#### 1 — Install JDK 21
+
+```powershell
+winget install EclipseAdoptium.Temurin.21.JDK   # Windows
+brew install --cask temurin@21                   # macOS
+sudo apt install temurin-21-jdk                  # Ubuntu
 ```
 
-Verify:
-```bash
-java -version   # should print: openjdk version "21 ..."
-```
+Verify: `java -version` → should print `openjdk version "21 ..."`
 
-### 2 — Set JAVA_HOME to JDK 21
+#### 2 — Set JAVA_HOME to JDK 21
 
-> **Important:** If you have multiple JDKs installed, Maven must use JDK 21 — not an older version. The error `invalid target release: 21` means `JAVA_HOME` points to an older JDK.
+> **Important:** The error `invalid target release: 21` means `JAVA_HOME` points to an older JDK.
 
-**Windows — current session only**
+**Windows — current session**
 ```powershell
 $env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot"
 $env:PATH = "$env:JAVA_HOME\bin;" + $env:PATH
-java -version   # confirm: 21
 ```
-
-**Windows — permanent (System Properties → Environment Variables)**
-1. Open *System Properties* → *Environment Variables*
-2. Set `JAVA_HOME` = `C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot`
-3. Move `%JAVA_HOME%\bin` to the top of the `Path` variable
-4. Restart your terminal
+**Windows — permanent:** System Properties → Environment Variables → set `JAVA_HOME`, move `%JAVA_HOME%\bin` to top of `Path`.
 
 **macOS / Linux**
 ```bash
 export JAVA_HOME=$(/usr/libexec/java_home -v 21)   # macOS
-# or
 export JAVA_HOME=/usr/lib/jvm/temurin-21            # Linux
 export PATH="$JAVA_HOME/bin:$PATH"
-java -version
 ```
 
-### 3 — Clone the Repository
+#### 3 — Clone the Repository
 
 ```bash
 git clone https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi.git
 cd sp25_gruppe1_dateng_hammudi_stechert_alshaabi
 ```
 
-### 4 — Build & Run Tests
+#### 4 — Build & Run Tests
 
 ```bash
-# Compile + run all unit tests + generate coverage report
 mvn clean verify
-
-# Coverage report is written to:
-#   target/site/jacoco/index.html
+# Coverage report → target/site/jacoco/index.html
 ```
 
-### 5 — Run the Application
+#### 5 — Run the Application
 
-#### Option A — JavaFX GUI (recommended)
+**JavaFX GUI (recommended):**
 ```bash
 mvn javafx:run
 ```
 
-#### Option B — Headless CLI
+**Build ZIP installer locally:**
 ```bash
-mvn clean package -DskipTests
-java -jar target/userstory-analyzer-1.0-SNAPSHOT-jar-with-dependencies.jar
+mvn package -Pnative -DskipTests
+# Output: target/UserStoryAnalyzer-1.0-SNAPSHOT.zip
 ```
 
-The CLI parser reads user stories from `src/main/resources/models/g03-loudoun.txt`  
-and writes the structured result to `src/main/resources/json-files/userstories.json`.
+**Build native AppImage (requires Liberica Full JDK 21):**
+```bash
+# Install Liberica Full: winget install BellSoft.LibericaJDK.21.Full
+mvn package -Pnative -DskipTests
+# Output: target/installer/UserStoryAnalyzer/
+```
 
 ---
 
