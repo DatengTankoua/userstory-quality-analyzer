@@ -144,7 +144,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.uni_marburg.userstoryanalyzer.Main</mainClass>
+                            <mainClass>de.uni_marburg.userstoryanalyzer.AppLauncher</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
