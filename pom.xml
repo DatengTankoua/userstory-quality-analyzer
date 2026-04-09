@@ -75,12 +75,7 @@
             <version>${dl4j.version}</version>
         </dependency>
 
-        <!-- ND4J: Scientific computing backend -->
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native-platform</artifactId>
-            <version>${dl4j.version}</version>
-        </dependency>
+        <!-- ND4J: Scientific computing backend (platform-specific native auto-selected via OS profile below) -->
 
         <!-- Word2Vec / NLP tools -->
         <dependency>
@@ -282,6 +277,47 @@
                 </plugins>
             </build>
         </profile>
+
+        <!-- ND4J platform-specific native backend (auto-activated by OS, avoids bundling all platforms) -->
+        <profile>
+            <id>nd4j-windows</id>
+            <activation><os><family>windows</family></os></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.nd4j</groupId>
+                    <artifactId>nd4j-native</artifactId>
+                    <version>${dl4j.version}</version>
+                    <classifier>windows-x86_64</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>nd4j-linux</id>
+            <activation><os><family>unix</family><name>Linux</name></os></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.nd4j</groupId>
+                    <artifactId>nd4j-native</artifactId>
+                    <version>${dl4j.version}</version>
+                    <classifier>linux-x86_64</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>nd4j-mac</id>
+            <activation><os><family>mac</family></os></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.nd4j</groupId>
+                    <artifactId>nd4j-native</artifactId>
+                    <version>${dl4j.version}</version>
+                    <classifier>macosx-x86_64</classifier>
+                </dependency>
+            </dependencies>
+        </profile>
+
     </profiles>
 
 </project>
