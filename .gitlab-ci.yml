@@ -128,22 +128,9 @@ package:installer:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
 # ── Native AppImage via Liberica Full JDK (includes JavaFX jmods) ────────────
-package:native:
-  stage: package
-  needs: [unit-tests]
-  image: bellsoft/liberica-openjre-debian:21-full
-  before_script:
-    - apt-get update -qq && apt-get install -y -qq maven binutils fakeroot
-  script:
-    - mvn $MAVEN_CLI_OPTS package -Pnative -DskipTests
-  artifacts:
-    name: "UserStoryAnalyzer-$CI_COMMIT_REF_SLUG-linux"
-    paths:
-      - target/installer/
-    expire_in: 30 days
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
-  allow_failure: true  # AppImage build is best-effort; ZIP is the primary artifact
+# NOTE: Disabled — requires bellsoft/liberica image which may not be allowed
+#       by the GitLab runner. Re-enable locally with a self-hosted runner.
+# package:native: ...
 
 # ============================================================
 #  STAGE 4 — DEPLOY
@@ -159,7 +146,6 @@ deploy:staging:
       artifacts: true
     - job: package:installer
       artifacts: true
-  image: curlimages/curl:latest
   environment:
     name: staging
     url: $CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/download
@@ -184,47 +170,25 @@ deploy:production:
       artifacts: true
     - job: package:installer
       artifacts: true
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
   environment:
     name: production
     url: $CI_PROJECT_URL/-/releases
   script:
     - |
       echo "============================================"
-      echo "  Production release"
-      echo "  Version : $APP_VERSION"
-      echo "  Tag     : v$APP_VERSION-$CI_PIPELINE_IID"
+      echo "  Production release: v$APP_VERSION"
+      echo "  Pipeline : #$CI_PIPELINE_IID"
+      echo "  Commit   : $CI_COMMIT_SHORT_SHA"
       echo "============================================"
-  release:
-    name: "v$APP_VERSION"
-    description: |
-      ## User Story Analyzer v$APP_VERSION
-
-      Automated production release triggered by pipeline **#$CI_PIPELINE_IID**.
-
-      ### Download — choose your platform
-      | Platform | Download | Requires |
-      |---|---|---|
-      | Windows / macOS / Linux | `UserStoryAnalyzer-$APP_VERSION.zip` | Java 21+ |
-      | Linux AppImage | `installer/UserStoryAnalyzer/` | nothing |
-      | Fat JAR (advanced) | `userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar` | Java 21+ |
-
-      **Windows / macOS / Linux (ZIP):**
-      1. Download and unzip `UserStoryAnalyzer-$APP_VERSION.zip`
-      2. Windows: double-click `run.bat` — macOS/Linux: `bash run.sh`
-
-      **What's included**
-      - Full NLP-based quality analysis engine (OpenNLP + Stanford CoreNLP)
-      - JavaFX desktop GUI — load stories, select criteria, export JSON
-      - Ground Truth datasets
-
-      **Commit:** $CI_COMMIT_SHORT_SHA — $CI_COMMIT_TITLE
-    tag_name: "v$APP_VERSION-$CI_PIPELINE_IID"
-    assets:
-      links:
-        - name: "userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar"
-          url: "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/raw/target/userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar"
-          link_type: package
+      # Install release-cli into PATH (single static binary, no extra image needed)
+      curl -L --output /usr/local/bin/release-cli \
+        "https://release-cli-downloads.s3.amazonaws.com/latest/release-cli-linux-amd64"
+      chmod +x /usr/local/bin/release-cli
+      release-cli create \
+        --name "v$APP_VERSION" \
+        --tag-name "v$APP_VERSION-$CI_PIPELINE_IID" \
+        --description "Automated release v$APP_VERSION from pipeline #$CI_PIPELINE_IID. Commit: $CI_COMMIT_SHORT_SHA" \
+        --assets-link "{\"name\":\"UserStoryAnalyzer-$APP_VERSION.zip\",\"url\":\"$CI_PROJECT_URL/-/jobs/artifacts/main/raw/target/UserStoryAnalyzer-$APP_VERSION.zip?job=package:installer\",\"link_type\":\"package\"}"
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: manual
