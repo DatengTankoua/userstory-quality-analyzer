@@ -84,10 +84,8 @@ unit-tests:
 
 # ============================================================
 #  STAGE 3 — PACKAGE
-#  3a. Fat JAR                    (maven:temurin-21)
-#  3b. ZIP installer (JAR+scripts) (maven:temurin-21, -Pnative)
-#  3c. Native AppImage            (Liberica Full JDK 21 w/ JavaFX jmods)
-#  All jobs run only on main.
+#  Builds the executable fat JAR (all dependencies bundled).
+#  Runs only on integration and release branches.
 # ============================================================
 package:jar:
   stage: package
@@ -109,29 +107,6 @@ package:jar:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
 
-# ── ZIP: JAR + run.bat + run.sh (requires only Java 21 on end-user machine) ──
-package:installer:
-  stage: package
-  needs: [unit-tests]
-  <<: *maven-cache
-  script:
-    - mvn $MAVEN_CLI_OPTS verify -Pnative -DskipTests
-    - |
-      VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-      echo "APP_VERSION=$VERSION" >> build.env
-  artifacts:
-    name: "UserStoryAnalyzer-$CI_COMMIT_REF_SLUG-portable"
-    paths:
-      - target/UserStoryAnalyzer-*.zip
-    expire_in: 30 days
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
-
-# ── Native AppImage via Liberica Full JDK (includes JavaFX jmods) ────────────
-# NOTE: Disabled — requires bellsoft/liberica image which may not be allowed
-#       by the GitLab runner. Re-enable locally with a self-hosted runner.
-# package:native: ...
-
 # ============================================================
 #  STAGE 4 — DEPLOY
 #
@@ -144,8 +119,7 @@ deploy:staging:
   needs:
     - job: package:jar
       artifacts: true
-    - job: package:installer
-      artifacts: true
+  image: curlimages/curl:latest
   environment:
     name: staging
     url: $CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/download
@@ -168,32 +142,42 @@ deploy:production:
   needs:
     - job: package:jar
       artifacts: true
-    - job: package:installer
-      artifacts: true
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
   environment:
     name: production
     url: $CI_PROJECT_URL/-/releases
   script:
     - |
       echo "============================================"
-      echo "  Production release: v$APP_VERSION"
-      echo "  Pipeline : #$CI_PIPELINE_IID"
-      echo "  Commit   : $CI_COMMIT_SHORT_SHA"
+      echo "  Production release"
+      echo "  Version : $APP_VERSION"
+      echo "  Tag     : v$APP_VERSION-$CI_PIPELINE_IID"
       echo "============================================"
-      TAG_NAME="v${APP_VERSION}-${CI_PIPELINE_IID}"
-      DESCRIPTION="Automated release v${APP_VERSION} from pipeline #${CI_PIPELINE_IID}. Commit: ${CI_COMMIT_SHORT_SHA}"
-      # Create GitLab release via REST API (no release-cli binary required)
-      curl --fail-with-body \
-           --header "JOB-TOKEN: $CI_JOB_TOKEN" \
-           --header "Content-Type: application/json" \
-           --data "{
-             \"name\": \"v${APP_VERSION}\",
-             \"tag_name\": \"${TAG_NAME}\",
-             \"ref\": \"${CI_COMMIT_SHA}\",
-             \"description\": \"${DESCRIPTION}\"
-           }" \
-           "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases"
-      echo "Release ${TAG_NAME} created successfully."
+  release:
+    name: "v$APP_VERSION"
+    description: |
+      ## User Story Analyzer v$APP_VERSION
+
+      Automated production release triggered by pipeline **#$CI_PIPELINE_IID**.
+
+      ### Download
+      Get the executable JAR from the assets below and run:
+      ```
+      java -jar userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar
+      ```
+
+      ### What's included
+      - Full NLP-based quality analysis engine
+      - JavaFX desktop GUI
+      - JSON export for all analysis reports
+
+      **Commit:** $CI_COMMIT_SHORT_SHA — $CI_COMMIT_TITLE
+    tag_name: "v$APP_VERSION-$CI_PIPELINE_IID"
+    assets:
+      links:
+        - name: "userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar"
+          url: "$CI_PROJECT_URL/-/jobs/$CI_JOB_ID/artifacts/raw/target/userstory-analyzer-$APP_VERSION-jar-with-dependencies.jar"
+          link_type: package
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: manual

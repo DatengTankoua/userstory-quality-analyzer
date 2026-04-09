@@ -75,7 +75,12 @@
             <version>${dl4j.version}</version>
         </dependency>
 
-        <!-- ND4J: Scientific computing backend (platform-specific native auto-selected via OS profile below) -->
+        <!-- ND4J: Scientific computing backend -->
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-native-platform</artifactId>
+            <version>${dl4j.version}</version>
+        </dependency>
 
         <!-- Word2Vec / NLP tools -->
         <dependency>
@@ -144,7 +149,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>de.uni_marburg.userstoryanalyzer.AppLauncher</mainClass>
+                            <mainClass>de.uni_marburg.userstoryanalyzer.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -237,87 +242,4 @@
             </resource>
         </resources>
     </build>
-
-    <!-- ═══════════════════════════════════════════════════════
-         PROFILE: native
-         Erstellt eine plattformspezifische native Anwendung
-         (Windows .exe, macOS .dmg, Linux AppImage) via jpackage.
-
-         Voraussetzung: Liberica Full JDK 21 (enthält JavaFX jmods)
-           winget install BellSoft.LibericaJDK.21.Full
-
-         Ausführen:
-           mvn -Pnative package
-         ═══════════════════════════════════════════════════════ -->
-    <profiles>
-        <profile>
-            <id>native</id>
-            <build>
-                <plugins>
-                    <!-- ZIP: JAR + Launcher-Skripte -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>3.7.1</version>
-                        <executions>
-                            <execution>
-                                <id>dist-zip</id>
-                                <phase>verify</phase>
-                                <goals><goal>single</goal></goals>
-                                <configuration>
-                                    <descriptors>
-                                        <descriptor>src/assembly/dist.xml</descriptor>
-                                    </descriptors>
-                                    <finalName>UserStoryAnalyzer-${project.version}</finalName>
-                                    <appendAssemblyId>false</appendAssemblyId>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!-- ND4J platform-specific native backend (auto-activated by OS, avoids bundling all platforms) -->
-        <profile>
-            <id>nd4j-windows</id>
-            <activation><os><family>windows</family></os></activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.nd4j</groupId>
-                    <artifactId>nd4j-native</artifactId>
-                    <version>${dl4j.version}</version>
-                    <classifier>windows-x86_64</classifier>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>nd4j-linux</id>
-            <activation><os><family>unix</family><name>Linux</name></os></activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.nd4j</groupId>
-                    <artifactId>nd4j-native</artifactId>
-                    <version>${dl4j.version}</version>
-                    <classifier>linux-x86_64</classifier>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>nd4j-mac</id>
-            <activation><os><family>mac</family></os></activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.nd4j</groupId>
-                    <artifactId>nd4j-native</artifactId>
-                    <version>${dl4j.version}</version>
-                    <classifier>macosx-x86_64</classifier>
-                </dependency>
-            </dependencies>
-        </profile>
-
-    </profiles>
-
 </project>
