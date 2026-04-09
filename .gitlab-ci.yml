@@ -180,15 +180,20 @@ deploy:production:
       echo "  Pipeline : #$CI_PIPELINE_IID"
       echo "  Commit   : $CI_COMMIT_SHORT_SHA"
       echo "============================================"
-      # Install release-cli into PATH (single static binary, no extra image needed)
-      curl -L --output /usr/local/bin/release-cli \
-        "https://release-cli-downloads.s3.amazonaws.com/latest/release-cli-linux-amd64"
-      chmod +x /usr/local/bin/release-cli
-      release-cli create \
-        --name "v$APP_VERSION" \
-        --tag-name "v$APP_VERSION-$CI_PIPELINE_IID" \
-        --description "Automated release v$APP_VERSION from pipeline #$CI_PIPELINE_IID. Commit: $CI_COMMIT_SHORT_SHA" \
-        --assets-link "{\"name\":\"UserStoryAnalyzer-$APP_VERSION.zip\",\"url\":\"$CI_PROJECT_URL/-/jobs/artifacts/main/raw/target/UserStoryAnalyzer-$APP_VERSION.zip?job=package:installer\",\"link_type\":\"package\"}"
+      TAG_NAME="v${APP_VERSION}-${CI_PIPELINE_IID}"
+      DESCRIPTION="Automated release v${APP_VERSION} from pipeline #${CI_PIPELINE_IID}. Commit: ${CI_COMMIT_SHORT_SHA}"
+      # Create GitLab release via REST API (no release-cli binary required)
+      curl --fail-with-body \
+           --header "JOB-TOKEN: $CI_JOB_TOKEN" \
+           --header "Content-Type: application/json" \
+           --data "{
+             \"name\": \"v${APP_VERSION}\",
+             \"tag_name\": \"${TAG_NAME}\",
+             \"ref\": \"${CI_COMMIT_SHA}\",
+             \"description\": \"${DESCRIPTION}\"
+           }" \
+           "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/releases"
+      echo "Release ${TAG_NAME} created successfully."
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: manual
