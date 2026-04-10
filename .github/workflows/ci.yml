@@ -1,0 +1,168 @@
+# ============================================================
+#  User Story Analyzer — GitHub Actions CI/CD Pipeline
+#  Stages: build → test → package → staging → production
+#
+#  Branch strategy
+#    feature/**  →  build + test
+#    main        →  build + test + package + staging (auto) + production (manual)
+#
+#  Production manual gate:
+#    GitHub → Settings → Environments → production → Required reviewers
+# ============================================================
+
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main", "feature/**"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+
+  # ── Stage 1 + 2: Build & Test ──────────────────────────────
+  test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Compile (main + test sources)
+        run: mvn --batch-mode --no-transfer-progress clean test-compile
+
+      - name: Run tests & generate JaCoCo report
+        run: |
+          set +e
+          mvn --batch-mode --no-transfer-progress test jacoco:report
+          EXIT_CODE=$?
+          if [ ! -d target/site/jacoco ]; then
+            echo "Tests failed before JaCoCo report — generating from recorded data..."
+            mvn --batch-mode --no-transfer-progress jacoco:report || true
+          fi
+          exit $EXIT_CODE
+
+      - name: Upload test results & coverage
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: |
+            target/surefire-reports/
+            target/site/jacoco/
+          retention-days: 7
+
+  # ── Stage 3: Package ───────────────────────────────────────
+  package:
+    name: Package fat JAR
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Build fat JAR
+        run: mvn --batch-mode --no-transfer-progress package -DskipTests
+
+      - name: Read project version
+        id: version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "value=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: userstory-analyzer-${{ github.sha }}
+          path: target/*-jar-with-dependencies.jar
+          retention-days: 30
+
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+
+  # ── Stage 4a: Staging (automatic) ─────────────────────────
+  deploy-staging:
+    name: Deploy — Staging
+    needs: package
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Staging summary
+        run: |
+          echo "============================================"
+          echo "  Staging artifact ready"
+          echo "  Version : ${{ needs.package.outputs.version }}"
+          echo "  Commit  : ${{ github.sha }}"
+          echo "  Run     : ${{ github.run_id }}"
+          echo ""
+          echo "  Download: Actions → this run → Artifacts"
+          echo "  → userstory-analyzer-${{ github.sha }}"
+          echo "============================================"
+
+  # ── Stage 4b: Production (manual approval required) ───────
+  #
+  #  To enable the manual gate:
+  #  GitHub → Settings → Environments → production
+  #    → Required reviewers → add yourself
+  #
+  deploy-production:
+    name: Deploy — Production
+    needs: [package, deploy-staging]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ github.server_url }}/${{ github.repository }}/releases/latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download JAR
+        uses: actions/download-artifact@v4
+        with:
+          name: userstory-analyzer-${{ github.sha }}
+          path: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: "v${{ needs.package.outputs.version }}-${{ github.run_number }}"
+          name: "User Story Analyzer v${{ needs.package.outputs.version }}"
+          body: |
+            ## User Story Analyzer v${{ needs.package.outputs.version }}
+
+            Production release — pipeline run **#${{ github.run_number }}**
+
+            ### Run the application
+            ```bash
+            java -jar userstory-analyzer-${{ needs.package.outputs.version }}-jar-with-dependencies.jar
+            ```
+
+            ### GUI (JavaFX)
+            ```bash
+            mvn javafx:run
+            ```
+
+            **Commit:** ${{ github.sha }}
+          files: dist/*-jar-with-dependencies.jar
+          draft: false
+          prerelease: false

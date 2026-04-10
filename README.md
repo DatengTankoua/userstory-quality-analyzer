@@ -2,7 +2,8 @@
 
 > An NLP-powered desktop application for automated quality analysis of Agile user stories — developed at Philipps-Universität Marburg (SP25 · Group 1).
 
-[![Pipeline](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/badges/main/pipeline.svg)](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/-/pipelines)
+[![CI/CD – GitHub](https://github.com/DatengTankoua/userstory-quality-analyzer/actions/workflows/ci.yml/badge.svg)](https://github.com/DatengTankoua/userstory-quality-analyzer/actions/workflows/ci.yml)
+[![Pipeline – GitLab](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/badges/main/pipeline.svg)](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/-/pipelines)
 [![Coverage](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/badges/main/coverage.svg)](https://gitlab.uni-marburg.de/stechert/sp25_gruppe1_dateng_hammudi_stechert_alshaabi/-/jobs)
 [![Java 21](https://img.shields.io/badge/Java-21%20LTS-orange?logo=openjdk)](https://adoptium.net/)
 [![JavaFX 21](https://img.shields.io/badge/JavaFX-21-blue?logo=java)](https://openjfx.io/)
